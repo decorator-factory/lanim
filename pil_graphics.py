@@ -349,7 +349,7 @@ def background(a: Animation[P], group: Group[Q]) -> Animation[Group[Union[P, Q]]
     return anim.map_a(a, group.add)
 
 
-def group(*animations: Animation[P]) -> Animation[Group[P]]:
+def parallel(*animations: Animation[P]) -> Animation[Group[P]]:
     if animations == ():
         raise ValueError("No animations!")
     duration = max(animation.duration for animation in animations)
@@ -358,6 +358,14 @@ def group(*animations: Animation[P]) -> Animation[Group[P]]:
         return Group([a.projector(t * f if t < 1/f else 1.0) for (a, f) in zip(animations, factors)])
 
     return Animation(duration, projector)
+
+
+def appear(p: PSX) -> Animation[PSX]:
+    return p.scaled(0.0).morph_into(p)
+
+
+def appear_from(p: PSX, x: float, y: float) -> Animation[PSX]:
+    return p.scaled_about(0.0, x, y).morph_into(p)
 
 
 class ThenAny(Protocol):
@@ -395,19 +403,17 @@ if __name__ == "__main__":
     def base(then: Then[Group[Latex]]):
         @scene(easings.in_out)
         def a_to_b__appears(then: Then[Latex]):
-            a_to_b1 = then(anim.const_a(Latex(-2.0, 0.5, R"$A \implies B$", 0.5)))
-            a_to_b2 = then(scale(a_to_b1, 1.5))
-            a_to_b3 = then(move_by(a_to_b2, -2.0, 0.0))
-            a_to_b4 = then(move_by(a_to_b3, -1.0, -2.5))
+            a_to_b1 = then(appear(Latex(-2.0, 0.5, R"$A \implies B$", 0.75)) * 2)
+            a_to_b2 = then(move_by(a_to_b1, -2.0, 0.0))
+            a_to_b3 = then(move_by(a_to_b2, -1.0, -2.5))
 
         @scene(easings.in_out)
         def b_to_a__appears(then: Then[Latex]):
-            b_to_a1 = then(anim.const_a(Latex(2.0, -0.5, R"$B \implies A$", 0.0)))
-            b_to_a2 = then(b_to_a1.scale_upto(0.75))
-            b_to_a3 = then(move_by(b_to_a2, 2.0, 0.0))
-            b_to_a4 = then(move_by(b_to_a3, 1.0, 2.5))
+            b_to_a1 = then(appear(Latex(2.0, -0.5, R"$B \implies A$", 0.75)) * 2)
+            b_to_a2 = then(move_by(b_to_a1, 2.0, 0.0))
+            b_to_a3 = then(move_by(b_to_a2, 1.0, 2.5))
 
-        two_equations = then(group(a_to_b__appears, b_to_a__appears))
+        two_equations = then(parallel(a_to_b__appears, b_to_a__appears))
         then(const_a(two_equations) * 0.5)
         then(scale(two_equations, 0.0) @ easings.in_out)
 
