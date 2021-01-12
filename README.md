@@ -9,8 +9,7 @@
 # Usage
 
 ```bash
-rm -rf _out \
-    && python pil_graphics.py
-    && (yes | ffmpeg -framerate 30 -start_number 0 -i _out/frame_%d.png -vcodec mpeg4 out.mp4)
-    && rm -rf _out
+# compile.sh <fps>
+# e.g.:
+./compile.sh 30
 ```

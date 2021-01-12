@@ -29,7 +29,7 @@ def run_latex_process(input_file: Path, output_dir: Path) -> Path:
         str(output_dir / input_file.name.replace(".tex", ".dvi")),
         "-fg", "rgb 1.0 1.0 1.0",
         "-bg", "Transparent",
-        "-D", "720", # DPI
+        "-D", "1280", # DPI
         "-o", str(output_png_file.absolute())
     ]
     p2 = subprocess.run(cmd_dvipng, stdout=subprocess.PIPE)

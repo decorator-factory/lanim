@@ -2,10 +2,11 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from itertools import repeat
-from typing import Any, Callable, ClassVar, Generic, Iterable, Iterator, NoReturn, Optional, Protocol, Sequence, TYPE_CHECKING, TypeVar, Union, Generator, overload
+from typing import Any, Callable, ClassVar, Generic, Iterable, Iterator, Literal, NoReturn, Optional, Protocol, Sequence, TYPE_CHECKING, TypeVar, Union, Generator, overload
 from PIL import Image, ImageDraw
 from pathlib import Path
 from threading import Thread
+from queue import Queue
 from pil_utils import render_latex_scaled
 import time
 import anim
@@ -261,58 +262,83 @@ class Latex:
         return Latex(self.x + dx, self.y + dy, self.source, self.scale_factor)
 
     def render_pil(self, ctx: PilContext) -> None:
-        if self.scale_factor <= 0.05:
+        scale_factor = self.scale_factor * (ctx.settings.width / 1920)
+        if scale_factor <= 0.025:
             return
-        img = render_latex_scaled(self.source, self.scale_factor)
+        img = render_latex_scaled(self.source, scale_factor)
         x, y = ctx.coord(self.x, self.y)
         ctx.draw.bitmap((x - img.width//2, y - img.height//2), img)
 
 
+ImageQ = Queue[Union[Literal["stop"], tuple[int, Image.Image]]]
+
+
 def render_pil(animation: Animation[PilRenderable], path: Path, fps: float, workers: int):
     path.mkdir(parents=True, exist_ok=True)
-    print(f"Rendering animation, {animation.duration}s at {fps}FPS with {workers} workers")
 
-    WIDTH = 1280
-    HEIGHT = 720
+    WIDTH = 864
+    HEIGHT = round(WIDTH * 9 / 16)
 
     settings = PilSettings(
         width=WIDTH, height=HEIGHT,
         center_x=WIDTH//2, center_y=HEIGHT//2,
-        unit=1280//16
+        unit=WIDTH//16
     )
+
+    print(f"Rendering animation {WIDTH}x{HEIGHT} {animation.duration}s @{fps}FPS")
 
     jobs = [[] for _ in range(workers)]
 
     for (i, frame) in enumerate(anim.frames(animation, fps)):
         jobs[i % workers].append((i, frame))
 
-    threads: list[Thread] = []
+    queue: ImageQ = Queue()
+    frame_rendering_threads: list[Thread] = []
+    png_rendering_threads: list[Thread] = []
 
     t1 = time.time()
     for (n, job) in enumerate(jobs):
         print(f"Starting job {n} with {len(job)} frames...")
-        thread = Thread(target=_render_frames, args=(job, settings, path), daemon=True)
+        thread = Thread(target=_render_frames, args=(job, settings, queue), daemon=True)
         thread.start()
-        threads.append(thread)
-    for (n, thread) in enumerate(threads):
-        print(f"Waiting for job {n}...")
-        try:
-            thread.join()
-        except:
-            time.sleep(1.0)
-            raise
+        frame_rendering_threads.append(thread)
+
+    for n in range(workers):
+        thread = Thread(target=_save_frame_to_file, args=(path, queue), daemon=True)
+        thread.start()
+        png_rendering_threads.append(thread)
+
+    for (n, thread) in enumerate(frame_rendering_threads):
+        print(f"Waiting for frame-job {n}...")
+        thread.join()
+
+    for n in range(workers):
+        queue.put("stop", block=True)
+
+    for (n, thread) in enumerate(png_rendering_threads):
+        print(f"Waiting for png-job {n}...")
+        thread.join()
+
     t2 = time.time()
     print(f"Time taken: {t2 - t1:.2f}s")
     return t2 - t1
 
 
-def _render_frames(frames: Iterable[tuple[int, PilRenderable]], settings: PilSettings, path: Path):
+def _save_frame_to_file(path: Path, queue: ImageQ):
+    while True:
+        item = queue.get()
+        if item == "stop":
+            break
+        i, image = item
+        image.copy().save(path / f"frame_{i}.png", format="PNG")
+
+
+def _render_frames(frames: Iterable[tuple[int, PilRenderable]], settings: PilSettings, queue: ImageQ):
     ctx = settings.make_ctx()
     for (i, frame) in frames:
-        print(f"rendering frame {i} ({frame})...")
         ctx.draw.rectangle((0, 0) + ctx.img.size, fill=(0, 0, 0, 255))
         frame.render_pil(ctx)
-        ctx.img.save(path / f"frame_{i}.png", format="PNG")
+        queue.put((i, ctx.img.copy()), block=True)
 
 
 def partition(anim: Animation[A]) -> tuple[Animation[A], A]:
@@ -326,13 +352,8 @@ def background(a: Animation[P], group: Group[Q]) -> Animation[Group[Union[P, Q]]
 def group(*animations: Animation[P]) -> Animation[Group[P]]:
     if animations == ():
         raise ValueError("No animations!")
-
     duration = max(animation.duration for animation in animations)
-
     factors = [duration / animation.duration for animation in animations]
-
-
-
     def projector(t: float) -> Group[P]:
         return Group([a.projector(t * f if t < 1/f else 1.0) for (a, f) in zip(animations, factors)])
 
@@ -368,18 +389,20 @@ if not TYPE_CHECKING:
 
 
 if __name__ == "__main__":
+    import sys
+
     @scene()
     def base(then: Then[Group[Latex]]):
         @scene(easings.in_out)
         def a_to_b__appears(then: Then[Latex]):
-            a_to_b1 = then(anim.const_a(Latex(-2.0, 0.25, R"$A \implies B$", 0.5)))
+            a_to_b1 = then(anim.const_a(Latex(-2.0, 0.5, R"$A \implies B$", 0.5)))
             a_to_b2 = then(scale(a_to_b1, 1.5))
             a_to_b3 = then(move_by(a_to_b2, -2.0, 0.0))
             a_to_b4 = then(move_by(a_to_b3, -1.0, -2.5))
 
         @scene(easings.in_out)
         def b_to_a__appears(then: Then[Latex]):
-            b_to_a1 = then(anim.const_a(Latex(2.0, -0.25, R"$B \implies A$", 0.0)))
+            b_to_a1 = then(anim.const_a(Latex(2.0, -0.5, R"$B \implies A$", 0.0)))
             b_to_a2 = then(b_to_a1.scale_upto(0.75))
             b_to_a3 = then(move_by(b_to_a2, 2.0, 0.0))
             b_to_a4 = then(move_by(b_to_a3, 1.0, 2.5))
@@ -390,4 +413,9 @@ if __name__ == "__main__":
 
     animation = base >> (anim.pause_before, 0.5) >> (anim.pause_after, 0.5)
 
-    render_pil(animation, Path("./out"), fps=15, workers=4)
+    render_pil(
+        anim.seq_a(animation, animation, animation),
+        Path("./out"),
+        fps=int(sys.argv[1]),
+        workers=4
+    )
