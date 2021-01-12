@@ -2,16 +2,27 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from itertools import repeat
-from typing import Any, Callable, ClassVar, Generic, Iterable, Iterator, Literal, NoReturn, Optional, Protocol, Sequence, TYPE_CHECKING, TypeVar, Union, Generator, overload
+from typing import ClassVar, Generic, Iterator, Optional, Protocol, Sequence, TYPE_CHECKING, TypeVar, Union
 from PIL import Image, ImageDraw
-from pathlib import Path
-from threading import Thread
-from queue import Queue
 from pil_utils import render_latex_scaled
-import time
-import anim
-from anim import Animation, const_a
-import easings
+from anim import Animation
+from enum import Enum
+
+
+class Align(Enum):
+    Center = "CENTER"
+    Left = "LEFT"
+    Right = "RIGHT"
+
+    def __call__(self, x: float, y: float, width: float, height: float) -> tuple[float, float]:
+        if self is Align.Center:
+            return (x - width / 2, y - height / 2)
+        elif self is Align.Left:
+            return (x, y - height / 2)
+        elif self is Align.Right:
+            return (x - width, y - height / 2)
+        else:
+            assert False
 
 
 @dataclass(frozen=True)
@@ -230,6 +241,9 @@ class Latex:
     source: str
     scale_factor: float = 1.0
 
+    align: Align = Align.Center
+
+
     def morph_into(self, other: Latex) -> Animation[Latex]:
         if other.source != self.source:
             raise NotImplementedError("Morphing of Latex with different source isn't implemented yet")
@@ -238,30 +252,33 @@ class Latex:
                 self.x * (1 - t) + other.x * t,
                 self.y * (1 - t) + other.y * t,
                 other.source,
-                self.scale_factor * (1 - t) + other.scale_factor * t
+                self.scale_factor * (1 - t) + other.scale_factor * t,
+                self.align
             )
         return Animation(1.0, projector)
 
     def scale_upto(self, factor: float) -> Animation[Latex]:
-        return self.morph_into(Latex(self.x, self.y, self.source, factor))
+        return self.morph_into(Latex(self.x, self.y, self.source, factor, self.align))
 
     def scaled(self, factor: float) -> Latex:
-        return Latex(self.x, self.y, self.source, self.scale_factor * factor)
+        return Latex(self.x, self.y, self.source, self.scale_factor * factor, self.align)
 
     def scaled_about(self, factor: float, cx: float, cy: float) -> Latex:
         dx = self.x - cx
         dy = self.y - cy
         new_x = cx + dx*factor
         new_y = cy + dy*factor
-        return Latex(new_x, new_y, self.source, self.scale_factor * factor)
+        return Latex(new_x, new_y, self.source, self.scale_factor * factor, self.align)
 
     def moved(self, dx: float, dy: float) -> Latex:
-        return Latex(self.x + dx, self.y + dy, self.source, self.scale_factor)
+        return Latex(self.x + dx, self.y + dy, self.source, self.scale_factor, self.align)
 
     def render_pil(self, ctx: PilContext) -> None:
         scale_factor = self.scale_factor * (ctx.settings.width / 1920)
         if scale_factor <= 0.025:
             return
         img = render_latex_scaled(self.source, scale_factor)
-        x, y = ctx.coord(self.x, self.y)
-        ctx.draw.bitmap((x - img.width//2, y - img.height//2), img)
+        cx, cy = ctx.coord(self.x, self.y)
+        x, y = self.align(cx, cy, img.width, img.height)
+        ix, iy = map(round, (x, y))
+        ctx.draw.bitmap((ix, iy), img)
