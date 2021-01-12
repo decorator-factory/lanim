@@ -1,0 +1,8 @@
+**/__pycache__/*
+out/
+_out/
+.vscode/
+env/
+_latex_cache/
+test.mp4
+out.mp4
