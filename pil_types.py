@@ -89,6 +89,10 @@ class PilContext:
 
 
 class PilRenderable(Protocol):
+    x: float
+    y: float
+
+    def moved(self: A, dx: float, dy: float) -> A: ...
     def render_pil(self, ctx: PilContext) -> None: ...
 
 A = TypeVar("A")
@@ -96,28 +100,15 @@ B = TypeVar("B")
 P = TypeVar("P", bound=PilRenderable)
 Q = TypeVar("Q", bound=PilRenderable)
 
-
-class HasPosition(PilRenderable, Protocol):
-    x: float
-    y: float
-
-
-class Movable(HasPosition, Protocol):
-    def moved(self: A, dx: float, dy: float) -> A: ...
-
-
-class Scalable(HasPosition, Protocol):
+class Scalable(PilRenderable, Protocol):
     def scaled(self: A, factor: float) -> A: ...
     def scaled_about(self: A, factor: float, cx: float, cy: float) -> A: ...
 
 class Morphable(PilRenderable, Protocol):
     def morph_into(self: A, other: A) -> Animation[A]: ...
 
-class Alignable(Movable, Protocol):
+class Alignable(PilRenderable, Protocol):
     def aligned(self: A, new_align: Align) -> A: ...
-
-class ScalableMovable(Scalable, Movable, Protocol):
-    pass
 
 class AlignableMorphable(Alignable, Morphable, Protocol):
     pass
@@ -125,25 +116,15 @@ class AlignableMorphable(Alignable, Morphable, Protocol):
 class ScalableMorphable(Scalable, Morphable, Protocol):
     pass
 
-class MovableMorphable(Movable, Morphable, Protocol):
-    pass
 
-class ScalableMovableMorphable(Scalable, Movable, Morphable, Protocol):
-    pass
-
-PP = TypeVar("PP", bound=HasPosition)
 PA = TypeVar("PA", bound=Alignable)
 PS = TypeVar("PS", bound=Scalable)
-PM = TypeVar("PM", bound=Movable)
 PX = TypeVar("PX", bound=Morphable)
-PSM = TypeVar("PSM", bound=ScalableMovable)
-PMX = TypeVar("PMX", bound=MovableMorphable)
 PSX = TypeVar("PSX", bound=ScalableMorphable)
 PAX = TypeVar("PAX", bound=AlignableMorphable)
-PSMX = TypeVar("PSMX", bound=ScalableMovableMorphable)
 
 
-def move_by(obj: PMX, dx: float, dy: float) -> Animation[PMX]:
+def move_by(obj: PX, dx: float, dy: float) -> Animation[PX]:
     return obj.morph_into(obj.moved(dx, dy))
 
 
@@ -237,11 +218,11 @@ class Group(Generic[P]):
     def center(self) -> tuple[float, float]:
         if len(self.items) == 0:
             raise ValueError(f"Cannot find a center of an empty group, items: {self.items!r}")
-        cx = sum(item.x for item in self.items)/len(self.items)  # type: ignore
-        cy = sum(item.y for item in self.items)/len(self.items)  # type: ignore
+        cx = sum(item.x for item in self.items)/len(self.items)
+        cy = sum(item.y for item in self.items)/len(self.items)
         return (cx, cy)
 
-    def moved(self: Group[PM], dx: float, dy: float) -> Group[PM]:
+    def moved(self: Group[P], dx: float, dy: float) -> Group[P]:
         return Group([item.moved(dx, dy) for item in self.items])
 
     def scaled_about(self: Group[PS], factor: float, cx: float, cy: float) -> Group[PS]:
