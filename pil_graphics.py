@@ -14,8 +14,13 @@ __all__ = [
     "partition",
     "background",
     "gbackground",
+    "group_join",
+    "mixed_group_join",
+    "merge_group_animations",
+    "group",
     "parallel",
     "appear",
+    "par_and_bg",
     "appear_from",
     "Then",
     "ThenAny",
@@ -91,6 +96,10 @@ class ThenAny(Protocol):
 
 class Then(Protocol[P]):
     def __call__(self, a: Animation[P]) -> P: ...
+
+
+def group(*ps: P) -> Group[P]:
+    return Group(ps)
 
 
 def scene_any(easing: easings.Easing = easings.in_out, duration: float = 1.0):
