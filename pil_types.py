@@ -6,23 +6,38 @@ from typing import ClassVar, Generic, Iterator, Optional, Protocol, Sequence, TY
 from PIL import Image, ImageDraw
 from pil_utils import render_latex_scaled
 from anim import Animation
-from enum import Enum
+
+@dataclass
+class Align:
+    dx: float
+    dy: float
+
+    CC: ClassVar[Align]
+    LC: ClassVar[Align]
+    RC: ClassVar[Align]
+    CU: ClassVar[Align]
+    LU: ClassVar[Align]
+    RU: ClassVar[Align]
+    CD: ClassVar[Align]
+    LD: ClassVar[Align]
+    RD: ClassVar[Align]
+
+    def blend(self, other: Align, t: float) -> Align:
+        return Align(self.dx * (1 - t) + other.dx * t, self.dy * (1 - t) + other.dy * t)
+
+    def apply(self, x: float, y: float, width: float, height: float) -> tuple[float, float]:
+        return x + self.dx * width, y + self.dy * height
 
 
-class Align(Enum):
-    Center = "CENTER"
-    Left = "LEFT"
-    Right = "RIGHT"
-
-    def __call__(self, x: float, y: float, width: float, height: float) -> tuple[float, float]:
-        if self is Align.Center:
-            return (x - width / 2, y - height / 2)
-        elif self is Align.Left:
-            return (x, y - height / 2)
-        elif self is Align.Right:
-            return (x - width, y - height / 2)
-        else:
-            assert False
+Align.CC = Align(-1/2, -1/2)
+Align.LC = Align(   0, -1/2)
+Align.RC = Align(  -1, -1/2)
+Align.CU = Align(-1/2,    0)
+Align.LU = Align(   0,    0)
+Align.RU = Align(  -1,    0)
+Align.CD = Align(-1/2,   -1)
+Align.LD = Align(   0,   -1)
+Align.RD = Align(  -1,   -1)
 
 
 @dataclass(frozen=True)
@@ -98,7 +113,13 @@ class Scalable(HasPosition, Protocol):
 class Morphable(PilRenderable, Protocol):
     def morph_into(self: A, other: A) -> Animation[A]: ...
 
+class Alignable(Movable, Protocol):
+    def aligned(self: A, new_align: Align) -> A: ...
+
 class ScalableMovable(Scalable, Movable, Protocol):
+    pass
+
+class AlignableMorphable(Alignable, Morphable, Protocol):
     pass
 
 class ScalableMorphable(Scalable, Morphable, Protocol):
@@ -111,12 +132,14 @@ class ScalableMovableMorphable(Scalable, Movable, Morphable, Protocol):
     pass
 
 PP = TypeVar("PP", bound=HasPosition)
+PA = TypeVar("PA", bound=Alignable)
 PS = TypeVar("PS", bound=Scalable)
 PM = TypeVar("PM", bound=Movable)
 PX = TypeVar("PX", bound=Morphable)
 PSM = TypeVar("PSM", bound=ScalableMovable)
 PMX = TypeVar("PMX", bound=MovableMorphable)
 PSX = TypeVar("PSX", bound=ScalableMorphable)
+PAX = TypeVar("PAX", bound=AlignableMorphable)
 PSMX = TypeVar("PSMX", bound=ScalableMovableMorphable)
 
 
@@ -130,6 +153,10 @@ def scale(obj: PSX, factor: float) -> Animation[PSX]:
 
 def scale_about(obj: PSX, factor: float) -> Animation[PSX]:
     return obj.morph_into(obj.scaled(factor))
+
+
+def align(obj: PAX, new_align: Align) -> Animation[PAX]:
+    return obj.morph_into(obj.aligned(new_align))
 
 
 @dataclass(frozen=True)
@@ -241,7 +268,7 @@ class Latex:
     source: str
     scale_factor: float = 1.0
 
-    align: Align = Align.Center
+    align: Align = Align.CC
 
 
     def morph_into(self, other: Latex) -> Animation[Latex]:
@@ -253,9 +280,12 @@ class Latex:
                 self.y * (1 - t) + other.y * t,
                 other.source,
                 self.scale_factor * (1 - t) + other.scale_factor * t,
-                self.align
+                self.align.blend(other.align, t)
             )
         return Animation(1.0, projector)
+
+    def aligned(self, new_align: Align) -> Latex:
+        return Latex(self.x, self.y, self.source, self.scale_factor, new_align)
 
     def scale_upto(self, factor: float) -> Animation[Latex]:
         return self.morph_into(Latex(self.x, self.y, self.source, factor, self.align))
@@ -279,6 +309,6 @@ class Latex:
             return
         img = render_latex_scaled(self.source, scale_factor)
         cx, cy = ctx.coord(self.x, self.y)
-        x, y = self.align(cx, cy, img.width, img.height)
+        x, y = self.align.apply(cx, cy, img.width, img.height)
         ix, iy = map(round, (x, y))
         ctx.draw.bitmap((ix, iy), img)
