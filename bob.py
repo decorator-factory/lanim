@@ -1,44 +1,40 @@
 import sys
-fps = int(sys.argv[1])
+width, height, fps = map(int, sys.argv[1:])
 
+from pathlib import Path
 from easings import *
 from anim import *
 from pil_graphics import *
 from pil_types import *
 
-# @scene(easings.in_out)
-# def a_to_b__appears(then: Then[Latex]):
-#     a_to_b1 = then(appear(Latex(-2.0, 0.5, R"$A \implies B$", 0.75)) * 2)
-#     a_to_b2 = then(move_by(a_to_b1, -2.0, 0.0))
-#     a_to_b3 = then(move_by(a_to_b2, -1.0, -2.5))
-
-# @scene(easings.in_out)
-# def b_to_a__appears(then: Then[Latex]):
-#     b_to_a1 = then(appear(Latex(2.0, -0.5, R"$B \implies A$", 0.75)) * 2)
-#     b_to_a2 = then(move_by(b_to_a1, 2.0, 0.0))
-#     b_to_a3 = then(move_by(b_to_a2, 1.0, 2.5))
-
-# @scene(easings.linear)
-# def base(then: Then[Group[Latex]]):
-#     two_equations = then(parallel(a_to_b__appears, b_to_a__appears))
-#     then(const_a(two_equations) * 0.5)
-#     then(scale(two_equations, 0.0) @ easings.in_out)
-
 
 @scene()
-def d_f__appears(then: Then[Latex]):
-    df1 = then(appear(Latex(-4, 0.0, R"($D$, $f$)")))
-    df2 = then(const_a(df1))
+def easing_generalization(then: Then[Group[Latex]]):
+    square1 = Latex(-0.5, -2.0, R"($D$, $\tau \mapsto f(\tau^2)$)", 0.5, align=Align.RC)
+    invert1 = Latex(+0.5, -2.0, R"($D$, $\tau \mapsto f(1 - \tau)$)", 0.5, align=Align.LC)
+
+    square2 = Latex(-0.5, -2.0, R"($D$, $f \circ (\tau \mapsto \tau^2)$)", 0.5, align=Align.RC)
+    invert2 = Latex(+0.5, -2.0, R"($D$, $f \circ (\tau \mapsto 1 - \tau)$)", 0.5, align=Align.LC)
+
+    generalization1 = Latex(0.0, -2.0, R"($D$, $f \circ \text{easing}$)", 0.66)
+    generalization2 = Latex(0.5, -2.0, R"($D$, $f$) $ @ $ easing", 0.66, align=Align.LC)
+
+    df1 = then(appear(group(square1)))
+    df2 = then(gbackground(appear(invert1), df1) >> (pause_after, 1.0))
+    df3 = then(move_by(df2, 0.0, 2.0))
+    df4 = then(gbackground(appear(square2), df3))
+    df5 = then(gbackground(appear(invert2), df4) >> (pause_after, 1.0))
+    df6 = then(move_by(df5, 0.0, 2.0))
+    _   = then(gbackground(appear(generalization1), df6) * 0.35)
+    df7 = then(
+            gbackground(
+                generalization1.morph_into(generalization1.aligned(Align.RC).moved(-0.5, 0.0)),
+                df6
+            )*0.35 >> (pause_after, 1.0)
+        )
+    df8 = then(gbackground(appear(generalization2), df7) >> (pause_after, 1.0))
 
 
-base = d_f__appears
+animation = easing_generalization >> (pause_before, 0.5) >> (pause_after, 2.0)
 
-
-animation = base >> (anim.pause_before, 0.5) >> (anim.pause_after, 0.5)
-
-render_pil(
-    animation,
-    Path("./out"),
-    fps,
-    workers=4
-)
+render_pil(width, height, animation, Path("./out"), fps, workers=4)
