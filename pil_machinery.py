@@ -15,19 +15,23 @@ from pil_types import PilRenderable, PilSettings
 ImageQ = Queue[Union[Literal["stop"], tuple[int, Image.Image]]]
 
 
-def render_pil(animation: Animation[PilRenderable], path: Path, fps: float, workers: int):
+def render_pil(
+    width: int,
+    height: int,
+    animation: Animation[PilRenderable],
+    path: Path,
+    fps: float,
+    workers: int
+):
     path.mkdir(parents=True, exist_ok=True)
 
-    WIDTH = 1280
-    HEIGHT = round(WIDTH * 9 / 16)
-
     settings = PilSettings(
-        width=WIDTH, height=HEIGHT,
-        center_x=WIDTH//2, center_y=HEIGHT//2,
-        unit=WIDTH//16
+        width=width, height=height,
+        center_x=width//2, center_y=height//2,
+        unit=width//16
     )
 
-    print(f"Rendering animation {WIDTH}x{HEIGHT} {animation.duration}s @{fps}FPS")
+    print(f"Rendering animation {width}x{height} {animation.duration}s @{fps}FPS")
 
     jobs = [[] for _ in range(workers)]
 
