@@ -83,11 +83,11 @@ def parallel(*animations: Animation[P]) -> Animation[Group[P]]:
 
 
 def appear(p: PSX) -> Animation[PSX]:
-    return p.scaled(0.0).morph_into(p)
+    return morph_into(p.scaled(0.0), (p))
 
 
 def appear_from(p: PSX, x: float, y: float) -> Animation[PSX]:
-    return p.scaled_about(0.0, x, y).morph_into(p)
+    return morph_into(p.scaled_about(0.0, x, y), p)
 
 
 class ThenAny(Protocol):

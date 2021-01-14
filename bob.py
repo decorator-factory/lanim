@@ -21,8 +21,7 @@ def slider_and_rect(t: float):
         slider(x1=-4.0, x2=4.0, y=-3.0, t=t),
 
         Rect(0, 0, 2, 2, line_width=2)
-        .morph_into(Rect(0, 0, 4, 1.5, line_width=2))
-        .projector(t)
+        .morphed(Rect(0, 0, 4, 1.5, line_width=2), t)
     )
 
 base = Animation(duration=1.5, projector=slider_and_rect) @ in_out
@@ -58,7 +57,7 @@ def easing_generalization(then: Then[Group[Latex]]):
     _   = then(gbackground(appear(generalization1), df6) * 0.35)
     df7 = then(
             gbackground(
-                generalization1.morph_into(generalization1.aligned(Align.RC).moved(-0.5, 0.0)),
+                morph_into(generalization1, generalization1.aligned(Align.RC).moved(-0.5, 0.0)),
                 df6
             )*0.35 >> (pause_after, 1.0)
         )

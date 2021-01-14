@@ -108,7 +108,7 @@ class Scalable(PilRenderable, Protocol):
     def scaled_about(self: A, factor: float, cx: float, cy: float) -> A: ...
 
 class Morphable(PilRenderable, Protocol):
-    def morph_into(self: A, other: A) -> Animation[A]: ...
+    def morphed(self: A, other: A, t: float) -> A: ...
 
 class Alignable(PilRenderable, Protocol):
     def aligned(self: A, new_align: Align) -> A: ...
@@ -143,20 +143,23 @@ RAX2 = TypeVar("RAX2", bound=AlignableMorphable)
 RAX3 = TypeVar("RAX3", bound=AlignableMorphable)
 
 
+def morph_into(source: PX, destination: PX) -> Animation[PX]:
+    return Animation(1.0, lambda t: source.morphed(destination, t))
+
 def move_by(obj: PX, dx: float, dy: float) -> Animation[PX]:
-    return obj.morph_into(obj.moved(dx, dy))
+    return morph_into(obj, obj.moved(dx, dy))
 
 
 def scale(obj: PSX, factor: float) -> Animation[PSX]:
-    return obj.morph_into(obj.scaled(factor))
+    return morph_into(obj, obj.scaled(factor))
 
 
 def scale_about(obj: PSX, factor: float) -> Animation[PSX]:
-    return obj.morph_into(obj.scaled(factor))
+    return morph_into(obj, obj.scaled(factor))
 
 
 def align(obj: PAX, new_align: Align) -> Animation[PAX]:
-    return obj.morph_into(obj.aligned(new_align))
+    return morph_into(obj, obj.aligned(new_align))
 
 
 @dataclass(frozen=True)
@@ -180,22 +183,14 @@ class Rect:
         new_y = cy + dy*factor
         return Rect(new_x, new_y, self.width*factor, self.height*factor, self.line_width)
 
-    def move_by(self, dx: float, dy: float) -> Animation[Rect]:
-        return self.morph_into(self.moved(dx, dy))
-
-    def move_to(self, x: float, y: float) -> Animation[Rect]:
-        return self.move_by(x - self.x, y - self.y)
-
-    def morph_into(self, other: Rect) -> Animation[Rect]:
-        def projector(t: float):
-            return Rect(
-                self.x * (1 - t) + other.x * t,
-                self.y * (1 - t) + other.y * t,
-                self.width * (1 - t) + other.width * t,
-                self.height * (1 - t) + other.height * t,
-                self.line_width * (1 - t) + other.line_width * t
-            )
-        return Animation(1.0, projector)
+    def morphed(self, other: Rect, t: float) -> Rect:
+        return Rect(
+            self.x * (1 - t) + other.x * t,
+            self.y * (1 - t) + other.y * t,
+            self.width * (1 - t) + other.width * t,
+            self.height * (1 - t) + other.height * t,
+            self.line_width * (1 - t) + other.line_width * t
+        )
 
     def render_pil(self, ctx: PilContext) -> None:
         if self.width <= 0 or self.height <= 0:
@@ -226,16 +221,10 @@ class Group(Generic[P]):
         def y(self) -> float:
             return self.center()[1]
 
-    def morph_into(self: Group[PX], other: Group[PX]) -> Animation[Group[PX]]:
+    def morphed(self: Group[PX], other: Group[PX], t: float) -> Group[PX]:
         if len(self.items) != len(other.items):
             raise NotImplementedError("Morphing groups with different lengths isn't implemented yet")
-        animations = [
-            item_a.morph_into(item_b)
-            for (item_a, item_b) in zip(self.items, other.items)
-        ]
-        def projector(t: float) -> Group[PX]:
-            return Group([a.projector(t) for a in animations])
-        return Animation(1.0, projector)
+        return Group([a.morphed(b, t) for a, b in zip(self.items, other.items)])
 
     def __iter__(self) -> Iterator[P]:
         return iter(self.items)
@@ -317,11 +306,8 @@ class Pair(GTuple2[P, Q]):
     def scaled_about(self: Pair[PS, QS], factor: float, cx: float, cy: float) -> Pair[PS, QS]:
         return Pair(self.p.scaled_about(factor, cx, cy), self.q.scaled_about(factor, cx, cy))
 
-    def morph_into(self: Pair[PX, QX], other: Pair[PX, QX]) -> Animation[Pair[PX, QX]]:
-        return map_a(
-            par_a_longest(self.p.morph_into(other.p), self.q.morph_into(other.q)),
-            lambda pq: Pair(*pq)
-        )
+    def morphed(self: Pair[PX, QX], other: Pair[PX, QX], t: float) -> Pair[PX, QX]:
+        return Pair(self.p.morphed(other.p, t), self.q.morphed(other.q, t))
 
     def flip(self) -> Pair[Q, P]:
         return Pair[Q, P](self.q, self.p)
@@ -343,24 +329,19 @@ class Latex:
 
     align: Align = Align.CC
 
-    def morph_into(self, other: Latex) -> Animation[Latex]:
+    def morphed(self, other: Latex, t: float) -> Latex:
         if other.source != self.source:
             raise NotImplementedError("Morphing of Latex with different source isn't implemented yet")
-        def projector(t: float) -> Latex:
-            return Latex(
-                self.x * (1 - t) + other.x * t,
-                self.y * (1 - t) + other.y * t,
-                other.source,
-                self.scale_factor * (1 - t) + other.scale_factor * t,
-                self.align.blend(other.align, t)
-            )
-        return Animation(1.0, projector)
+        return Latex(
+            self.x * (1 - t) + other.x * t,
+            self.y * (1 - t) + other.y * t,
+            other.source,
+            self.scale_factor * (1 - t) + other.scale_factor * t,
+            self.align.blend(other.align, t)
+        )
 
     def aligned(self, new_align: Align) -> Latex:
         return Latex(self.x, self.y, self.source, self.scale_factor, new_align)
-
-    def scale_upto(self, factor: float) -> Animation[Latex]:
-        return self.morph_into(Latex(self.x, self.y, self.source, factor, self.align))
 
     def scaled(self, factor: float) -> Latex:
         return Latex(self.x, self.y, self.source, self.scale_factor * factor, self.align)
