@@ -12,19 +12,22 @@ from pil_types import *
 def slider(x1: float, x2: float, y: float, t: float):
     x = x1*(1-t) + x2*t
     return Pair(
-        Rect((x1 + x2)/2, y + 0.4, x2 - x1, 0.05, line_width=1.5),
-        Latex(x, y, f"${t:.02f}$", 0.5),
+        Rect((x1 + x2)/2, y + 0.6, x2 - x1, 0.05, line_width=1.5),
+        Pair(
+            Triangle(x, y + 0.4, *(-0.2, 0, +0.2, 0, 0, 0.2)),
+            Latex(x, y, f"${t:.02f}$", 0.5),
+        ),
     )
 
-def slider_and_rect(t: float):
+def slider_and_tri(t: float):
     return Pair(
         slider(x1=-4.0, x2=4.0, y=-3.0, t=t),
 
-        Rect(0, 0, 2, 2, line_width=2)
-        .morphed(Rect(0, 0, 4, 1.5, line_width=2), t)
+        Triangle(0, 0, *(1, 0, -1, -1, -0.5, 1.25), line_width=2)
+        .morphed(Triangle(0, 0, *(2, 0, -2.5, -0.5, -0.25, 3), line_width=6), t)
     )
 
-base = Animation(duration=1.5, projector=slider_and_rect) @ in_out
+base = Animation(duration=1.5, projector=slider_and_tri) @ in_out
 here_and_there = seq_a(
     base >> (pause_after, 1.0),
     base @ invert >> (pause_after, 0.5)

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace as dataclass_replace
 from itertools import repeat
-from typing import Callable, ClassVar, Generic, Iterator, Literal, Optional, Protocol, Sequence, TYPE_CHECKING, TypeVar, Union, overload
+from typing import Any, Callable, ClassVar, Generic, Iterator, Literal, Optional, Protocol, Sequence, TYPE_CHECKING, TypeVar, Union, overload
 from PIL import Image, ImageDraw
 from pil_utils import render_latex_scaled
 from anim import Animation, map_a, par_a_longest, par_a_shortest
@@ -48,8 +48,6 @@ class Style:
 
     default: ClassVar[Style]
 
-Style.default = Style(fill=None, outline=0xffffff, line_width=4)  # type: ignore
-
 
 @dataclass(frozen=True)
 class PilSettings:
@@ -76,16 +74,38 @@ class PilContext:
         pixels_y = self.settings.center_y + self.settings.unit * y
         return round(pixels_x), round(pixels_y)
 
-    def rectangle_wh(self, cx: float, cy: float, width: float, height: float, style: Style = Style.default):
+    def rectangle_wh(self, cx: float, cy: float, width: float, height: float, style: Style):
         self.rectangle(cx - width/2, cy - height/2, cx + width/2, cy + height/2, style)
 
-    def rectangle(self, x1: float, y1: float, x2: float, y2: float, style: Style = Style.default):
+    def rectangle(self, x1: float, y1: float, x2: float, y2: float, style: Style):
         self.draw.rectangle(
             (self.coord(x1, y1), self.coord(x2, y2) ),
             fill=style.fill,
             outline=style.outline,
             width=style.line_width,
         )
+
+    def line(self, x1: float, y1: float, x2: float, y2: float, style: Style):
+        self.draw.line(
+            [*self.coord(x1, y1), *self.coord(x2, y2)],
+            fill=style.outline,
+            width=style.line_width,
+        )
+
+    def triangle(self, x1: float, y1: float, x2: float, y2: float, x3: float, y3: float, style: Style):
+        self.draw.line(
+            [
+                *self.coord(x1, y1),
+                *self.coord(x2, y2),
+                *self.coord(x3, y3),
+                *self.coord(x1, y1),
+                *self.coord((x1+x2)/2, (y1+y2)/2),
+            ],
+            fill=style.outline,
+            width=style.line_width,
+            joint="curve"
+        )
+
 
 
 class PilRenderable(Protocol):
@@ -202,6 +222,64 @@ class Rect:
                 outline=0xffffff,
                 line_width=max(1, round(self.line_width * 4 * ctx.img.width / 1920))
             ),
+        )
+
+
+def _automorph(self: P, other: P, t: float, *names: str) -> P:
+    kwargs = {name: getattr(self, name) * (1 - t) + getattr(other, name) * t for name in names}
+    return type(self)(**kwargs)  # type: ignore
+
+
+@dataclass(frozen=True)
+class Triangle:
+    x: float
+    y: float
+    dx1: float
+    dy1: float
+    dx2: float
+    dy2: float
+    dx3: float
+    dy3: float
+    line_width: float = 1
+
+    def moved(self, dx: float, dy: float) -> Triangle:
+        return dataclass_replace(self, x=self.x + dx, y = self.y + dy)
+
+    def scaled(self, factor: float) -> Triangle:
+        return dataclass_replace(
+            self,
+            dx1=self.dx1 * factor,
+            dy1=self.dy1 * factor,
+            dx2=self.dx2 * factor,
+            dy2=self.dy2 * factor,
+            dx3=self.dx3 * factor,
+            dy3=self.dy3 * factor,
+        )
+
+    def scaled_about(self, factor: float, cx: float, cy: float) -> Triangle:
+        dx = cx - self.x
+        dy = cy - self.y
+        return self.scaled(factor).moved(dx*factor, dy*factor)
+
+    def morphed(self, other: Triangle, t: float) -> Triangle:
+        return _automorph(
+            self, other, t,
+            "x", "y", "dx1", "dy1", "dx2", "dy2", "dx3", "dy3", "line_width"
+        )
+
+    def render_pil(self, ctx: PilContext) -> None:
+        ctx.triangle(
+            self.x + self.dx1,
+            self.y + self.dy1,
+            self.x + self.dx2,
+            self.y + self.dy2,
+            self.x + self.dx3,
+            self.y + self.dy3,
+            Style(
+                outline=0xffffff,
+                fill=0x000000,
+                line_width=max(1, round(self.line_width * 4 * ctx.img.width / 1920))
+            )
         )
 
 
