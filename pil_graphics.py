@@ -10,6 +10,11 @@ import easings
 
 
 __all__ = [
+    "morph_into",
+    "move_by",
+    "scale",
+    "scale_about",
+    "align",
     "render_pil",
     "partition",
     "background",
@@ -29,9 +34,27 @@ __all__ = [
 ]
 
 
-
 N = TypeVar("N", bound=PilRenderable, covariant=True)
 M = TypeVar("M", bound=PilRenderable, covariant=True)
+
+
+def morph_into(source: PX, destination: PX) -> Animation[PX]:
+    return Animation(1.0, lambda t: source.morphed(destination, t))
+
+def move_by(obj: PX, dx: float, dy: float) -> Animation[PX]:
+    return morph_into(obj, obj.moved(dx, dy))
+
+
+def scale(obj: PSX, factor: float) -> Animation[PSX]:
+    return morph_into(obj, obj.scaled(factor))
+
+
+def scale_about(obj: PSX, factor: float) -> Animation[PSX]:
+    return morph_into(obj, obj.scaled(factor))
+
+
+def align(obj: PAX, new_align: Align) -> Animation[PAX]:
+    return morph_into(obj, obj.aligned(new_align))
 
 
 def partition(anim: Animation[A]) -> tuple[Animation[A], A]:

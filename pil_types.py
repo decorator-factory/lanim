@@ -163,25 +163,6 @@ RAX2 = TypeVar("RAX2", bound=AlignableMorphable)
 RAX3 = TypeVar("RAX3", bound=AlignableMorphable)
 
 
-def morph_into(source: PX, destination: PX) -> Animation[PX]:
-    return Animation(1.0, lambda t: source.morphed(destination, t))
-
-def move_by(obj: PX, dx: float, dy: float) -> Animation[PX]:
-    return morph_into(obj, obj.moved(dx, dy))
-
-
-def scale(obj: PSX, factor: float) -> Animation[PSX]:
-    return morph_into(obj, obj.scaled(factor))
-
-
-def scale_about(obj: PSX, factor: float) -> Animation[PSX]:
-    return morph_into(obj, obj.scaled(factor))
-
-
-def align(obj: PAX, new_align: Align) -> Animation[PAX]:
-    return morph_into(obj, obj.aligned(new_align))
-
-
 @dataclass(frozen=True)
 class Rect:
     x: float
@@ -334,15 +315,22 @@ class Group(Generic[P]):
             item.render_pil(ctx)
 
 
+# The following is needed so that you can unpack a `Pair` like a tuple.
+# This is possible without this hack, but the inferred type of each element will be a union:
+
+# a, b = Pair(Rect(...), Latex(...))
+# ^  ^
+# |__|___a: Rect | Latex, b: Rect | Latex
+
 if TYPE_CHECKING:
-    class GTuple2(tuple[A, B], Generic[A, B]):
+    class _GTuple2(tuple[A, B], Generic[A, B]):
         ...
 else:
-    GTuple2 = Generic
+    _GTuple2 = Generic
 
 
 @dataclass(frozen=True)
-class Pair(GTuple2[P, Q]):
+class Pair(_GTuple2[P, Q]):
     p: P
     q: Q
 
