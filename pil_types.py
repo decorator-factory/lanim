@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from itertools import repeat
-from typing import ClassVar, Generic, Iterator, Optional, Protocol, Sequence, TYPE_CHECKING, TypeVar, Union
+from typing import Callable, ClassVar, Generic, Iterator, Literal, Optional, Protocol, Sequence, TYPE_CHECKING, TypeVar, Union, overload
 from PIL import Image, ImageDraw
 from pil_utils import render_latex_scaled
-from anim import Animation
+from anim import Animation, map_a, par_a_longest, par_a_shortest
 
 @dataclass
 class Align:
@@ -99,6 +99,9 @@ A = TypeVar("A")
 B = TypeVar("B")
 P = TypeVar("P", bound=PilRenderable)
 Q = TypeVar("Q", bound=PilRenderable)
+R = TypeVar("R", bound=PilRenderable)
+R2 = TypeVar("R2", bound=PilRenderable)
+R3 = TypeVar("R3", bound=PilRenderable)
 
 class Scalable(PilRenderable, Protocol):
     def scaled(self: A, factor: float) -> A: ...
@@ -119,9 +122,25 @@ class ScalableMorphable(Scalable, Morphable, Protocol):
 
 PA = TypeVar("PA", bound=Alignable)
 PS = TypeVar("PS", bound=Scalable)
+QS = TypeVar("QS", bound=Scalable)
+RS = TypeVar("RS", bound=Scalable)
+RS2 = TypeVar("RS2", bound=Scalable)
+RS3 = TypeVar("RS3", bound=Scalable)
 PX = TypeVar("PX", bound=Morphable)
+QX = TypeVar("QX", bound=Morphable)
+RX = TypeVar("RX", bound=Morphable)
+RX2 = TypeVar("RX2", bound=Morphable)
+RX3 = TypeVar("RX3", bound=Morphable)
 PSX = TypeVar("PSX", bound=ScalableMorphable)
+QSX = TypeVar("QSX", bound=ScalableMorphable)
+RSX = TypeVar("RSX", bound=ScalableMorphable)
+RSX2 = TypeVar("RSX2", bound=ScalableMorphable)
+RSX3 = TypeVar("RSX3", bound=ScalableMorphable)
 PAX = TypeVar("PAX", bound=AlignableMorphable)
+QAX = TypeVar("QAX", bound=AlignableMorphable)
+RAX = TypeVar("RAX", bound=AlignableMorphable)
+RAX2 = TypeVar("RAX2", bound=AlignableMorphable)
+RAX3 = TypeVar("RAX3", bound=AlignableMorphable)
 
 
 def move_by(obj: PX, dx: float, dy: float) -> Animation[PX]:
@@ -146,19 +165,20 @@ class Rect:
     y: float
     width: float
     height: float
+    line_width: float = 1
 
     def scaled(self, factor: float) -> Rect:
-        return Rect(self.x, self.y, self.width * factor, self.height * factor)
+        return Rect(self.x, self.y, self.width * factor, self.height * factor, self.line_width)
 
     def moved(self, dx: float, dy: float) -> Rect:
-        return Rect(self.x + dx, self.y + dy, self.width, self.height)
+        return Rect(self.x + dx, self.y + dy, self.width, self.height, self.line_width)
 
     def scaled_about(self, factor: float, cx: float, cy: float) -> Rect:
         dx = self.x - cx
         dy = self.y - cy
         new_x = cx + dx*factor
         new_y = cy + dy*factor
-        return Rect(new_x, new_y, self.width*factor, self.height*factor)
+        return Rect(new_x, new_y, self.width*factor, self.height*factor, self.line_width)
 
     def move_by(self, dx: float, dy: float) -> Animation[Rect]:
         return self.morph_into(self.moved(dx, dy))
@@ -173,6 +193,7 @@ class Rect:
                 self.y * (1 - t) + other.y * t,
                 self.width * (1 - t) + other.width * t,
                 self.height * (1 - t) + other.height * t,
+                self.line_width * (1 - t) + other.line_width * t
             )
         return Animation(1.0, projector)
 
@@ -181,7 +202,11 @@ class Rect:
             return
         ctx.rectangle_wh(
             self.x, self.y, self.width, self.height,
-            style=Style(fill=None, outline=0xffffff, line_width=4),
+            style=Style(
+                fill=None,
+                outline=0xffffff,
+                line_width=max(1, round(self.line_width * 4 * ctx.img.width / 1920))
+            ),
         )
 
 
@@ -222,7 +247,7 @@ class Group(Generic[P]):
         cy = sum(item.y for item in self.items)/len(self.items)
         return (cx, cy)
 
-    def moved(self: Group[P], dx: float, dy: float) -> Group[P]:
+    def moved(self, dx: float, dy: float) -> Group[P]:
         return Group([item.moved(dx, dy) for item in self.items])
 
     def scaled_about(self: Group[PS], factor: float, cx: float, cy: float) -> Group[PS]:
@@ -231,15 +256,82 @@ class Group(Generic[P]):
     def scaled(self: Group[PS], factor: float) -> Group[PS]:
         return self.scaled_about(factor, *self.center())
 
-    def add(self: Group[P], new_item: Q) -> Group[Union[P, Q]]:
+    def add(self, new_item: Q) -> Group[Union[P, Q]]:
         return Group([*self.items, new_item])
 
-    def concat(self: Group[P], other: Group[Q]) -> Group[Union[P, Q]]:
+    def concat(self, other: Group[Q]) -> Group[Union[P, Q]]:
         return Group([*self.items, *other.items])
 
     def render_pil(self, ctx: PilContext) -> None:
         for item in self.items:
             item.render_pil(ctx)
+
+
+if TYPE_CHECKING:
+    class GTuple2(tuple[A, B], Generic[A, B]):
+        ...
+else:
+    GTuple2 = Generic
+
+
+@dataclass(frozen=True)
+class Pair(GTuple2[P, Q]):
+    p: P
+    q: Q
+
+    if TYPE_CHECKING:
+        x: float = field(init = False)
+        y: float = field(init = False)
+    else:
+        @property
+        def x(self) -> float:
+            return self.center()[0]
+
+        @property
+        def y(self) -> float:
+            return self.center()[1]
+
+    @overload
+    def __getitem__(self, index: Literal[0]) -> P: ...
+    @overload
+    def __getitem__(self, index: Literal[1]) -> Q: ...
+
+    def __getitem__(self, index: int):
+        return (self.p, self.q)[index]
+
+    def __len__(self):
+        return 2
+
+    def as_group(self) -> Group[Union[P, Q]]:
+        return Group(self)
+
+    def moved(self, dx: float, dy: float) -> Pair[P, Q]:
+        return Pair(self.p.moved(dx, dy), self.q.moved(dx, dy))
+
+    def center(self) -> tuple[float, float]:
+        return Group((self.p, self.q)).center()
+
+    def scaled(self: Pair[PS, QS], factor: float) -> Pair[PS, QS]:
+        return self.scaled_about(factor, *self.center())
+
+    def scaled_about(self: Pair[PS, QS], factor: float, cx: float, cy: float) -> Pair[PS, QS]:
+        return Pair(self.p.scaled_about(factor, cx, cy), self.q.scaled_about(factor, cx, cy))
+
+    def morph_into(self: Pair[PX, QX], other: Pair[PX, QX]) -> Animation[Pair[PX, QX]]:
+        return map_a(
+            par_a_longest(self.p.morph_into(other.p), self.q.morph_into(other.q)),
+            lambda pq: Pair(*pq)
+        )
+
+    def flip(self) -> Pair[Q, P]:
+        return Pair[Q, P](self.q, self.p)
+
+    def render_pil(self, ctx: PilContext) -> None:
+        self.p.render_pil(ctx)
+        self.q.render_pil(ctx)
+
+
+Triple = Pair[P, Pair[Q, R]]
 
 
 @dataclass(frozen=True)
@@ -250,7 +342,6 @@ class Latex:
     scale_factor: float = 1.0
 
     align: Align = Align.CC
-
 
     def morph_into(self, other: Latex) -> Animation[Latex]:
         if other.source != self.source:
