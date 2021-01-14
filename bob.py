@@ -9,6 +9,21 @@ from pil_types import *
 
 
 
+# Trajectories:
+
+
+@scene(linear)
+def moving_rectangle(then: Then[Rect]):
+    r0 = then(const_a(Rect(-2, -2, 1, 1)) * 0.1)
+    r1 = then(move_t(r0, dest_x=3, dest_y=1, traj=halfcircle_traj) >> (pause_after, 0.5))
+    r2 = then(move_t(r1, dest_x=-2, dest_y=-2, traj=low_arc_traj) >> (pause_after, 0.5))
+
+traj_markers = Pair(Rect(-2, -2, 0.1, 0.1), Rect(3, 1, 0.1, 0.1))
+traj_animations = lpair(moving_rectangle, traj_markers)
+
+
+# Slider:
+
 def slider(x1: float, x2: float, y: float, t: float):
     x = x1*(1-t) + x2*t
     return Pair(
@@ -32,13 +47,15 @@ here_and_there = seq_a(
     base >> (pause_after, 1.0),
     base @ invert >> (pause_after, 0.5)
 )
-animation = seq_a(
+slider_animation = seq_a(
     here_and_there >> (pause_after, 0.5),
     here_and_there * 0.2,
     here_and_there * 0.2,
     here_and_there * 0.2
 )
 
+
+# Easing definition:
 
 @scene()
 def easing_generalization(then: Then[Group[Latex]]):
@@ -67,7 +84,7 @@ def easing_generalization(then: Then[Group[Latex]]):
     df8 = then(gbackground(appear(generalization2), df7) >> (pause_after, 1.0))
 
 
-#animation = easing_generalization >> (pause_before, 0.5) >> (pause_after, 2.0)
-animation = animation >> (pause_before, 0.75) >> (pause_after, 1.25)
+animation = traj_animations * 2 >> (pause_before, 0.75) >> (pause_after, 1.25)
+
 
 render_pil(width, height, animation, Path("./out"), fps, workers=4)
