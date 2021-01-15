@@ -1,18 +1,24 @@
 from __future__ import annotations
+from functools import reduce
 
 from pil_machinery import render_pil
 from pil_types import *
 
+import random
+from immutables import Map
 import math
-from typing import Any, Callable, Protocol, TYPE_CHECKING, Union
+from typing import Any, Callable, Protocol, TYPE_CHECKING, Union, TypeVar
 import anim
-from anim import Animation, map_a
+from anim import Animation, Projector, map_a
 import easings
 
 
 N = TypeVar("N", bound=PilRenderable, covariant=True)
 M = TypeVar("M", bound=PilRenderable, covariant=True)
 
+
+def moved_to(p: P, x: float, y: float) -> P:
+    return p.moved(x - p.x, y - p.y)
 
 
 # Fundamental animation constructions:
@@ -62,10 +68,14 @@ def ease_t(traj: Trajectory, easing: easings.Easing) -> Trajectory:
 
 
 def move_t(obj: PX, dest_x: float, dest_y: float, traj: Trajectory) -> Animation[PX]:
+    return Animation(1.0, proj_t(obj, dest_x, dest_y, traj))
+
+
+def proj_t(obj: PX, dest_x: float, dest_y: float, traj: Trajectory) -> Projector[PX]:
     def projector(t: float) -> PX:
         x, y  = traj(obj.x, obj.y, dest_x, dest_y, t)
         return obj.moved(x - obj.x, y - obj.y)
-    return Animation(1.0, projector)
+    return projector
 
 
 linear_traj: Trajectory = \
@@ -166,6 +176,34 @@ def parallel(*animations: Animation[P]) -> Animation[Group[P]]:
 def group(*ps: P) -> Group[P]:
     return Group(ps)
 
+
+def with_last_frame(animation: Animation[A], a: A) -> Animation[A]:
+    def projector(t: float):
+        if t < 1.0:
+            return animation.projector(t)
+        else:
+            return a
+    return animation.with_projector(projector)
+
+
+def swap(g: Group[PX], index1: int, index2: int, traj: Trajectory = linear_traj) -> Animation[Group[PX]]:
+    items = list(g.items)
+    items[index1], items[index2] = (
+        moved_to(items[index2], items[index1].x, items[index1].y),
+        moved_to(items[index1], items[index2].x, items[index2].y),
+    )
+    final_group = Group(items)
+
+    proj1 = proj_t(g.items[index1], g.items[index2].x, g.items[index2].y, traj)
+    proj2 = proj_t(g.items[index2], g.items[index1].x, g.items[index1].y, traj)
+
+    def projector(t: float) -> Group[PX]:
+        items = list(g.items)
+        items[index1] = proj1(t)
+        items[index2] = proj2(t)
+        return Group(items)
+
+    return with_last_frame(Animation(1.0, projector), final_group)
 
 
 # Appearing and disappearing:

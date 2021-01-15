@@ -1,4 +1,5 @@
 import sys
+from typing import Iterable
 width, height, fps = map(int, sys.argv[1:])
 
 from pathlib import Path
@@ -7,6 +8,37 @@ from anim import *
 from pil_graphics import *
 from pil_types import *
 
+
+
+# Swapping
+
+
+def swap_numbers(items: Sequence[int], swappings: Sequence[tuple[int, int]]):
+    Cell = Pair[Rect, Latex]
+    lx = -len(items)/2
+    cells = [
+        Pair(
+            Rect(lx+i, 0, 1, 1),
+            Latex(lx+i, 0, f"${item}$", scale_factor=0.5)
+        ) for (i, item) in enumerate(items)
+    ]
+
+    @scene()
+    def _swap(then: Then[Group[Cell]]):
+        g = Group(cells)
+        for (i1, i2) in swappings:
+            g = then(swap(g, i1, i2, halfcircle_traj))
+
+    return _swap
+
+
+def bubble_sort_swaps(items: Sequence[int]) -> Iterator[tuple[int, int]]:
+    arr = list(items)
+    for i in range(len(arr)):
+        for j in range(len(arr) - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                yield (j, j+1)
 
 
 # Trajectories:
@@ -84,7 +116,18 @@ def easing_generalization(then: Then[Group[Latex]]):
     df8 = then(gbackground(appear(generalization2), df7) >> (pause_after, 1.0))
 
 
-animation = traj_animations * 2 >> (pause_before, 0.75) >> (pause_after, 1.25)
+xs = [7, 15, 3, 8, 30, 10, 20, 53, 14, 1, 27]
+animation = (
+    map_a(
+        swap_numbers(
+            xs,
+            list(bubble_sort_swaps(xs))
+        ),
+        lambda g: g.scaled(1.25)
+    )
+    >> (pause_before, 0.75)
+    >> (pause_after, 1.25)
+)
 
 
 render_pil(width, height, animation, Path("./out"), fps, workers=4)
