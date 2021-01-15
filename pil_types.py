@@ -396,8 +396,6 @@ class Latex:
     align: Align = Align.CC
 
     def morphed(self, other: Latex, t: float) -> Latex:
-        if other.source != self.source:
-            raise NotImplementedError("Morphing of Latex with different source isn't implemented yet")
         return Latex(
             self.x * (1 - t) + other.x * t,
             self.y * (1 - t) + other.y * t,
