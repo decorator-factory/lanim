@@ -207,3 +207,146 @@ def scene(
 
 if not TYPE_CHECKING:
     scene = scene_any
+
+
+
+
+# Scary Greek letters:
+
+
+# A = TypeVar("A")
+# B = TypeVar("B")
+# C = TypeVar("C")
+# D = TypeVar("D")
+# E = TypeVar("E")
+
+
+# class Pi(Generic[A]):
+#     def __init__(self, getter: Callable[[Scene], A], setter: Callable[[Scene, A], Scene]):
+#         self._getter = getter
+#         self._setter = setter
+
+#     @staticmethod
+#     def make_primitive(key: int) -> Pi[A]:
+#         return Pi(lambda s: s._get(key), lambda s, a: s._set(key, a))  # type: ignore
+
+
+# @dataclass(frozen=True)
+# class Snapshot:
+#     items: "Map[int, Animation[PilRenderable]]"
+#     is_draft: bool = False
+
+#     @property
+#     def size(self):
+#         return len(self.items)
+
+#     def add(self, animation: Animation[PilRenderable]):
+#         return self.set(self.size, animation)
+
+#     def set(self, key: int, animation: Animation[PilRenderable]):
+#         return Snapshot(self.items.set(key, animation), self.is_draft)
+
+#     def draft(self):
+#         return Snapshot(self.items, is_draft=True)
+
+#     def undraft(self):
+#         return Snapshot(self.items, is_draft=False)
+
+
+
+
+# @dataclass(frozen=True)
+# class Scene:
+#     snapshots: tuple[Snapshot, ...] = (Snapshot(Map()),)
+
+#     @property
+#     def size(self):
+#         return len(self.last_snapshot.items)
+
+#     @property
+#     def last_snapshot(self):
+#         return self.snapshots[-1]
+
+#     def _add(self, animation: Animation[PilRenderable]):
+#         return Scene(self.snapshots + (self.last_snapshot.add(animation),))
+
+#     def _get(self, index: int):
+#         return self.last_snapshot.items[index].projector(1.0)
+
+#     def _set(self, index: int, a: Animation[PilRenderable]):
+#         return Scene(self.snapshots + (self.last_snapshot.set(index, a),))
+
+#     def _commit(self):
+#         i = 1
+#         for (i, s) in enumerate(reversed(self.snapshots), start=1):
+#             if not s.is_draft:
+#                 break
+#         return Scene(self.snapshots[:-i] + (self.last_snapshot.undraft(),))
+
+#     def spawn(self, p: PSX) -> tuple[Scene, Pi[PSX]]:
+#         key = self.size
+#         pi = Pi[PSX].make_primitive(key)
+#         return (self._add(appear(p)), pi)
+
+#     def get(self, pi: Pi[A]) -> A:
+#         return pi._getter()
+
+#     # animations: "Map[int, PilRenderable]"
+
+#     # def _add(self, key: int, item: Any) -> Scene:
+#     #     return Scene(self.animations.set(key, item))
+
+#     # def spawn(self, p: P) -> tuple[Scene, Pi[P]]:
+#     #     key = random.randint(0, 2**128)
+#     #     new_scene = Scene(self.items.set(key, p))
+#     #     return (new_scene, Pi[P].make_primitive(key))
+
+#     # def set(self, pi: Pi[A], p: A) -> Scene:
+#     #     return pi._setter(self, p)
+
+#     # def get(self, pi: Pi[A]) -> A:
+#     #     return pi._getter(self)
+
+#     # def map(self, pi: Pi[A], f: Callable[[A], A]) -> Scene:
+#     #     return pi._setter(self, f(pi._getter(self)))
+
+#     @overload
+#     def join(self) -> Pi[tuple[()]]: ...
+#     @overload
+#     def join(self, a: Pi[A]) -> Pi[tuple[A]]: ...
+#     @overload
+#     def join(self, a: Pi[A], b: Pi[B]) -> Pi[tuple[A, B]]: ...
+#     @overload
+#     def join(self, a: Pi[A], b: Pi[B], c: Pi[C]) -> Pi[tuple[A, B, C]]: ...
+#     @overload
+#     def join(self, a: Pi[A], b: Pi[B], c: Pi[C], d: Pi[D]) -> Pi[tuple[A, B, C, D]]: ...
+#     @overload
+#     def join(self, a: Pi[A], b: Pi[B], c: Pi[C], d: Pi[D], e: Pi[E]) -> Pi[tuple[A, B, C, D, E]]: ...
+#     @overload
+#     def join(self, *pis: Pi[A]) -> Pi[tuple[A, ...]]: ...
+
+#     def join(self, *pis: Pi[A]) -> Pi[tuple[A, ...]]:
+#         return Pi(
+#             lambda s: tuple(pi._getter(s) for pi in pis),
+#             lambda s0, tuple_a: reduce(
+#                 lambda s1, i_pi: i_pi[1]._setter(s1, tuple_a[i_pi[0]]),
+#                 enumerate(pis),
+#                 s0
+#             )
+#         )
+
+
+
+# def f(scene: Scene):
+#     r = Rect(0, 0, 1, 1)
+#     l = Latex(0, 0, "$x^2$")
+
+#     scene, hr = scene.spawn(r)
+#     scene, hl = scene.spawn(l)
+
+#     ju = scene.join()
+#     jr = scene.join(hr)
+#     jrl = scene.join(hr, hl)
+#     jlrll = scene.join(hl, hr, hl, hl)
+
+#     a = scene.set(jrl, (r, l))
