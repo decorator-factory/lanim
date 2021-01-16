@@ -112,6 +112,20 @@ halfcircle_traj: Trajectory = make_arc_traj(lambda t: math.sqrt(1 - (2*t - 1)**2
 low_arc_traj: Trajectory = make_arc_traj(lambda t: t*(1 - t)*2)
 
 
+def lift_traj(height: float) -> Trajectory:
+    def traj(x1: float, y1: float, x2: float, y2: float, t: float):
+        if t < 0.25:
+            k = t * 4
+            return (x1, y1 - height * k)
+        elif t < 0.75:
+            k = 2 * (t - 0.25)
+            return (x1 * (1 - k) + x2 * k, y1 - height)
+        else:
+            k = 4 * (t - 0.75)
+            return (x2, (y1 - height) * (1 - k) + y2 * k)
+    return traj
+
+
 
 # Pair-related functions:
 
@@ -186,7 +200,7 @@ def with_last_frame(animation: Animation[A], a: A) -> Animation[A]:
     return animation.with_projector(projector)
 
 
-def swap(g: Group[PX], index1: int, index2: int, traj: Trajectory = linear_traj) -> Animation[Group[PX]]:
+def swap(g: Group[PX], index1: int, index2: int, traj1: Trajectory = linear_traj, traj2: Trajectory = linear_traj) -> Animation[Group[PX]]:
     items = list(g.items)
     items[index1], items[index2] = (
         moved_to(items[index2], items[index1].x, items[index1].y),
@@ -194,8 +208,8 @@ def swap(g: Group[PX], index1: int, index2: int, traj: Trajectory = linear_traj)
     )
     final_group = Group(items)
 
-    proj1 = proj_t(g.items[index1], g.items[index2].x, g.items[index2].y, traj)
-    proj2 = proj_t(g.items[index2], g.items[index1].x, g.items[index1].y, traj)
+    proj1 = proj_t(g.items[index1], g.items[index2].x, g.items[index2].y, traj1)
+    proj2 = proj_t(g.items[index2], g.items[index1].x, g.items[index1].y, traj2)
 
     def projector(t: float) -> Group[PX]:
         items = list(g.items)

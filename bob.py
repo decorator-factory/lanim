@@ -13,8 +13,9 @@ from pil_types import *
 # Swapping
 
 
-def swap_numbers(items: Sequence[int], swappings: Sequence[tuple[int, int]]):
+def swap_numbers(items: Sequence[int], swappings: Sequence[tuple[bool, int, int]]):
     Cell = Pair[Rect, Latex]
+
     lx = -len(items)/2
     cells = [
         Pair(
@@ -26,19 +27,39 @@ def swap_numbers(items: Sequence[int], swappings: Sequence[tuple[int, int]]):
     @scene()
     def _swap(then: Then[Group[Cell]]):
         g = Group(cells)
-        for (i1, i2) in swappings:
-            g = then(swap(g, i1, i2, halfcircle_traj))
+        for (should_swap, i1, i2) in swappings:
+            if should_swap:
+                g = then(swap(g, i1, i2, lift_traj(1), lift_traj(-1)))
+            else:
+                a = map_a(
+                    par_a_longest(
+                        swap(g, i1, i1, lift_traj(1), lift_traj(1)),
+                        swap(g, i2, i2, lift_traj(-1), lift_traj(-1))
+                    ),
+                    lambda ab: ab[0].morphed(ab[1], 0.5)
+                )
+                g = then(a * 0.75)
 
     return _swap
 
 
-def bubble_sort_swaps(items: Sequence[int]) -> Iterator[tuple[int, int]]:
+def bubble_sort_swaps(items: Sequence[int]) -> Iterator[tuple[bool, int, int]]:
     arr = list(items)
     for i in range(len(arr)):
-        for j in range(len(arr) - 1):
+        for j in range(len(arr) - i - 1):
             if arr[j] > arr[j + 1]:
                 arr[j], arr[j+1] = arr[j+1], arr[j]
-                yield (j, j+1)
+                yield (True, j, j+1)
+            else:
+                yield (False, j, j+1)
+
+
+xs = [7, 15, 3, 8, 30, 10, 20, 1, 70, 25, 14]
+animation = (
+    swap_numbers(xs, list(bubble_sort_swaps(xs)))
+    >> (pause_before, 0.75)
+    >> (pause_after, 1.25)
+)
 
 
 # Trajectories:
@@ -116,7 +137,7 @@ def easing_generalization(then: Then[Group[Latex]]):
     df8 = then(gbackground(appear(generalization2), df7) >> (pause_after, 1.0))
 
 
-xs = [7, 15, 3, 8, 30, 10, 20, 53, 14, 1, 27]
+xs = [7, 15, 3, 8, 30, 10, 20, 1, 70, 25, 14]
 animation = (
     map_a(
         swap_numbers(
