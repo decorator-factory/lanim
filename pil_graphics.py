@@ -9,7 +9,7 @@ from immutables import Map
 import math
 from typing import Any, Callable, Protocol, TYPE_CHECKING, Union, TypeVar
 import anim
-from anim import Animation, Projector, map_a
+from anim import Animation, Projector, ease_p, map_a
 import easings
 
 
@@ -220,14 +220,50 @@ def swap(g: Group[PX], index1: int, index2: int, traj1: Trajectory = linear_traj
     return with_last_frame(Animation(1.0, projector), final_group)
 
 
+
+# Sum-related functions:
+
+
+Maybe = Sum[PSX, Nil]
+
+
+def m_just(p: PSX) -> Maybe[PSX]:
+    return Sum(("p", p), disappear_into_nil)
+
+
+def m_none(x: float, y: float) -> Maybe[PSX]:
+    return Sum(("q", Nil(x, y)), disappear_into_nil)
+
+
 # Appearing and disappearing:
 
 def appear(p: PSX) -> Animation[PSX]:
-    return morph_into(p.scaled(0.0), (p))
+    return morph_into(p.scaled(0.0), p)
+
+
+def disappear(p: PSX) -> Animation[PSX]:
+    return appear(p) @ easings.invert
 
 
 def appear_from(p: PSX, x: float, y: float) -> Animation[PSX]:
     return morph_into(p.scaled_about(0.0, x, y), p)
+
+
+def disappear_from(p: PSX, x: float, y: float) -> Animation[PSX]:
+    return appear_from(p, x, y) @ easings.invert
+
+
+def disappear_into_nil(p: PSX, nil: Nil) -> Projector[Select[PSX, Nil]]:
+    def projector(t: float) -> Select[PSX, Nil]:
+        if t == 1.0:
+            return ("q", nil)
+        else:
+            return ("p", p.morphed(p.scaled_about(0.0, nil.x, nil.y), t))
+    return projector
+
+
+def appear_from_nil(p: PSX, nil: Nil) -> Projector[Select[PSX, Nil]]:
+    return ease_p(disappear_into_nil(p, nil), easings.invert)
 
 
 

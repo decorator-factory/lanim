@@ -5,7 +5,8 @@ from itertools import repeat
 from typing import Any, Callable, ClassVar, Generic, Iterator, Literal, Optional, Protocol, Sequence, TYPE_CHECKING, TypeVar, Union, overload
 from PIL import Image, ImageDraw
 from pil_utils import render_latex_scaled
-from anim import Animation, map_a, par_a_longest, par_a_shortest
+from anim import Animation, Projector, ease_p, map_a, par_a_longest, par_a_shortest
+import easings
 
 @dataclass
 class Align:
@@ -208,7 +209,7 @@ class Rect:
 
 def _automorph(self: P, other: P, t: float, *names: str) -> P:
     kwargs = {name: getattr(self, name) * (1 - t) + getattr(other, name) * t for name in names}
-    return type(self)(**kwargs)  # type: ignore
+    return dataclass_replace(self, **kwargs)
 
 
 @dataclass(frozen=True)
@@ -429,3 +430,107 @@ class Latex:
         x, y = self.align.apply(cx, cy, img.width, img.height)
         ix, iy = map(round, (x, y))
         ctx.draw.bitmap((ix, iy), img)
+
+
+@dataclass(frozen=True)
+class Nil:
+    x: float
+    y: float
+
+    def moved(self, dx: float, dy: float) -> Nil:
+        return Nil(self.x + dx, self.y + dy)
+
+    def scaled(self, factor: float) -> Nil:
+        return self
+
+    def scaled_about(self, factor: float, cx: float, cy: float) -> Nil:
+        dx = cx - self.x
+        dy = cy - self.y
+        return self.moved(dx*factor, dy*factor)
+
+    def morphed(self, other: Nil, t: float) -> Nil:
+        return _automorph(self, other, t, "x", "y")
+
+    def aligned(self, align: Align) -> Nil:
+        return self
+
+    def render_pil(self, ctx: PilContext) -> None:
+        pass
+
+
+Select = Union[tuple[Literal["p"], PX], tuple[Literal["q"], QX]]
+
+
+@dataclass(frozen=True)
+class Sum(Generic[PX, QX]):
+    item: Select[PX, QX]
+    mpq: Callable[[PX, QX], Projector[Select[PX, QX]]]
+
+    if TYPE_CHECKING:
+        x: float = field(init = False)
+        y: float = field(init = False)
+    else:
+        @property
+        def x(self) -> float:
+            return self.item[1].x
+
+        @property
+        def y(self) -> float:
+            return self.item[1].y
+
+    @property
+    def mqp(self) -> Callable[[QX, PX], Projector[Select[PX, QX]]]:
+        return lambda q, p: ease_p(self.mpq(p, q), easings.invert)
+
+    # mqp: Callable[[QX, PX], Projector[Select[PX, QX]]]
+
+    def with_left(self, left: PX) -> Sum[PX, QX]:
+        return self.with_pq(("p", left))
+
+    def with_right(self, right: QX) -> Sum[PX, QX]:
+        return self.with_pq(("q", right))
+
+    def with_pq(self, pq: Select[PX, QX]):
+        return Sum(pq, self.mpq)
+
+    def map(self, fp: Callable[[PX], RX], fq: Callable[[QX], RX2]) -> Sum[RX, RX2]:
+        tag, item = self.item
+        if tag == "p":
+            return self.with_left(fp(item))  # type: ignore
+        else:
+            return self.with_right(fq(item))  # type: ignore
+
+    def dispatch(self, fp: Callable[[PX], A], fq: Callable[[QX], A]) -> A:
+        tag, item = self.item
+        if tag == "p":
+            return fp(item)  # type: ignore
+        else:
+            return fq(item)  # type: ignore
+
+    def moved(self, dx: float, dy: float) -> Sum[PX, QX]:
+        return self.map(
+            lambda p: p.moved(dx, dy),
+            lambda q: q.moved(dx, dy),
+        )
+
+    def scaled(self: Sum[PSX, QSX], factor: float) -> Sum[PSX, QSX]:
+        return self.map(
+            lambda p: p.scaled(factor),
+            lambda q: q.scaled(factor),
+        )
+
+    def morphed(self, other: Sum[PX, QX], t: float) -> Sum[PX, QX]:
+        return self.dispatch(
+            lambda p1: other.dispatch(
+                lambda p2: self.with_left(p1.morphed(p2, t)),
+                lambda q2: self.with_pq(self.mpq(p1, q2)(t)),
+            ),
+            lambda q1: other.dispatch(
+                lambda p2: self.with_pq(self.mqp(q1, p2)(t)),
+                lambda q2: self.with_right(q1.morphed(q2, t)),
+            ),
+        )
+
+    def render_pil(self, ctx: PilContext) -> None:
+        _tag, item = self.item
+        item.render_pil(ctx)

@@ -1,5 +1,4 @@
 import sys
-from typing import Iterable
 width, height, fps = map(int, sys.argv[1:])
 
 from pathlib import Path
@@ -7,6 +6,19 @@ from easings import *
 from anim import *
 from pil_graphics import *
 from pil_types import *
+
+
+# Sum example
+
+
+@scene_any()
+def sum_example(then: ThenAny):
+    n0: Maybe[Rect] = m_none(0.0, 0.0)
+    n1 = then(morph_into(n0, n0.with_left(Rect(0, 0, 5, 3))))
+    n2 = then(morph_into(n1, n1.with_left(Rect(0, 0, 2, 4))))
+    n3 = then(morph_into(n2, n2.with_right(Nil(2, 2))))
+    n4 = then(morph_into(n3, n3.with_left(Rect(1, -1, 3, 1))) * 2)
+
 
 
 
@@ -137,18 +149,21 @@ def easing_generalization(then: Then[Group[Latex]]):
     df8 = then(gbackground(appear(generalization2), df7) >> (pause_after, 1.0))
 
 
-xs = [7, 15, 3, 8, 30, 10, 20, 1, 70, 25, 14]
-animation = (
-    map_a(
-        swap_numbers(
-            xs,
-            list(bubble_sort_swaps(xs))
-        ),
-        lambda g: g.scaled(1.25)
-    )
-    >> (pause_before, 0.75)
-    >> (pause_after, 1.25)
-)
+# xs = [7, 15, 3, 8, 30, 10, 20, 1, 70, 25, 14]
+# animation = (
+#     map_a(
+#         swap_numbers(
+#             xs,
+#             list(bubble_sort_swaps(xs))
+#         ),
+#         lambda g: g.scaled(1.25)
+#     )
+#     >> (pause_before, 0.75)
+#     >> (pause_after, 1.25)
+# )
+
+
+animation = sum_example >> (pause_before, 0.75) >> (pause_after, 1.25)
 
 
 render_pil(width, height, animation, Path("./out"), fps, workers=4)
