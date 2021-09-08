@@ -9,7 +9,7 @@
 # Usage
 
 ```bash
-# compile.sh <fps>
+# compile.sh <width> <height> <fps>
 # e.g.:
-./compile.sh 30
+./compile.sh 1920 1080 60
 ```

@@ -2,10 +2,10 @@ import sys
 width, height, fps = map(int, sys.argv[1:])
 
 from pathlib import Path
-from easings import *
-from anim import *
-from pil_graphics import *
-from pil_types import *
+from lanim.easings import *
+from lanim.anim import *
+from lanim.pil_graphics import *
+from lanim.pil_types import *
 
 
 # Sum example
@@ -147,20 +147,6 @@ def easing_generalization(then: Then[Group[Latex]]):
             )*0.35 >> (pause_after, 1.0)
         )
     df8 = then(gbackground(appear(generalization2), df7) >> (pause_after, 1.0))
-
-
-# xs = [7, 15, 3, 8, 30, 10, 20, 1, 70, 25, 14]
-# animation = (
-#     map_a(
-#         swap_numbers(
-#             xs,
-#             list(bubble_sort_swaps(xs))
-#         ),
-#         lambda g: g.scaled(1.25)
-#     )
-#     >> (pause_before, 0.75)
-#     >> (pause_after, 1.25)
-# )
 
 
 animation = sum_example >> (pause_before, 0.75) >> (pause_after, 1.25)

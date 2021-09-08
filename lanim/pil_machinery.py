@@ -7,9 +7,9 @@ from pathlib import Path
 from threading import Thread
 from queue import Queue
 import time
-import anim
-from anim import Animation
-from pil_types import PilRenderable, PilSettings
+from lanim import anim
+from lanim.anim import Animation
+from lanim.pil_types import PilRenderable, PilSettings
 
 
 ImageQ = Queue[Union[Literal["stop"], tuple[int, Image.Image]]]

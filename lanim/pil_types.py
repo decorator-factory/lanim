@@ -4,9 +4,9 @@ from dataclasses import dataclass, field, replace as dataclass_replace
 from itertools import repeat
 from typing import Any, Callable, ClassVar, Generic, Iterator, Literal, Optional, Protocol, Sequence, TYPE_CHECKING, TypeVar, Union, overload
 from PIL import Image, ImageDraw
-from pil_utils import render_latex_scaled
-from anim import Animation, Projector, ease_p, map_a, par_a_longest, par_a_shortest
-import easings
+from lanim.pil_utils import render_latex_scaled
+from lanim.anim import Animation, Projector, ease_p, map_a, par_a_longest, par_a_shortest
+from lanim import easings
 
 @dataclass
 class Align:

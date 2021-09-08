@@ -1,16 +1,16 @@
 from __future__ import annotations
 from functools import reduce
 
-from pil_machinery import render_pil
-from pil_types import *
+from lanim.pil_machinery import render_pil
+from lanim.pil_types import *
 
 import random
 from immutables import Map
 import math
 from typing import Any, Callable, Protocol, TYPE_CHECKING, Union, TypeVar
-import anim
-from anim import Animation, Projector, ease_p, map_a
-import easings
+from lanim import anim
+from lanim.anim import Animation, Projector, ease_p, map_a
+from lanim import easings
 
 
 N = TypeVar("N", bound=PilRenderable, covariant=True)

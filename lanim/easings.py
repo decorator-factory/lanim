@@ -161,7 +161,7 @@ sled: Easing = lambda t: (math.log(1 + t)/math.log(2))**math.pi
 
 if __name__ == "__main__":
     # Automatically document easings
-    import easings
+    from lanim import easings
     import inspect
 
     WIDTH = 32

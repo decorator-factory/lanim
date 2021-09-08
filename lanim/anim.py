@@ -1,7 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass, replace as dataclass_replace
 from typing import Callable, Generic, Iterable, Iterator, TypeVar, overload
-from easings import Easing
+from lanim.easings import Easing
 
 
 A = TypeVar("A", covariant=True)
