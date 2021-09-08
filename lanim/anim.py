@@ -50,7 +50,7 @@ class Animation(Generic[A]):
         return dataclass_replace(self, duration=duration)
 
     def with_projector(self, projector: Projector[B]) -> Animation[B]:
-        return dataclass_replace(self, projector=projector)
+        return Animation(self.duration, projector)
 
     def map_projector(self, f: Callable[[Projector[A]], Projector[B]]) -> Animation[B]:
         return self.with_projector(f(self.projector))

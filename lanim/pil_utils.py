@@ -2,7 +2,6 @@ import string
 import hashlib
 from pathlib import Path
 import shutil
-import threading
 from PIL import Image
 from threaded_cache import threaded_cache
 from latex import render_latex_to_png

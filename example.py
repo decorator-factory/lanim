@@ -1,3 +1,4 @@
+from lanim.pil_machinery import render_pil
 import sys
 width, height, fps = map(int, sys.argv[1:])
 

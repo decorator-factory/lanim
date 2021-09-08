@@ -1,15 +1,11 @@
 from __future__ import annotations
-from functools import reduce
 
-from lanim.pil_machinery import render_pil
 from lanim.pil_types import *
 
-import random
-from immutables import Map
 import math
 from typing import Any, Callable, Protocol, TYPE_CHECKING, Union, TypeVar
 from lanim import anim
-from lanim.anim import Animation, Projector, ease_p, map_a
+from lanim.anim import Animation, Projector, ease_p, map_a, par_a_longest
 from lanim import easings
 
 

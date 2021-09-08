@@ -1,2 +1,1 @@
 pillow
--e git+https://github.com/decorator-factory/immutables.git@typing-fix#egg=immutables
