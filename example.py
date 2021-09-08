@@ -150,7 +150,7 @@ def easing_generalization(then: Then[Group[Latex]]):
     df8 = then(gbackground(appear(generalization2), df7) >> (pause_after, 1.0))
 
 
-animation = sum_example >> (pause_before, 0.75) >> (pause_after, 1.25)
+animation = easing_generalization >> (pause_before, 0.75) >> (pause_after, 1.25)
 
 
 render_pil(width, height, animation, Path("./out"), fps, workers=4)

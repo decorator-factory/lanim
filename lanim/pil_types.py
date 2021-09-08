@@ -61,7 +61,7 @@ class PilSettings:
     unit: int
 
     def make_ctx(self) -> PilContext:
-        img = Image.new("RGB", (self.width, self.height))
+        img = Image.new("RGBA", (self.width, self.height), (0, 0, 0, 0))
         draw = ImageDraw.ImageDraw(img) # type: ignore
         return PilContext(self, img, draw)
 

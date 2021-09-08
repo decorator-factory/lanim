@@ -29,7 +29,7 @@ def image_from_file(path: Path) -> Image.Image:
     # is lazy: it doesn't actually load the bitmap
     img = Image.open(path)
     img.load()
-    return img
+    return img.convert("RGBA")
 
 
 @threaded_cache
