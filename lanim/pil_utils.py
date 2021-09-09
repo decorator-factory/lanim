@@ -4,7 +4,7 @@ from pathlib import Path
 import shutil
 from PIL import Image
 from lanim.threaded_cache import threaded_cache
-from latex import render_latex_to_png
+from lanim.latex import render_latex_to_png
 
 
 CACHE_DIR = Path("_latex_cache")
