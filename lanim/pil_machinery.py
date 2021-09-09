@@ -45,12 +45,12 @@ def render_pil(
     t1 = time.time()
     for (n, job) in enumerate(jobs):
         print(f"Starting job {n} with {len(job)} frames...")
-        thread = Thread(target=_render_frames, args=(job, settings, queue), daemon=True)
+        thread = Thread(target=_render_frames, args=(job, settings, queue))
         thread.start()
         frame_rendering_threads.append(thread)
 
     for n in range(workers):
-        thread = Thread(target=_save_frame_to_file, args=(path, queue), daemon=True)
+        thread = Thread(target=_save_frame_to_file, args=(path, queue))
         thread.start()
         png_rendering_threads.append(thread)
 
