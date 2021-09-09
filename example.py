@@ -10,8 +10,10 @@ from lanim.pil_graphics import *
 from lanim.pil_types import *
 
 
-# Sum example
+animations = []
 
+
+# Scene 1. `Sum` of animations
 
 @scene_any()
 def sum_example(then: ThenAny):
@@ -21,11 +23,10 @@ def sum_example(then: ThenAny):
     n3 = then(morph_into(n2, n2.with_right(Nil(2, 2))))
     n4 = then(morph_into(n3, n3.with_left(Rect(1, -1, 3, 1))) * 2)
 
+animations.append(sum_example)
 
 
-
-# Swapping
-
+# Scene 2. Bubble sort
 
 def swap_numbers(items: Sequence[int], swappings: Sequence[tuple[bool, int, int]]):
     Cell = Pair[Rect, Latex]
@@ -52,10 +53,9 @@ def swap_numbers(items: Sequence[int], swappings: Sequence[tuple[bool, int, int]
                     ),
                     lambda ab: ab[0].morphed(ab[1], 0.5)
                 )
-                g = then(a * 0.75)
+                g = then(a * 0.5)
 
     return _swap
-
 
 def bubble_sort_swaps(items: Sequence[int]) -> Iterator[tuple[bool, int, int]]:
     arr = list(items)
@@ -67,17 +67,12 @@ def bubble_sort_swaps(items: Sequence[int]) -> Iterator[tuple[bool, int, int]]:
             else:
                 yield (False, j, j+1)
 
-
-xs = [7, 15, 3, 8, 30, 10, 20, 1, 70, 25, 14]
-animation = (
-    swap_numbers(xs, list(bubble_sort_swaps(xs)))
-    >> (pause_before, 0.75)
-    >> (pause_after, 1.25)
-)
+numbers = [7, 70, 20, 1, 15, 14]
+bubble_sort_animation = swap_numbers(numbers, list(bubble_sort_swaps(numbers)))
+animations.append(bubble_sort_animation)
 
 
-# Trajectories:
-
+# Scene 3. Trajectories
 
 @scene(linear)
 def moving_rectangle(then: Then[Rect]):
@@ -88,8 +83,10 @@ def moving_rectangle(then: Then[Rect]):
 traj_markers = Pair(Rect(-2, -2, 0.1, 0.1), Rect(3, 1, 0.1, 0.1))
 traj_animations = lpair(moving_rectangle, traj_markers)
 
+animations.append(traj_animations)
 
-# Slider:
+
+# Scene 4. Slider
 
 def slider(x1: float, x2: float, y: float, t: float):
     x = x1*(1-t) + x2*t
@@ -121,8 +118,10 @@ slider_animation = seq_a(
     here_and_there * 0.2
 )
 
+animations.append(slider_animation)
 
-# Easing definition:
+
+# Scene 5. Easing definition:
 
 @scene()
 def easing_generalization(then: Then[Group[Latex]]):
@@ -150,8 +149,13 @@ def easing_generalization(then: Then[Group[Latex]]):
         )
     df8 = then(gbackground(appear(generalization2), df7) >> (pause_after, 1.0))
 
+animations.append(easing_generalization)
 
-animation = easing_generalization >> (pause_before, 0.75) >> (pause_after, 1.25)
 
+animation = (
+    seq_a(*[pause_after(a, 0.5) for a in animations])
+    >> (pause_before, 1)
+    >> (pause_after, 1)
+)
 
 render_pil(width, height, animation, Path("./out"), fps, workers=multiprocessing.cpu_count())
