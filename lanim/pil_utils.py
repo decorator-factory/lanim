@@ -45,7 +45,6 @@ def render_latex(latex: str) -> Image.Image:
 
 @threaded_cache
 def _render_latex_scaled(_: tuple[str, float]) -> Image.Image:
-    # print(f"_render_latex_scaled {_}")
     latex, scale_factor = _
     img = render_latex(latex)
     return img.resize((
