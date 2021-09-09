@@ -1,3 +1,4 @@
+import multiprocessing
 from lanim.pil_machinery import render_pil
 import sys
 width, height, fps = map(int, sys.argv[1:])
@@ -153,4 +154,4 @@ def easing_generalization(then: Then[Group[Latex]]):
 animation = easing_generalization >> (pause_before, 0.75) >> (pause_after, 1.25)
 
 
-render_pil(width, height, animation, Path("./out"), fps, workers=4)
+render_pil(width, height, animation, Path("./out"), fps, workers=multiprocessing.cpu_count())
