@@ -38,7 +38,7 @@ def render_pil(
     for (i, frame) in enumerate(anim.frames(animation, fps)):
         jobs[i % workers].append((i, frame))
 
-    queue: ImageQ = Queue()
+    queue: ImageQ = Queue(maxsize=256)
     frame_rendering_threads: list[Thread] = []
     png_rendering_threads: list[Thread] = []
 
