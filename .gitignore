@@ -2,7 +2,8 @@
 out/
 _out/
 .vscode/
+.venv/
 env/
 _latex_cache/
-test.mp4
-out.mp4
+*.mp4
+.python-version

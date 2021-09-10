@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "lanim"
+version = "0.1.0"
+description = "Functinal animation library"
+authors = ["decorator-factory <42166884+decorator-factory@users.noreply.github.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+pillow = "^8.3.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
