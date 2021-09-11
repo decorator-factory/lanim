@@ -125,7 +125,7 @@ class Animation(Generic[A]):
         return seq_a(self, other)
 
     @overload
-    def __rshift__(self, other: tuple[Callable[[Animation[A]], B]]) -> B: ...
+    def __rshift__(self, other: Callable[[Animation[A]], B]) -> B: ...
     @overload
     def __rshift__(self, other: tuple[Callable[[Animation[A], C], D], C]) -> D: ...
     @overload
@@ -143,8 +143,7 @@ class Animation(Generic[A]):
         fn, *args = other
         return fn(self, *args)
 
-    def __matmul__(self, easing: Easing) -> Animation[A]:
-        return ease_a(self, easing)  # type: ignore
+        return ease_a(self, easing)
 
 
 def const_p(a: C) -> Projector[C]:

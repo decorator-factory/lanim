@@ -82,6 +82,6 @@ def _save_frame_to_file(path: Path, queue: ImageQ):
 def _render_frames(frames: Iterable[tuple[int, PilRenderable]], settings: PilSettings, queue: ImageQ):
     ctx = settings.make_ctx()
     for (i, frame) in frames:
-        ctx.draw.rectangle((0, 0) + ctx.img.size, fill=(0, 0, 0, 255))
+        ctx.draw.rectangle((0, 0) + ctx.img.size, fill=(0, 0, 0, 255))  # type: ignore -- bad PIL stubs
         frame.render_pil(ctx)
         queue.put((i, ctx.img.copy()), block=True)
