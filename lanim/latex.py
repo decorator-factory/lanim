@@ -9,7 +9,7 @@ from contextlib import contextmanager
 import subprocess
 import random
 import shutil
-from typing import Callable, TypeVar
+from typing import Callable, Iterable, TypeVar
 
 
 A = TypeVar("A")
@@ -31,9 +31,9 @@ def run_latex_process(input_file: Path, output_dir: Path) -> Path:
         "-output-directory", str(output_dir.absolute()),
         str(input_file.absolute()) # input filename
     ]
-    p1 = subprocess.run(cmd_pdflatex, stdout=subprocess.PIPE)
+    p1 = subprocess.run(cmd_pdflatex, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if p1.returncode != 0:
-        raise RuntimeError(p1.stderr)
+        raise RuntimeError(p1.stdout.decode())
 
     output_png_file = output_dir / "output.png"
 
@@ -45,9 +45,9 @@ def run_latex_process(input_file: Path, output_dir: Path) -> Path:
         "-D", "1280", # DPI
         "-o", str(output_png_file.absolute())
     ]
-    p2 = subprocess.run(cmd_dvipng, stdout=subprocess.PIPE)
+    p2 = subprocess.run(cmd_dvipng, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if p2.returncode != 0:
-        raise RuntimeError(p2.stderr)
+        raise RuntimeError(p2.stdout.decode())
 
     return output_png_file
 
@@ -56,8 +56,7 @@ TEMPLATE = \
 R"""
 \documentclass[preview, border=1pt]{standalone}
 
-\usepackage{amsmath}
-\usepackage{amssymb}
+%s
 
 \begin{document}
 %s
@@ -65,17 +64,21 @@ R"""
 """
 
 
-def render_latex_to_png(source: str, callback: Callable[[Path], A]) -> A:
+def render_latex_to_png(source: str, packages: Iterable[str], callback: Callable[[Path], A]) -> A:
     r"""
     - `source`: LaTeX content to put between \begin{document} and \end{document}
+    - `packages`: Packages to include with \usepackage{...}
     - `callback`: Function to call when the PNG file is ready
 
     After `callback` is called, the file will not be accessible.
     """
+
+    usepackage_clauses = "\n".join([r"\usepackage{%s}" % package for package in packages])
+    content = TEMPLATE % (usepackage_clauses, source)
+
     with mktempdir(Path("./_latex_cache/"), "_latex") as tempdir:
         in_path = tempdir / "input.tex"
         out_path = tempdir / "out"
-        content = TEMPLATE % source
         in_path.write_text(content, "utf-8")
         out_path.mkdir()
         output_file_path = run_latex_process(in_path, out_path)

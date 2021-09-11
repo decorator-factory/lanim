@@ -2,6 +2,7 @@ import string
 import hashlib
 from pathlib import Path
 import shutil
+from typing import Iterable
 from PIL import Image
 from lanim.threaded_cache import threaded_cache
 from lanim.latex import render_latex_to_png
@@ -33,25 +34,25 @@ def image_from_file(path: Path) -> Image.Image:
 
 
 @threaded_cache
-def render_latex(latex: str) -> Image.Image:
+def _render_latex(_: tuple[str, Iterable[str]]) -> Image.Image:
+    latex, packages = _
     filename = CACHE_DIR / f"{long_hash(latex)}.png"
     if filename.exists():
         return image_from_file(filename)
     def on_render(p: Path):
         shutil.copy(p, filename)
         return image_from_file(filename)
-    return render_latex_to_png(latex, on_render)
-
+    return render_latex_to_png(latex, packages, on_render)
 
 @threaded_cache
-def _render_latex_scaled(_: tuple[str, float]) -> Image.Image:
-    latex, scale_factor = _
-    img = render_latex(latex)
+def _render_latex_scaled(_: tuple[str, Iterable[str], float]) -> Image.Image:
+    latex, packages, scale_factor = _
+    img = _render_latex((latex, packages))
     return img.resize((
         int(img.width * scale_factor),
         int(img.height * scale_factor)
     ))
 
 
-def render_latex_scaled(latex: str, scale_factor: float) -> Image.Image:
-    return _render_latex_scaled((latex, scale_factor))
+def render_latex_scaled(latex: str, packages: Iterable[str], scale_factor: float) -> Image.Image:
+    return _render_latex_scaled((latex, packages, scale_factor))

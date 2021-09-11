@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field, replace as dataclass_replace
 from typing import (
-    Callable, ClassVar, Generic, Iterator, Literal, Optional,
+    Callable, ClassVar, Collection, Generic, Iterator, Literal, Optional,
     Protocol, Sequence, TYPE_CHECKING, TypeVar, Union, overload,
 )
 from PIL import Image, ImageDraw
@@ -397,6 +397,7 @@ class Latex:
     scale_factor: float = 1.0
 
     align: Align = Align.CC
+    packages: Collection[str] = ("amsmath", "amssymb")
 
     def morphed(self, other: Latex, t: float) -> Latex:
         return Latex(
@@ -404,30 +405,31 @@ class Latex:
             self.y * (1 - t) + other.y * t,
             other.source,
             self.scale_factor * (1 - t) + other.scale_factor * t,
-            self.align.blend(other.align, t)
+            self.align.blend(other.align, t),
+            other.packages
         )
 
     def aligned(self, new_align: Align) -> Latex:
-        return Latex(self.x, self.y, self.source, self.scale_factor, new_align)
+        return Latex(self.x, self.y, self.source, self.scale_factor, new_align, self.packages)
 
     def scaled(self, factor: float) -> Latex:
-        return Latex(self.x, self.y, self.source, self.scale_factor * factor, self.align)
+        return Latex(self.x, self.y, self.source, self.scale_factor * factor, self.align, self.packages)
 
     def scaled_about(self, factor: float, cx: float, cy: float) -> Latex:
         dx = self.x - cx
         dy = self.y - cy
         new_x = cx + dx*factor
         new_y = cy + dy*factor
-        return Latex(new_x, new_y, self.source, self.scale_factor * factor, self.align)
+        return Latex(new_x, new_y, self.source, self.scale_factor * factor, self.align, self.packages)
 
     def moved(self, dx: float, dy: float) -> Latex:
-        return Latex(self.x + dx, self.y + dy, self.source, self.scale_factor, self.align)
+        return Latex(self.x + dx, self.y + dy, self.source, self.scale_factor, self.align, self.packages)
 
     def render_pil(self, ctx: PilContext) -> None:
         scale_factor = self.scale_factor * (ctx.settings.width / 1920)
         if scale_factor <= 0.025:
             return
-        img = render_latex_scaled(self.source, scale_factor)
+        img = render_latex_scaled(self.source, self.packages, scale_factor)
         cx, cy = ctx.coord(self.x, self.y)
         x, y = self.align.apply(cx, cy, img.width, img.height)
         ix, iy = map(round, (x, y))
