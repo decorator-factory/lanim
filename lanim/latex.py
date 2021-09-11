@@ -54,7 +54,7 @@ def run_latex_process(input_file: Path, output_dir: Path) -> Path:
 
 TEMPLATE = \
 R"""
-\documentclass[preview, border=1pt]{standalone}
+\documentclass[varwidth, preview, border=1pt]{standalone}
 
 %s
 
