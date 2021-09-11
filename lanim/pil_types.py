@@ -425,11 +425,22 @@ class Latex:
     def moved(self, dx: float, dy: float) -> Latex:
         return Latex(self.x + dx, self.y + dy, self.source, self.scale_factor, self.align, self.packages)
 
+    def _render(self, scale_factor: float):
+        return render_latex_scaled(self.source, self.packages, scale_factor)
+
+    def width(self) -> float:
+        img = self._render(self.scale_factor)
+        return img.width / 1920 * 16
+
+    def height(self) -> float:
+        img = self._render(self.scale_factor)
+        return img.height / 1920 * 16
+
     def render_pil(self, ctx: PilContext) -> None:
         scale_factor = self.scale_factor * (ctx.settings.width / 1920)
         if scale_factor <= 0.025:
             return
-        img = render_latex_scaled(self.source, self.packages, scale_factor)
+        img = self._render(scale_factor)
         cx, cy = ctx.coord(self.x, self.y)
         x, y = self.align.apply(cx, cy, img.width, img.height)
         ix, iy = map(round, (x, y))
