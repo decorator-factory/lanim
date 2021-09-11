@@ -3,9 +3,9 @@ from __future__ import annotations
 from lanim.pil_types import *
 
 import math
-from typing import Any, Callable, Protocol, TYPE_CHECKING, Union, TypeVar
+from typing import Any, Callable, Iterable, Protocol, TYPE_CHECKING, Union, TypeVar
 from lanim import anim
-from lanim.anim import Animation, Projector, ease_p, par_a_longest
+from lanim.anim import Animation, Projector, ease_p, par_a_longest, par_a_shortest
 from lanim import easings
 
 
@@ -14,34 +14,40 @@ M = TypeVar("M", bound=PilRenderable, covariant=True)
 
 
 def moved_to(p: P, x: float, y: float) -> P:
+    """
+    Return the object moved to a particular point.
+    """
     return p.moved(x - p.x, y - p.y)
 
 
 # Fundamental animation constructions:
 
 def morph_into(source: PX, destination: PX) -> Animation[PX]:
+    """
+    Create a second-long animation of one object morphing into the other
+    """
     return Animation(1.0, lambda t: source.morphed(destination, t))
 
 
 def move_by(obj: PX, dx: float, dy: float) -> Animation[PX]:
+    """
+    Create a second-long animation of an object moving by (`dx`, `dy`)
+    """
     return morph_into(obj, obj.moved(dx, dy))
 
 
 def scale(obj: PSX, factor: float) -> Animation[PSX]:
-    return morph_into(obj, obj.scaled(factor))
-
-
-def scale_about(obj: PSX, factor: float) -> Animation[PSX]:
+    """
+    Create a second-long animation of an object scaling `factor` times
+    """
     return morph_into(obj, obj.scaled(factor))
 
 
 def align(obj: PAX, new_align: Align) -> Animation[PAX]:
+    """
+    Create a second-long animation of an object changing alignment
+    """
     return morph_into(obj, obj.aligned(new_align))
-
-
-def partition(anim: Animation[A]) -> tuple[Animation[A], A]:
-    return anim, anim.projector(1.0)
-
 
 
 # Movement:
@@ -60,10 +66,17 @@ class Trajectory(Protocol):
 
 
 def ease_t(traj: Trajectory, easing: easings.Easing) -> Trajectory:
+    """
+    Apply an easing to a trajectory
+    """
     return lambda x1, y1, x2, y2, t: traj(x1, y1, x2, y2, easing(t))
 
 
 def move_t(obj: PX, dest_x: float, dest_y: float, traj: Trajectory) -> Animation[PX]:
+    """
+    Create a second-long animation of an object moving along a trajectory
+    from `dest_x` to `dest_y`
+    """
     return Animation(1.0, proj_t(obj, dest_x, dest_y, traj))
 
 
@@ -82,6 +95,9 @@ linear_traj: Trajectory = \
 
 
 def normal(x1: float, y1: float, x2: float, y2: float) -> tuple[float, float]:
+    """
+    Compute the normal vector given two points
+    """
     phi = math.atan2(y2 - y1, x2 - x1) + math.pi/2
     return (math.cos(phi), math.sin(phi))
 
@@ -109,6 +125,9 @@ low_arc_traj: Trajectory = make_arc_traj(lambda t: t*(1 - t)*2)
 
 
 def lift_traj(height: float) -> Trajectory:
+    """
+    Lift the trajectory up by `height` units
+    """
     def traj(x1: float, y1: float, x2: float, y2: float, t: float):
         if t < 0.25:
             k = t * 4
@@ -122,30 +141,50 @@ def lift_traj(height: float) -> Trajectory:
     return traj
 
 
-
 # Pair-related functions:
 
 def lpair(ap: Animation[P], q: Q) -> Animation[Pair[P, Q]]:
+    """
+    Add `Q` as a still image to an animation of P
+    """
     return ap.map(lambda p: Pair(p, q))
 
 
 def rpair(p: P, aq: Animation[Q]) -> Animation[Pair[P, Q]]:
+    """
+    Add `P` as a still image to an animation of Q
+    """
     return aq.map(lambda q: Pair(p, q))
 
 
-def lrpair(ap: Animation[P], aq: Animation[Q]) -> Animation[Pair[P, Q]]:
+def lrpair_longest(ap: Animation[P], aq: Animation[Q]) -> Animation[Pair[P, Q]]:
+    """
+    Combine two animations into an animation of a pair.
+
+    If one animation is longer, the other animation is extended.
+    """
     return par_a_longest(ap, aq).map(lambda pq: Pair(*pq))
+
+
+def lrpair_shortest(ap: Animation[P], aq: Animation[Q]) -> Animation[Pair[P, Q]]:
+    """
+    Combine two animations into an animation of a pair.
+
+    If one animation is longer, it's cut off.
+    """
+    return par_a_shortest(ap, aq).map(lambda pq: Pair(*pq))
 
 
 # Group-relatd functions:
 
+def gbackground(fg: Animation[P], bg: Iterable[Q]) -> Animation[Group[Union[P, Q]]]:
+    bg = list(bg)
+    return fg.map(lambda p: Group((*bg, p)))  # type: ignore
 
-def gbackground(a: Animation[P], group: Group[Q]) -> Animation[Group[Union[P, Q]]]:
-    return a.map(group.add)  # type: ignore
 
-
-def background(fg: Animation[P], *bg: Q) -> Animation[Group[Union[P, Q]]]:
-    return fg.map(lambda p: Group((p, *bg)))  # type: ignore
+def gforeground(bg: Animation[P], fg: Iterable[P]) -> Animation[Group[P]]:
+    fg = list(fg)
+    return bg.map(lambda p: Group((p, *fg)))
 
 
 def group_join(g: Group[Group[N]]) -> Group[N]:
@@ -170,7 +209,7 @@ def merge_group_animations(*animations: Animation[Group[N]]) -> Animation[Group[
 
 
 def par_and_bg(fg: Sequence[Animation[N]], bg: Sequence[N]) -> Animation[Group[N]]:
-    return background(parallel(*fg), Group(bg)).map(group_join)
+    return gforeground(parallel(*fg), bg).map(group_join)  # type: ignore
 
 
 def parallel(*animations: Animation[P]) -> Animation[Group[P]]:
@@ -187,28 +226,45 @@ def group(*ps: P) -> Group[P]:
     return Group(ps)
 
 
-def with_last_frame(animation: Animation[A], a: A) -> Animation[A]:
+def with_last_frame(animation: Animation[A], last_frame: A) -> Animation[A]:
+    """
+    Return the same animation but with the very last frame replaced
+    """
     def projector(t: float):
         if t < 1.0:
             return animation.projector(t)
         else:
-            return a
+            return last_frame
     return animation.with_projector(projector)
 
 
-def swap(g: Group[PX], index1: int, index2: int, traj1: Trajectory = linear_traj, traj2: Trajectory = linear_traj) -> Animation[Group[PX]]:
-    items = list(g.items)
+def swap(
+    group: Group[PX],
+    index1: int,
+    index2: int,
+    traj1: Trajectory = linear_traj,
+    traj2: Trajectory = linear_traj
+) -> Animation[Group[PX]]:
+    """
+    Swap two items in a group, one being at index `index1` and another at `index2`.
+    The resulting animation lasts one second.
+
+    By default the objects will move towards each other in a straight line,
+    but you can customize this behaviour by providing the `traj1` and `traj2`
+    parameters for the first and second object respectively
+    """
+    items = list(group.items)
     items[index1], items[index2] = (
         moved_to(items[index2], items[index1].x, items[index1].y),
         moved_to(items[index1], items[index2].x, items[index2].y),
     )
     final_group = Group(items)
 
-    proj1 = proj_t(g.items[index1], g.items[index2].x, g.items[index2].y, traj1)
-    proj2 = proj_t(g.items[index2], g.items[index1].x, g.items[index1].y, traj2)
+    proj1 = proj_t(group.items[index1], group.items[index2].x, group.items[index2].y, traj1)
+    proj2 = proj_t(group.items[index2], group.items[index1].x, group.items[index1].y, traj2)
 
     def projector(t: float) -> Group[PX]:
-        items = list(g.items)
+        items = list(group.items)
         items[index1] = proj1(t)
         items[index2] = proj2(t)
         return Group(items)

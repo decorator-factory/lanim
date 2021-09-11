@@ -1,3 +1,9 @@
+"""
+Utility module for invoking `pdflatex` and `dvipng` to render
+LaTeX documents as images.
+"""
+
+
 from pathlib import Path
 from contextlib import contextmanager
 import subprocess
@@ -10,6 +16,13 @@ A = TypeVar("A")
 
 
 def run_latex_process(input_file: Path, output_dir: Path) -> Path:
+    """
+    Invoke `pdflatex` and `dvipng` on a LaTeX document
+    and return the path of the resulting PNG file.
+
+    - `input_file`: path to a LaTeX document to render
+    - `output_dir`: directory where to place the output
+    """
     cmd_pdflatex = [
         "pdflatex",
         "-draftmode", # lower quality + produces only DVI, not PDF
@@ -53,6 +66,12 @@ R"""
 
 
 def render_latex_to_png(source: str, callback: Callable[[Path], A]) -> A:
+    r"""
+    - `source`: LaTeX content to put between \begin{document} and \end{document}
+    - `callback`: Function to call when the PNG file is ready
+
+    After `callback` is called, the file will not be accessible.
+    """
     with mktempdir(Path("./_latex_cache/"), "_latex") as tempdir:
         in_path = tempdir / "input.tex"
         out_path = tempdir / "out"
