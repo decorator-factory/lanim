@@ -91,6 +91,15 @@ class Animation(Generic[A]):
         """
         return Animation(self.duration, projector)
 
+    def map(self, f: Callable[[A], B]) -> Animation[B]:
+        """
+        Apply a function to each frame of an animation
+        """
+        return self.map_projector(lambda p: map_p(p, f))
+
+    def progress_map(self, f: Callable[[A, float], B]) -> Animation[B]:
+        return self.map_projector(lambda p: lambda t: f(p(t), t))
+
     def map_projector(self, f: Callable[[Projector[A]], Projector[B]]) -> Animation[B]:
         """
         Apply a function to the projector
