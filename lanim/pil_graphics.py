@@ -5,7 +5,7 @@ from lanim.pil_types import *
 import math
 from typing import Any, Callable, Protocol, TYPE_CHECKING, Union, TypeVar
 from lanim import anim
-from lanim.anim import Animation, Projector, ease_p, map_a, par_a_longest
+from lanim.anim import Animation, Projector, ease_p, par_a_longest
 from lanim import easings
 
 
@@ -126,26 +126,26 @@ def lift_traj(height: float) -> Trajectory:
 # Pair-related functions:
 
 def lpair(ap: Animation[P], q: Q) -> Animation[Pair[P, Q]]:
-    return map_a(ap, lambda p: Pair(p, q))
+    return ap.map(lambda p: Pair(p, q))
 
 
 def rpair(p: P, aq: Animation[Q]) -> Animation[Pair[P, Q]]:
-    return map_a(aq, lambda q: Pair(p, q))
+    return aq.map(lambda q: Pair(p, q))
 
 
 def lrpair(ap: Animation[P], aq: Animation[Q]) -> Animation[Pair[P, Q]]:
-    return map_a(par_a_longest(ap, aq), lambda pq: Pair(*pq))
+    return par_a_longest(ap, aq).map(lambda pq: Pair(*pq))
 
 
 # Group-relatd functions:
 
 
 def gbackground(a: Animation[P], group: Group[Q]) -> Animation[Group[Union[P, Q]]]:
-    return anim.map_a(a, group.add)
+    return a.map(group.add)  # type: ignore
 
 
 def background(fg: Animation[P], *bg: Q) -> Animation[Group[Union[P, Q]]]:
-    return anim.map_a(fg, lambda p: Group((p, *bg)))
+    return fg.map(lambda p: Group((p, *bg)))  # type: ignore
 
 
 def group_join(g: Group[Group[N]]) -> Group[N]:
@@ -166,11 +166,11 @@ def mixed_group_join(g: Group[Union[N, Group[N]]]) -> Group[N]:
 
 
 def merge_group_animations(*animations: Animation[Group[N]]) -> Animation[Group[N]]:
-    return map_a(parallel(*animations), group_join)
+    return parallel(*animations).map(group_join)
 
 
 def par_and_bg(fg: Sequence[Animation[N]], bg: Sequence[N]) -> Animation[Group[N]]:
-    return map_a(background(parallel(*fg), Group(bg)), group_join)
+    return background(parallel(*fg), Group(bg)).map(group_join)
 
 
 def parallel(*animations: Animation[P]) -> Animation[Group[P]]:
@@ -238,7 +238,7 @@ def appear(p: PSX) -> Animation[PSX]:
 
 
 def disappear(p: PSX) -> Animation[PSX]:
-    return appear(p) @ easings.invert
+    return appear(p).ease(easings.invert)
 
 
 def appear_from(p: PSX, x: float, y: float) -> Animation[PSX]:
@@ -246,7 +246,7 @@ def appear_from(p: PSX, x: float, y: float) -> Animation[PSX]:
 
 
 def disappear_from(p: PSX, x: float, y: float) -> Animation[PSX]:
-    return appear_from(p, x, y) @ easings.invert
+    return appear_from(p, x, y).ease(easings.invert)
 
 
 def disappear_into_nil(p: PSX, nil: Nil) -> Projector[Select[PSX, Nil]]:
@@ -277,7 +277,7 @@ def scene_any(easing: easings.Easing = easings.in_out, duration: float = 1.0):
     def _(f: Callable[[ThenAny], Any]) -> Animation[PilRenderable]:
         animations: list[Animation[PilRenderable]] = []
         def on_animate(a: Animation[Q]) -> Q:
-            animations.append((a @ easing) * duration)
+            animations.append(a.ease(easing) * duration)
             return a.projector(1.0)
         f(on_animate)
         return anim.seq_a(*animations)

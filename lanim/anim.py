@@ -51,13 +51,10 @@ __all__ = [
     "par_p",
     "ease_p",
     "const_a",
-    "map_a",
-    "ease_a",
     "seq_a",
     "flatmap_a",
     "par_a_longest",
     "par_a_shortest",
-    "stretch",
     "pause_after",
     "pause_before",
     "frames",
@@ -143,7 +140,8 @@ class Animation(Generic[A]):
         fn, *args = other
         return fn(self, *args)
 
-        return ease_a(self, easing)
+    def ease(self, easing: Easing) -> Animation[A]:
+        return self.map_projector(lambda p: ease_p(p, easing))
 
 
 def const_p(a: C) -> Projector[C]:
@@ -201,20 +199,6 @@ def const_a(a: C) -> Animation[C]:
     Create a second-long animation consisting of a still frame
     """
     return Animation(1.0, const_p(a))
-
-
-def map_a(anim: Animation[A], f: Callable[[A], B]) -> Animation[B]:
-    """
-    Apply a function to each frame of an animation
-    """
-    return anim.map_projector(lambda p: map_p(p, f))
-
-
-def ease_a(anim: Animation[A], e: Easing) -> Animation[A]:
-    """
-    Apply easing to an animation
-    """
-    return anim.map_projector(lambda p: ease_p(p, e))
 
 
 def seq_a(*animations: Animation[A]) -> Animation[A]:
@@ -317,13 +301,6 @@ def pause_before(anim: Animation[A], duration: float) -> Animation[A]:
         else:
             return first_frame
     return Animation(total_duration, projector)
-
-
-def stretch(anim: Animation[A], factor: float) -> Animation[A]:
-    """
-    Make the animation `factor` times longer
-    """
-    return anim * factor
 
 
 def frames(animation: Animation[A], fps: float) -> Iterator[A]:

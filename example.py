@@ -46,11 +46,10 @@ def swap_numbers(items: Sequence[int], swappings: Sequence[tuple[bool, int, int]
             if should_swap:
                 g = then(swap(g, i1, i2, lift_traj(1), lift_traj(-1)))
             else:
-                a = map_a(
-                    par_a_longest(
-                        swap(g, i1, i1, lift_traj(1), lift_traj(1)),
-                        swap(g, i2, i2, lift_traj(-1), lift_traj(-1))
-                    ),
+                a = par_a_longest(
+                    swap(g, i1, i1, lift_traj(1), lift_traj(1)),
+                    swap(g, i2, i2, lift_traj(-1), lift_traj(-1))
+                ).map(
                     lambda ab: ab[0].morphed(ab[1], 0.5)
                 )
                 g = then(a * 0.5)
@@ -106,10 +105,10 @@ def slider_and_tri(t: float):
         .morphed(Triangle(0, 0, *(2, 0, -2.5, -0.5, -0.25, 3), line_width=6), t)
     )
 
-base = Animation(duration=1.5, projector=slider_and_tri) @ in_out
+base = Animation(duration=1.5, projector=slider_and_tri).ease(in_out)
 here_and_there = seq_a(
     base >> (pause_after, 1.0),
-    base @ invert >> (pause_after, 0.5)
+    base.ease(invert) >> (pause_after, 0.5)
 )
 slider_animation = seq_a(
     here_and_there >> (pause_after, 0.5),
