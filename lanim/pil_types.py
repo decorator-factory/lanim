@@ -25,6 +25,17 @@ class Align:
     LD: ClassVar[Align]
     RD: ClassVar[Align]
 
+    def __repr__(self):
+        for name in (
+            "CC", "LC", "RC",
+            "CU", "LU", "RU",
+            "CD", "LD", "RD"
+        ):
+            if self == getattr(Align, name):
+                return f"Align.{name}"
+        return f"Align(dx={self.dx!r}, dy={self.dy}!r)"
+
+
     def blend(self, other: Align, t: float) -> Align:
         return Align(self.dx * (1 - t) + other.dx * t, self.dy * (1 - t) + other.dy * t)
 
