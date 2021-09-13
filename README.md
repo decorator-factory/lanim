@@ -1,10 +1,30 @@
 # Requirements
 
 1. Python 3.9+
-2. Everything from `requirements.txt`
-3. `pdflatex`
-4. ffmpeg
-5. dvipng
+2. Poetry
+3. Some external dependencies, see "External dependencies"
+
+# External dependencies
+
+## LaTeX
+LaTeX is needed to render text and equations.
+
+### Arch Linux
+```bash
+sudo pacman -S texlive-latexextra
+```
+
+### Ubuntu
+```
+sudo apt-get install texlive-latex-extra
+```
+
+### Windows
+You should be good to go if you install MiKTeX (https://miktex.org/download)
+
+## FFmpeg
+FFmpeg is used to render a video from frames. You can get it here: https://www.ffmpeg.org/download.html
+
 
 # Usage
 
