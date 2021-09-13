@@ -1,15 +1,22 @@
 [tool.poetry]
 name = "lanim"
 version = "0.1.0"
-description = "Functinal animation library"
+description = "Functional animation library"
 authors = ["decorator-factory <42166884+decorator-factory@users.noreply.github.com>"]
 license = "MIT"
+homepage = "https://github.com/decorator-factory/lanim"
+readme = "README.md"
+
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Topic :: Multimedia",
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+pillow = "^8.3.2"
 
 [tool.poetry.dev-dependencies]
-pillow = "^8.3.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
