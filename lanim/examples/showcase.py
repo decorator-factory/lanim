@@ -1,15 +1,10 @@
-import multiprocessing
-import sys
-from pathlib import Path
 from itertools import islice
 
 from lanim.anim import *
 from lanim.easings import *
 from lanim.pil_graphics import *
-from lanim.pil_machinery import render_pil
 from lanim.pil_types import *
 
-width, height, fps = map(int, sys.argv[1:])
 
 animations = []
 
@@ -154,7 +149,6 @@ animations.append(easing_generalization)
 
 # Scene 6. Fibonacci ladder
 
-
 def fibonacci():
     a, b = 1, 1
     while True:
@@ -181,10 +175,8 @@ animations.append(fibonacci_animation)
 
 # Combining the scenes
 
-animation = (
+export = (
     seq_a(*[pause_after(a, 0.5) for a in animations])
     >> (pause_before, 1)
     >> (pause_after, 1)
 )
-
-render_pil(width, height, animation, Path("./out"), fps, workers=multiprocessing.cpu_count())

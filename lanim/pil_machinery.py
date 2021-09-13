@@ -31,7 +31,8 @@ def render_pil(
         unit=width//16
     )
 
-    print(f"Rendering animation {width}x{height} {animation.duration}s @{fps}FPS")
+    print(f"Size: {width}x{height}, duration: {animation.duration}s @{fps}FPS")
+    print(f"Launching {workers} threads")
 
     jobs = [[] for _ in range(workers)]
 
@@ -66,7 +67,6 @@ def render_pil(
         thread.join()
 
     t2 = time.time()
-    print(f"Time taken: {t2 - t1:.2f}s")
     return t2 - t1
 
 

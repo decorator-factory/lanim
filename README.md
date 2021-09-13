@@ -8,8 +8,22 @@
 
 # Usage
 
+Compile the example
 ```bash
-# compile.sh <width> <height> <fps>
-# e.g.:
-./compile.sh 1920 1080 60
+python -m lanim -o out.mp4 lanim.examples.showcase
+```
+
+Compile the example in lower quality
+```bash
+python -m lanim -o out.mp4 -w 480 -h 270 --fps 15 lanim.examples.showcase
+```
+
+Compile the example but use tmpfs for temporary directory
+```bash
+python -m lanim -o out.mp4 -p /tmp/.lanim lanim.examples.showcase
+```
+
+See full list of options:
+```bash
+python -m lanim --help
 ```
