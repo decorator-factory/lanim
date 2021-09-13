@@ -1,0 +1,9 @@
+site_name: Lanim
+site_url: https://decorator-factory.github.io/lanim
+edit_uri: https://github.com/decorator-factory/lanim/tree/master/mkdocs/docs
+repo_url: https://github.com/decorator-factory/lanim
+nav:
+  - Home: index.md
+  - Tutorial: tutorial.md
+  - How-to guides: howtos.md
+theme: material

@@ -1,3 +1,5 @@
+Read the [documentation](https://decorator-factory.github.io/lanim/howtos/).
+
 # Requirements
 
 1. Python 3.9+

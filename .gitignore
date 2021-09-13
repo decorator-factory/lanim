@@ -9,3 +9,4 @@ env/
 _latex_cache/
 *.mp4
 .python-version
+mkdocs/site
