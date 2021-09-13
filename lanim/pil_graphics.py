@@ -347,3 +347,28 @@ def scene(
 
 if not TYPE_CHECKING:
     scene = scene_any
+
+
+T = TypeVar("T")
+
+
+def progression(
+    step: Callable[[P, T], Animation[P]],
+    initial: P,
+    items: Iterable[T],
+    then: Union[Then[P], ThenAny],
+) -> P:
+    """
+    Given a step function and a sequence of element, produce an sequence
+    of animations produced by the step function on each step. The step
+    function will receive the current state (of type `P`) and an element
+    (of type `T`).
+
+    This essentially implements the 'reduce' pattern, but also calls `then`.
+
+    This is similar to `foldM` in Haskell/Scala.
+    """
+    acc = initial
+    for item in items:
+        acc = then(step(acc, item))
+    return acc

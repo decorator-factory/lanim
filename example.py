@@ -1,14 +1,15 @@
 import multiprocessing
-from lanim.pil_machinery import render_pil
 import sys
-width, height, fps = map(int, sys.argv[1:])
-
 from pathlib import Path
-from lanim.easings import *
+from itertools import islice
+
 from lanim.anim import *
+from lanim.easings import *
 from lanim.pil_graphics import *
+from lanim.pil_machinery import render_pil
 from lanim.pil_types import *
 
+width, height, fps = map(int, sys.argv[1:])
 
 animations = []
 
@@ -150,6 +151,35 @@ def easing_generalization(then: Then[Group[Latex]]):
 
 animations.append(easing_generalization)
 
+
+# Scene 6. Fibonacci ladder
+
+
+def fibonacci():
+    a, b = 1, 1
+    while True:
+        yield a
+        a, b = b, a + b
+
+def advance(acc: ScalableMorphable, n: int) -> Animation[ScalableMorphable]:
+    next_number = Latex(x=0, y=0, source="$%s$" % n).scaled(0.9)
+    old_target = acc.moved(dx=-0.8 * next_number.width()**0.7, dy=-0.2).scaled(0.7)
+    return (
+        lrpair_longest(morph_into(acc, old_target), appear(next_number))
+        * 0.4
+        >> (pause_after, 0.15)
+    )
+
+@scene_any()
+def fibonacci_animation(then: ThenAny):
+    fibs = islice(fibonacci(), 13)
+    progression(advance, Nil(x=0, y=0), fibs, then)
+
+
+animations.append(fibonacci_animation)
+
+
+# Combining the scenes
 
 animation = (
     seq_a(*[pause_after(a, 0.5) for a in animations])
