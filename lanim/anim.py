@@ -303,6 +303,25 @@ def pause_before(anim: Animation[A], duration: float) -> Animation[A]:
     return Animation(total_duration, projector)
 
 
+def crop_by_range(anim: Animation[A], start: float, finish: float) -> Animation[A]:
+    """
+    Render a range of an animation.
+    `start` and `finish` should be floats from 0 to 1.
+    """
+    if not (0 <= start < finish < 1):
+        raise ValueError(
+            "Invalid range ({}, {}). Expected 0 <= start <= finish < 1"
+            .format(start, finish)
+        )
+    scale_factor = finish - start + 0.01
+    new_duration = anim.duration * scale_factor
+
+    def projector(t: float) -> A:
+        return anim.projector(t * scale_factor + start)
+
+    return Animation(new_duration, projector)
+
+
 def frames(animation: Animation[A], fps: float) -> Iterator[A]:
     """
     Generate a series of discrete frames from an animation given

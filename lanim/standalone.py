@@ -3,7 +3,8 @@ import importlib
 import subprocess
 from typing import Protocol
 
-from lanim.anim import Animation
+from lanim.anim import Animation, crop_by_range
+from lanim.pil_types import PilRenderable
 from lanim.pil_machinery import render_pil
 
 
@@ -16,6 +17,7 @@ class Options(Protocol):
     temp_dir: pathlib.Path
     output: pathlib.Path
     threads: int
+    range: tuple[int, int]
 
 
 def _is_present(*cmd: str):
@@ -41,24 +43,49 @@ def _ensure_dependencies_exist():
             )
 
 
-def entry_point(options: Options) -> None:
-    _ensure_dependencies_exist()
+def _crop_animation(
+    anim: Animation[PilRenderable],
+    start: int,
+    finish: int
+) -> Animation[PilRenderable]:
+    return crop_by_range(anim, start / 100, finish / 100)
 
+
+def _find_animation(module_name: str, export_name: str) -> Animation[PilRenderable]:
     try:
-        module = importlib.import_module(options.module)
+        module = importlib.import_module(module_name)
     except ImportError:
-        raise ImportError("Module {0.module!r} not found".format(options)) from None
+        raise ImportError("Module {!r} not found".format(module_name)) from None
 
     try:
-        animation = getattr(module, options.export_name)
+        animation = getattr(module, export_name)
     except AttributeError:
-        raise ImportError("Module {0.module!r} doesn't export {0.export_name!r}".format(options)) from None
+        raise ImportError(
+            "Module {!r} doesn't export {!r}".format(module, export_name)
+        ) from None
 
     if not isinstance(animation, Animation):
         raise TypeError(
-            "{0.module}.{0.export_name} should be an animation, but I got {1.__class__!r}: {1!r}"
-            .format(options, animation)
+            "{}.{} should be an animation, but I got {1.__class__!r}: {1!r}"
+            .format(module_name, export_name, animation)
         )
+
+    return animation
+
+
+def _purge_temp_dir(path: pathlib.Path):
+    path.mkdir(parents=True, exist_ok=True)
+    for file in path.glob("*.png"):
+        file.unlink()
+
+
+def entry_point(options: Options) -> None:
+    _purge_temp_dir(options.temp_dir)
+
+    _ensure_dependencies_exist()
+
+    animation = _find_animation(options.module, options.export_name)
+    animation = _crop_animation(animation, *options.range)
 
     render_pil(
         width=options.width,

@@ -51,6 +51,27 @@ parser.add_argument(
 )
 
 
+def _parse_range(s: str) -> tuple[int, int]:
+    from_, to = map(int, s.split(":"))
+    if from_ < 0:
+        raise ValueError("in FROM:TO, FROM should be positive, got {}".format(from_))
+    if to >= 100:
+        raise ValueError("in FROM:TO, TO should be less than 100, got {}".format(to))
+    if to < from_:
+        raise ValueError("in FROM:TO, TO shouldn't be greater than from_")
+    return (from_, to)
+
+
+parser.add_argument(
+    "--range",
+    metavar="PERCENT:PERCENT",
+    help="What range of the animation to render, for example `--range 25:49` "
+         "will render the second quarter of the animation.",
+    default=(0, 99),
+    type=_parse_range
+)
+
+
 args = parser.parse_args()
 print(args)
 entry_point(args)  # type: ignore
