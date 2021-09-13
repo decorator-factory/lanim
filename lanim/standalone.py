@@ -48,7 +48,7 @@ def _crop_animation(
     start: int,
     finish: int
 ) -> Animation[PilRenderable]:
-    return crop_by_range(anim, start / 100, finish / 100)
+    return crop_by_range(anim, start / 100, (finish + 1) / 100)
 
 
 def _find_animation(module_name: str, export_name: str) -> Animation[PilRenderable]:

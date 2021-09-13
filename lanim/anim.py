@@ -308,12 +308,12 @@ def crop_by_range(anim: Animation[A], start: float, finish: float) -> Animation[
     Render a range of an animation.
     `start` and `finish` should be floats from 0 to 1.
     """
-    if not (0 <= start < finish < 1):
+    if not (0 <= start < finish <= 1):
         raise ValueError(
             "Invalid range ({}, {}). Expected 0 <= start <= finish < 1"
             .format(start, finish)
         )
-    scale_factor = finish - start + 0.01
+    scale_factor = finish - start
     new_duration = anim.duration * scale_factor
 
     def projector(t: float) -> A:
