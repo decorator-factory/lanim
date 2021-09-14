@@ -62,6 +62,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#installation" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -219,10 +224,69 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Tutorial
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         Tutorial
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#external-dependencies" class="md-nav__link">
+    External dependencies
+  </a>
+  
+    <nav class="md-nav" aria-label="External dependencies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ffmpeg" class="md-nav__link">
+    FFmpeg
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latex" class="md-nav__link">
+    LaTeX
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    Python
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -250,6 +314,65 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#external-dependencies" class="md-nav__link">
+    External dependencies
+  </a>
+  
+    <nav class="md-nav" aria-label="External dependencies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ffmpeg" class="md-nav__link">
+    FFmpeg
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#latex" class="md-nav__link">
+    LaTeX
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python" class="md-nav__link">
+    Python
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -260,9 +383,49 @@
                   </a>
                 
                 
-                  <h1>Tutorial</h1>
-                
-                <p>This is a stub</p>
+                <h1 id="installation">Installation</h1>
+<h2 id="external-dependencies">External dependencies</h2>
+<p><code>lanim</code> requires some external programs to function.</p>
+<h3 id="ffmpeg">FFmpeg</h3>
+<p><em>FFmpeg</em> is used to create images from</p>
+<p>You should find instructions for installing it on the <a href="https://www.ffmpeg.org/">official website</a>.</p>
+<h3 id="latex">LaTeX</h3>
+<p><em>LaTeX</em> is the engine behind text and equations.</p>
+<p>Besides LaTeX itself, you'll need three packages: <code>standalone</code>, <code>amsmath</code> and <code>amssymb</code>.</p>
+<p>The easiest way to go is to download a package with many common packages.</p>
+<ul>
+<li>
+<p>Ubuntu:</p>
+<p><code>sudo apt-get install texlive-latex-extra</code></p>
+</li>
+<li>
+<p>Arch:</p>
+<p><code>pamac install texlive-latexextra</code></p>
+</li>
+<li>
+<p>Windows &amp; Mac:</p>
+<p>Download MikTeX here: <a href="https://miktex.org/download">https://miktex.org/download</a></p>
+</li>
+</ul>
+<p>(If you have a better way of doing this on Windows and Mac, please tell me!)</p>
+<h2 id="python">Python</h2>
+<p>You need Python 3.9 or higher to use <code>lanim</code>.</p>
+<p>Simply install the <code>lanim</code> package using <code>pip</code>.</p>
+<h1 id="verify-the-installation">Verify the installation</h1>
+<p>To make sure you installed <code>lanim</code> correctly, render the smoke test animation.</p>
+<pre><code class="language-bash">python -m lanim -o smoke_test.mp4 lanim.examples.hello
+</code></pre>
+<p>(substitute <code>python</code> for the right executable on your system)</p>
+<p>After running that, you should have a video called <code>smoke_test.mp4</code> in your current folder.</p>
+<p>The default settings are: <code>--width 1280 --height 720 --fps 30</code>. Let's try better ones:</p>
+<pre><code class="language-bash">python -m lanim -w 1920 -h 1080 --fps 60 -o smoke_test.mp4 lanim.examples.hello
+</code></pre>
+<h2 id="performance">Performance</h2>
+<p>To see how fast animations will render on your machine, render the showcase animation.
+It's about a minute long.</p>
+<pre><code class="language-bash">python -m lanim -o showcase.mp4 lanim.examples.showcase
+</code></pre>
+<p>Then render the animation again to see how the cache speeds up the rendering.</p>
                 
               
               
