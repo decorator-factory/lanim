@@ -346,6 +346,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#recap" class="md-nav__link">
+    Recap
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -449,6 +456,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#recap" class="md-nav__link">
+    Recap
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -469,6 +483,7 @@
                 <h1 id="how-does-lanim-work">How does Lanim work?</h1>
 <p>In this tutorial, we&rsquo;re going to create an animated slider.
 You will learn how Lanim works under the hood along the way.</p>
+<p><img alt="Step 6" src="step6.gif" /></p>
 <h2 id="1-so-what-is-an-animation">1. So what is an animation?</h2>
 <p>If you open <a href="https://github.com/decorator-factory/lanim/blob/8839014/lanim/anim.py#L68">the source code of the <code>Animation</code> class</a>
 and remove all the noise, this is what it is:</p>
@@ -762,8 +777,8 @@ formats a <code>float</code> with two decimal places.
     <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
 </code></pre></div></p>
 <p>Here&rsquo;s the issue: a pair only accepts two values, but we need three.
-<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span><span class="p">,</span> <span class="n">Latex</span>
-</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span><span class="p">,</span> <span class="n">Latex</span>
+
 <span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
@@ -780,7 +795,7 @@ formats a <code>float</code> with two decimal places.
     <span class="p">)</span>
 <span class="hll">    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
 </span></code></pre></div></p>
-<p>Solution: place the pair inside of another pair
+<p>Solution: place the pair inside another pair
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
@@ -843,8 +858,19 @@ formats a <code>float</code> with two decimal places.
         <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
         <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="k">return</span> <span class="n">Group</span><span class="p">([</span><span class="n">bar</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">triangle</span><span class="p">])</span>
-</code></pre></div>
+<span class="hll">    <span class="k">return</span> <span class="n">Group</span><span class="p">([</span><span class="n">bar</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">triangle</span><span class="p">])</span>
+</span></code></pre></div>
+<h2 id="recap">Recap</h2>
+<p>Now you know that:</p>
+<ol>
+<li>An animation consists of a duration and a projector</li>
+<li>A projector is a function taking a number from 0 to 1 and returning an animation frame</li>
+</ol>
+<p>And now you can:</p>
+<ol>
+<li>Write an animation by constructing an <code>Animation</code> object yourself</li>
+<li>Animate a structure made up of multiple elements</li>
+</ol>
                 
               
               
