@@ -1,6 +1,6 @@
 # Welcome to _λanim_!
 
-If you want to get started, check out [the tutorial](tutorial).
+If you want to get started, check out [the tutorial](tutorial/installation).
 
 If you want to see recipes for common use cases, look at [the how-to guides](howtos).
 

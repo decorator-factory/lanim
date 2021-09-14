@@ -2,8 +2,20 @@ site_name: Lanim
 site_url: https://decorator-factory.github.io/lanim
 edit_uri: https://github.com/decorator-factory/lanim/tree/master/mkdocs/docs
 repo_url: https://github.com/decorator-factory/lanim
+
 nav:
   - Home: index.md
-  - Tutorial: tutorial.md
+  - Tutorial:
+    - Installation: tutorial/installation.md
+    - Hello, λanim!: tutorial/hello.md
   - How-to guides: howtos.md
-theme: material
+
+theme:
+  name: material
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed
+  - smarty

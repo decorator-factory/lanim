@@ -1,4 +1,4 @@
-# Installation
+# Installing `lanim`
 
 ## External dependencies
 
@@ -43,7 +43,7 @@ You need Python 3.9 or higher to use `lanim`.
 Simply install the `lanim` package using `pip`.
 
 
-# Verify the installation
+## Verify the installation
 
 To make sure you installed `lanim` correctly, render the smoke test animation.
 

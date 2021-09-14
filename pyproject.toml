@@ -19,6 +19,7 @@ pillow = "^8.3.2"
 [tool.poetry.dev-dependencies]
 mkdocs = "^1.2.2"
 mkdocs-material = "^7.2.6"
+pymdown-extensions = "^8.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
