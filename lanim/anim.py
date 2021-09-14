@@ -30,7 +30,7 @@ Hello, world!
 
 from __future__ import annotations
 from dataclasses import dataclass, replace as dataclass_replace
-from typing import Callable, Generic, Iterable, Iterator, TypeVar, overload
+from typing import Callable, Generic, Iterable, Iterator, TypeVar, Union, overload
 from lanim.easings import Easing
 
 
@@ -115,11 +115,11 @@ class Animation(Generic[A]):
         """
         return self.with_duration(self.duration * factor)
 
-    def __add__(self, other: Animation[A]) -> Animation[A]:
+    def __add__(self, other: Animation[B]) -> Animation[Union[A, B]]:
         """
         Put one animation after the other
         """
-        return seq_a(self, other)
+        return seq_a(self, other)  # type: ignore
 
     @overload
     def __rshift__(self, other: Callable[[Animation[A]], B]) -> B: ...
