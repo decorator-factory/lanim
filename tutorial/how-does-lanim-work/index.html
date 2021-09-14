@@ -1,0 +1,925 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://decorator-factory.github.io/lanim/tutorial/how-does-lanim-work/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>How does Lanim work? - Lanim</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-does-lanim-work" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lanim" class="md-header__button md-logo" aria-label="Lanim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lanim
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How does Lanim work?
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/decorator-factory/lanim/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lanim" class="md-nav__button md-logo" aria-label="Lanim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Lanim
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/decorator-factory/lanim/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Tutorial
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorial" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hello/" class="md-nav__link">
+        Hello, λanim!
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          How does Lanim work?
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        How does Lanim work?
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-so-what-is-an-animation" class="md-nav__link">
+    1. So what is an animation?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-lets-write-an-animation-from-scratch" class="md-nav__link">
+    2. Let's write an animation from scratch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-using-standard-functions" class="md-nav__link">
+    3. Using standard functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-making-the-slider" class="md-nav__link">
+    4. Making the slider
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-testing-the-slider" class="md-nav__link">
+    5. Testing the slider
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-attaching-a-number-to-the-triangle" class="md-nav__link">
+    6. Attaching a number to the triangle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-using-a-group" class="md-nav__link">
+    7. Using a Group
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howtos/" class="md-nav__link">
+        How-to guides
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-so-what-is-an-animation" class="md-nav__link">
+    1. So what is an animation?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-lets-write-an-animation-from-scratch" class="md-nav__link">
+    2. Let's write an animation from scratch
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-using-standard-functions" class="md-nav__link">
+    3. Using standard functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-making-the-slider" class="md-nav__link">
+    4. Making the slider
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-testing-the-slider" class="md-nav__link">
+    5. Testing the slider
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-attaching-a-number-to-the-triangle" class="md-nav__link">
+    6. Attaching a number to the triangle
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-using-a-group" class="md-nav__link">
+    7. Using a Group
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/decorator-factory/lanim/tree/master/mkdocs/docs/tutorial/how-does-lanim-work.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="how-does-lanim-work">How does Lanim work?</h1>
+<p>In this tutorial, we&rsquo;re going to create an animated slider.
+You will learn how Lanim works under the hood along the way.</p>
+<h2 id="1-so-what-is-an-animation">1. So what is an animation?</h2>
+<p>If you open <a href="https://github.com/decorator-factory/lanim/blob/8839014/lanim/anim.py#L68">the source code of the <code>Animation</code> class</a>
+and remove all the noise, this is what it is:</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Animation</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">A</span><span class="p">]):</span>
+    <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">projector</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="n">A</span><span class="p">]</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you&rsquo;re not familiar with <a href="https://realpython.com/python-type-checking/">type annotations</a>
+(the stuff after <code>:</code>), just ignore them.</p>
+</div>
+<p>An animation consists of a duration (in seconds) and some function.
+We&rsquo;ll see what this function does in just a moment.</p>
+<h2 id="2-lets-write-an-animation-from-scratch">2. Let&rsquo;s write an animation from scratch</h2>
+<p>Type this code into a file, e.g. <code>how_does.py</code>:
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Rect</span>
+
+
+<span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">export</span> <span class="o">=</span> <span class="n">Animation</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">projector</span><span class="o">=</span><span class="n">projector</span><span class="p">)</span>
+</code></pre></div>
+Then run it the usual way:
+<code>python -m lanim -o how_does.mp4 how_does</code></p>
+<p>You should see this:</p>
+<p><img alt="Step 2" src="step2.gif" /></p>
+<p>The &ldquo;projector&rdquo; thing works as follows: <code>lanim</code> will call the <code>projector</code>
+of an animation with increasing values of t: <code>0.0</code>, <code>0.01</code>, <code>0.02</code>, &hellip;, and finally <code>1.0</code>.
+While doing so, it records all the <em>frames</em> (in this case, <code>Rect</code> objects) and
+renders them as images with the <code>pillow</code> library.</p>
+<p>That&rsquo;s it &mdash; no tricks up my sleeve.</p>
+<h2 id="3-using-standard-functions">3. Using standard functions</h2>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Rect</span>
+
+
+<span class="k">def</span> <span class="nf">projector1</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">side</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="mi">3</span>
+    <span class="k">return</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">side</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">side</span><span class="p">)</span>
+
+<span class="n">animation1</span> <span class="o">=</span> <span class="n">Animation</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">projector</span><span class="o">=</span><span class="n">projector1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">projector2</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="n">side</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="k">return</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">t</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">side</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">side</span><span class="p">)</span>
+
+<span class="n">animation2</span> <span class="o">=</span> <span class="n">Animation</span><span class="p">(</span><span class="n">duration</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">projector</span><span class="o">=</span><span class="n">projector2</span><span class="p">)</span>
+
+
+<span class="n">export</span> <span class="o">=</span> <span class="n">animation1</span> <span class="o">+</span> <span class="n">animation2</span>
+</code></pre></div>
+<img alt="Step 3" src="step3.gif" /></p>
+<p>The sum animation works in the same way: it receives a <code>t</code> ranging from 0 to 1, and it
+returns something renderable. It does so by picking one of the animations and adjusting
+the <code>t</code> value. For example, like this:
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">export_projector</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">:</span>
+        <span class="n">local_t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="mi">4</span>
+        <span class="k">return</span> <span class="n">projector1</span><span class="p">(</span><span class="n">local_t</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">local_t</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">projector2</span><span class="p">(</span><span class="n">local_t</span><span class="p">)</span>
+
+<span class="n">export</span> <span class="o">=</span> <span class="n">Animation</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mf">3.0</span><span class="p">,</span> <span class="n">export_projector</span> <span class="p">)</span>
+</code></pre></div></p>
+<div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Visualization</label><div class="tabbed-content">
+<p><img alt="How the + operator works" src="plus-operator.gif" /></p>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Code (advanced)</label><div class="tabbed-content">
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">lrpair_longest</span>
+
+
+<span class="k">def</span> <span class="nf">slider</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="n">slider_xpos</span> <span class="o">=</span> <span class="n">x1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">x2</span><span class="o">*</span><span class="n">t</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span>
+        <span class="n">line_width</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+
+    <span class="n">pointer</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mf">0.3</span><span class="p">,</span>
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=+</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=+</span><span class="mf">0.3</span>
+    <span class="p">)</span>
+
+    <span class="n">progress</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="n">Align</span><span class="o">.</span><span class="n">CD</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">source</span><span class="o">=</span><span class="n">message</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="n">Align</span><span class="o">.</span><span class="n">CU</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Group</span><span class="p">([</span><span class="n">bar</span><span class="p">,</span> <span class="n">pointer</span><span class="p">,</span> <span class="n">progress</span><span class="p">,</span> <span class="n">sign</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">big_slider</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="n">slider_</span> <span class="o">=</span> <span class="n">slider</span><span class="p">(</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="s2">&quot;animation1 + animation2&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">moved</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="o">=-</span><span class="mf">2.8</span><span class="p">)</span>
+    <span class="n">notch</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mf">2.8</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.55</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Group</span><span class="p">([</span><span class="n">slider_</span><span class="p">,</span> <span class="n">notch</span><span class="p">])</span>
+
+
+<span class="k">def</span> <span class="nf">left_slider</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">slider</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;animation1</span><span class="se">\n\n</span><span class="s2">duration = 1&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">moved</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">right_slider</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">slider</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;animation2</span><span class="se">\n\n</span><span class="s2">duration = 3&quot;</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">moved</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">total_slider</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">left_slider</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">right_slider</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">3</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">conditional</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$t &lt; \dfrac</span><span class="si">{1}{4}</span><span class="s2">$&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$t \ge \dfrac</span><span class="si">{1}{4}</span><span class="s2">$&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+
+<span class="n">export</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">lrpair_longest</span><span class="p">,</span> <span class="p">(</span>
+    <span class="n">Animation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">total_slider</span><span class="p">),</span>
+    <span class="n">Animation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">big_slider</span><span class="p">),</span>
+    <span class="n">Animation</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">conditional</span><span class="p">),</span>
+<span class="p">))</span>
+</code></pre></div>
+</div>
+</div>
+<p>With some simple maths, you can do what <code>+</code> does like so:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">plus</span><span class="p">(</span><span class="n">animation1</span><span class="p">,</span> <span class="n">animation2</span><span class="p">):</span>
+    <span class="n">total_duration</span> <span class="o">=</span> <span class="n">animation1</span><span class="o">.</span><span class="n">duration</span> <span class="o">+</span> <span class="n">animation2</span><span class="o">.</span><span class="n">duration</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="n">animation1</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="n">total_duration</span>
+
+    <span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">ratio</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">animation1</span><span class="o">.</span><span class="n">projector</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">ratio</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">animation2</span><span class="o">.</span><span class="n">projector</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ratio</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">Animation</span><span class="p">(</span><span class="n">total_duration</span><span class="p">,</span> <span class="n">projector</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="4-making-the-slider">4. Making the slider</h2>
+<p>At the start, I promised that we&rsquo;re going to make a slider animation.</p>
+<p>A slider will consist of two things: a bar and a triangle that moves along that bar.</p>
+<p>We&rsquo;ll make a function that accepts some parameters and returns a <code>Pair</code> object.</p>
+<hr />
+<p>Here, <code>x</code> and <code>y</code> are the center of our slider, <code>width</code> is the width of the slider,
+and <code>t</code> is the progress &mdash; a value from 0 to 1 that tells where on the slider
+the triangle should be.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+
+
+<span class="hll"><span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+</span>    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="n">width</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
+</code></pre></div></p>
+<hr />
+<p>For the bar, we&rsquo;ll use a very thin rectangle with a big line thickness.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+
+
+<span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+<span class="hll">    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span>    <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="n">width</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
+</code></pre></div></p>
+<hr />
+<p>The <code>Triangle</code> class accepts the starting position <code>(x, y)</code> and three pairs
+<code>(dx1, dy1)</code>, <code>(dx2, dy2)</code>, <code>(dx3, dy3)</code> telling how far apart each of the
+three points is from <code>(x, y)</code>.</p>
+<p>For the <code>x</code> position, we will choose a value that depends on <code>t</code>. This is what&rsquo;s
+going to make the slide animated.
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+
+
+<span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="hll">    <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+</span><span class="hll">        <span class="n">x</span><span class="o">=</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="n">width</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+</span><span class="hll">
+</span><span class="hll">        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+</span><span class="hll">        <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+</span><span class="hll">        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+</span><span class="hll">    <span class="p">)</span>
+</span>    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
+</code></pre></div></p>
+<hr />
+<p>Finally, we bundle the bar and the triangle into a pair and return it.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+
+
+<span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="n">width</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="hll">    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="5-testing-the-slider">5. Testing the slider</h2>
+<p>Let&rsquo;s make a helper function that will act the <em>projector</em>.
+Then you can run the animation.</p>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span>
+</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+
+
+<span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="n">width</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
+
+
+<span class="hll"><span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+</span><span class="hll">    <span class="k">return</span> <span class="n">make_slider</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll">
+</span><span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">Animation</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="n">projector</span><span class="p">)</span>
+</span></code></pre></div>
+<p><img alt="Step 5" src="step5.gif" /></p>
+<h2 id="6-attaching-a-number-to-the-triangle">6. Attaching a number to the triangle</h2>
+<p>In the previous animation, the slider had a varying number attached to it.
+Let&rsquo;s implement that as well.</p>
+<p>First, let&rsquo;s extract the x-coordinate of the slider into a variable.
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="hll">    <span class="n">slider_xpos</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="n">width</span>
+</span>
+<span class="hll">    <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+</span>        <span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Then, let&rsquo;s add a <code>Latex</code> object with the number we want. The <code>:.2f</code> modifier
+formats a <code>float</code> with two decimal places.
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">slider_xpos</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="n">width</span>
+
+<span class="hll">    <span class="n">label</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+</span>
+    <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Here&rsquo;s the issue: a pair only accepts two values, but we need three.
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span><span class="p">,</span> <span class="n">Latex</span>
+</span>
+<span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">slider_xpos</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="n">width</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="hll">    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
+</span></code></pre></div></p>
+<p>Solution: place the pair inside of another pair
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">slider_xpos</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="n">width</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+<span class="hll">    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">))</span>
+</span></code></pre></div></p>
+<p>Now let&rsquo;s run the code:</p>
+<details class="quote"><summary>The code so far</summary><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span><span class="p">,</span> <span class="n">Latex</span>
+
+
+<span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">slider_xpos</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="n">width</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">make_slider</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mi">3</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
+
+
+<span class="n">export</span> <span class="o">=</span> <span class="n">Animation</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="n">projector</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<p><img alt="Step 6" src="step6.gif" /></p>
+<h2 id="7-using-a-group">7. Using a <code>Group</code></h2>
+<p>If you have more than 2 or 3 elements, nested pairs become inconvenient.
+<code>Group</code> is a generalization of <code>Pair</code> &mdash; it can hold any number of elements</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="n">slider_xpos</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">t</span><span class="o">*</span><span class="n">width</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">+</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+
+    <span class="n">triangle</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">-</span><span class="mf">0.6</span><span class="p">,</span>
+
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>  <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.35</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">Group</span><span class="p">([</span><span class="n">bar</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">triangle</span><span class="p">])</span>
+</code></pre></div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../hello/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Hello, λanim!" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Hello, λanim!
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../howtos/" class="md-footer__link md-footer__link--next" aria-label="Next: How-to guides" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              How-to guides
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>
