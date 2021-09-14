@@ -2,6 +2,8 @@
 
 In this tutorial, we're going to recreate the `lanim.examples.hello` animation.
 
+![Step 11](hello/step11.gif)
+
 ## 1. Create a stub
 
 Create a file called `tutorial_hello.py` with this content:
