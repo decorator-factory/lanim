@@ -9,6 +9,7 @@ nav:
     - Installation: tutorial/installation.md
     - Hello, λanim!: tutorial/hello.md
     - How does Lanim work?: tutorial/how-does-lanim-work.md
+    - The coordinate system: tutorial/coordinates.md
   - How-to guides: howtos.md
 
 theme:

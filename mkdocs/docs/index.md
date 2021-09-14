@@ -17,7 +17,7 @@ or use [GitHub Discussions](https://github.com/decorator-factory/lanim/discussio
 - Docs:
     - [ ] Make tutorials about all the basic concepts
         - [X] Hello, λanim!
-        - [ ] The coordinate system
+        - [X] The coordinate system
         - [X] Projectors
         - [ ] Imperative `scene` API
         - [ ] APIs offered by `pil_types`
