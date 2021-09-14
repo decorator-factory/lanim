@@ -1,9 +1,9 @@
 from lanim.anim import pause_after, seq_a
 from lanim.pil_graphics import appear, gbackground, move_by
-from lanim.pil_types import Align, Latex, Pair, Rect
+from lanim.pil_types import Latex, Pair, Rect
 from lanim.easings import in_out, sled
 
-sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!").aligned(Align.CC)
+sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
 border = Rect(x=0, y=-0.1, width=sign.width() + 0.5, height=sign.height() + 0.5)
 
