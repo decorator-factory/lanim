@@ -5,9 +5,9 @@ from typing import (
     Callable, ClassVar, Collection, Generic, Iterator, Literal, Optional,
     Protocol, Sequence, TYPE_CHECKING, TypeVar, Union, overload,
 )
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageChops
 from lanim.pil_utils import render_latex_scaled
-from lanim.anim import Projector, ease_p
+from lanim.anim import Animation, Projector, ease_p
 from lanim import easings
 
 @dataclass
@@ -560,3 +560,55 @@ class Sum(Generic[PX, QX]):
     def render_pil(self, ctx: PilContext) -> None:
         _tag, item = self.item
         item.render_pil(ctx)
+
+
+class Opacity(Generic[P]):
+    """
+    Wrapper around a PilRenderable value to render it with an opacity (from 0 to 1)
+    """
+
+    def __init__(self, child: P, opacity: float = 1.0):
+        if not (0 <= opacity <= 1):
+            raise ValueError(f"Opacity should be between 0 and 1, got {opacity!r}")
+
+        self.x = child.x
+        self.y = child.y
+        self.child = child
+        self.opacity = opacity
+
+    def morphed(self: "Opacity[PX]", other: "Opacity[PX]", t: float) -> "Opacity[PX]":
+        return Opacity(
+            self.child.morphed(other.child, t),
+            self.opacity * (1 - t) + other.opacity * t
+        )
+
+    def scaled(self: "Opacity[PS]", factor: float) -> "Opacity[PS]":
+        return Opacity(self.child.scaled(factor), self.opacity)
+
+    def scaled_about(self: "Opacity[PS]", factor: float, cx: float, cy: float) -> "Opacity[PS]":
+        return Opacity(self.child.scaled_about(factor, cx, cy), self.opacity)
+
+    def moved(self, dx: float, dy: float) -> "Opacity[P]":
+        return Opacity(self.child.moved(dx, dy), self.opacity)
+
+    def fade(self, target: float = 0) -> Animation["Opacity[P]"]:
+        def projector(t: float):
+            return Opacity(self.child, self.opacity * (1 - t) + target * t)
+        return Animation(1, projector)
+
+    def render_pil(self, ctx: PilContext):
+        new_ctx = ctx.settings.make_ctx()
+        self.child.render_pil(new_ctx)
+
+        # TODO: find out if there's a way to do this without creating 3 extra images:
+
+        mask = Image.new("RGBA", new_ctx.img.size, (0, 0, 0, round(255 * self.opacity)))
+
+        transparent = Image.new("RGBA", new_ctx.img.size, (0, 0, 0, 0))
+        transparent = ImageChops.composite(new_ctx.img, transparent, mask)
+
+        buffer = Image.new("RGBA", new_ctx.img.size, (0, 0, 0, 0))
+        buffer.paste(ctx.img)
+        buffer.paste(transparent, mask=transparent)
+
+        ctx.img.paste(buffer)
