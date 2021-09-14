@@ -1,0 +1,1000 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://decorator-factory.github.io/lanim/tutorial/hello/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>Hello, λanim! - Lanim</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hello-anim" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lanim" class="md-header__button md-logo" aria-label="Lanim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lanim
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Hello, λanim!
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/decorator-factory/lanim/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lanim" class="md-nav__button md-logo" aria-label="Lanim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Lanim
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/decorator-factory/lanim/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      <label class="md-nav__link" for="__nav_2">
+        Tutorial
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorial" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Hello, λanim!
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Hello, λanim!
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-create-a-stub" class="md-nav__link">
+    1. Create a stub
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-create-the-greeting" class="md-nav__link">
+    2. Create the greeting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-make-a-static-animation-of-the-sign" class="md-nav__link">
+    3. Make a static animation of the sign
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-stretch-the-animation" class="md-nav__link">
+    3. Stretch the animation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-make-the-sign-scale-out-instead-of-just-sitting-there" class="md-nav__link">
+    4. Make the sign scale out instead of just sitting there
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-create-a-border-around-the-greeting" class="md-nav__link">
+    5. Create a border around the greeting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-animate-a-pair-of-the-greeting-and-the-border" class="md-nav__link">
+    6. Animate a pair of the greeting and the border
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-make-the-last-frame-persist-for-a-while" class="md-nav__link">
+    7. Make the last frame persist for a while:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-make-the-border-appear-before-the-sign" class="md-nav__link">
+    8. Make the border appear before the sign
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Make the border appear before the sign">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-make-the-sign-appear-inside-the-border" class="md-nav__link">
+    8.1. Make the sign appear inside the border
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-stretch-out-the-border-before-the-greeting-animation" class="md-nav__link">
+    8.2. Stretch out the border before the greeting animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-split-a-complex-expression-across-several-lines" class="md-nav__link">
+    8.3. Split a complex expression across several lines
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-move-the-whole-thing-down" class="md-nav__link">
+    9. Move the whole thing down
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-add-easings" class="md-nav__link">
+    10. Add easings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-adjust-durations" class="md-nav__link">
+    11. Adjust durations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recap" class="md-nav__link">
+    Recap
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howtos/" class="md-nav__link">
+        How-to guides
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-create-a-stub" class="md-nav__link">
+    1. Create a stub
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-create-the-greeting" class="md-nav__link">
+    2. Create the greeting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-make-a-static-animation-of-the-sign" class="md-nav__link">
+    3. Make a static animation of the sign
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-stretch-the-animation" class="md-nav__link">
+    3. Stretch the animation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-make-the-sign-scale-out-instead-of-just-sitting-there" class="md-nav__link">
+    4. Make the sign scale out instead of just sitting there
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-create-a-border-around-the-greeting" class="md-nav__link">
+    5. Create a border around the greeting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-animate-a-pair-of-the-greeting-and-the-border" class="md-nav__link">
+    6. Animate a pair of the greeting and the border
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-make-the-last-frame-persist-for-a-while" class="md-nav__link">
+    7. Make the last frame persist for a while:
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-make-the-border-appear-before-the-sign" class="md-nav__link">
+    8. Make the border appear before the sign
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Make the border appear before the sign">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-make-the-sign-appear-inside-the-border" class="md-nav__link">
+    8.1. Make the sign appear inside the border
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-stretch-out-the-border-before-the-greeting-animation" class="md-nav__link">
+    8.2. Stretch out the border before the greeting animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-split-a-complex-expression-across-several-lines" class="md-nav__link">
+    8.3. Split a complex expression across several lines
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-move-the-whole-thing-down" class="md-nav__link">
+    9. Move the whole thing down
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-add-easings" class="md-nav__link">
+    10. Add easings
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-adjust-durations" class="md-nav__link">
+    11. Adjust durations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recap" class="md-nav__link">
+    Recap
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/decorator-factory/lanim/tree/master/mkdocs/docs/tutorial/hello.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="hello-anim">Hello, λanim!</h1>
+<p>In this tutorial, we&rsquo;re going to recreate the <code>lanim.examples.hello</code> animation.</p>
+<h2 id="1-create-a-stub">1. Create a stub</h2>
+<p>Create a file called <code>tutorial_hello.py</code> with this content:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.examples.hello</span> <span class="kn">import</span> <span class="n">export</span>
+</code></pre></div>
+<p>Then run <code>python -m lanim -o hello.mp4 tutorial_hello</code> in the same directory.</p>
+<p>This explains how to make <code>lanim</code> animate your module: it needs to export the
+animation under the <code>export</code> name.</p>
+<p>Now we&rsquo;re going to make an</p>
+<h2 id="2-create-the-greeting">2. Create the greeting</h2>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span>
+
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+</code></pre></div>
+Theis object doesn&rsquo;t <em>do</em> anything yet &mdash; it&rsquo;s a simple value, like a number
+or a string.</p>
+<h2 id="3-make-a-static-animation-of-the-sign">3. Make a static animation of the sign</h2>
+<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
+</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span>
+
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">const_a</span><span class="p">(</span><span class="n">sign</span><span class="p">)</span>
+</span></code></pre></div>
+Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what happens.
+<img alt="Step 3" src="step3.gif" /></p>
+<p>This animation is only 1 second long, how do we make it longer?</p>
+<h2 id="3-stretch-the-animation">3. Stretch the animation</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span>
+
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">const_a</span><span class="p">(</span><span class="n">sign</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span>
+</span></code></pre></div>
+<p>The animation now lasts for five seconds.</p>
+<h2 id="4-make-the-sign-scale-out-instead-of-just-sitting-there">4. Make the sign scale out instead of just sitting there</h2>
+<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span>
+</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span>
+
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">appear</span><span class="p">(</span><span class="n">sign</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
+</span></code></pre></div>
+<img alt="Step 6" src="step4.gif" /></p>
+<h2 id="5-create-a-border-around-the-greeting">5. Create a border around the greeting</h2>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span>
+</span>
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="hll"><span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
+</span><span class="hll">    <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+</span><span class="hll">    <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+</span><span class="hll">    <span class="n">width</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+</span><span class="hll">    <span class="n">height</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+</span><span class="hll"><span class="p">)</span>
+</span></code></pre></div>
+<p>How do we animate both of them?</p>
+<h2 id="6-animate-a-pair-of-the-greeting-and-the-border">6. Animate a pair of the greeting and the border</h2>
+<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span>
+</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="hll"><span class="n">pair</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">border</span><span class="p">)</span>
+</span>
+<span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">appear</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+</span></code></pre></div>
+<img alt="Step 6" src="step6.gif" /></p>
+<p><code>Pair</code> is also an ordinary immutable value, like <code>Latex</code> and <code>Rect</code>.</p>
+<h2 id="7-make-the-last-frame-persist-for-a-while">7. Make the last frame persist for a while:</h2>
+<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
+</span><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">pair</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">border</span><span class="p">)</span>
+
+<span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">appear</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span> <span class="o">+</span> <span class="n">const_a</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+</span></code></pre></div>
+<img alt="Step 7" src="step7.gif" /></p>
+<h2 id="8-make-the-border-appear-before-the-sign">8. Make the border appear before the sign</h2>
+<h3 id="81-make-the-sign-appear-inside-the-border">8.1. Make the sign appear inside the border</h3>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span>
+</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">pair</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">border</span><span class="p">)</span>
+
+<span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">gbackground</span><span class="p">(</span><span class="n">appear</span><span class="p">(</span><span class="n">sign</span><span class="p">),</span> <span class="p">[</span><span class="n">border</span><span class="p">])</span> <span class="o">+</span> <span class="n">const_a</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+</span></code></pre></div>
+<img alt="Step 8.1" src="step8_1.gif" /></p>
+<p><code>gbackground</code> accepts an animation and a list of things to put in the background.</p>
+<h3 id="82-stretch-out-the-border-before-the-greeting-animation">8.2. Stretch out the border before the greeting animation</h3>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">pair</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">border</span><span class="p">)</span>
+
+<span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">appear</span><span class="p">(</span><span class="n">border</span><span class="p">)</span> <span class="o">+</span> <span class="n">gbackground</span><span class="p">(</span><span class="n">appear</span><span class="p">(</span><span class="n">sign</span><span class="p">),</span> <span class="p">[</span><span class="n">border</span><span class="p">])</span> <span class="o">+</span> <span class="n">const_a</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+</span></code></pre></div>
+<img alt="Step 8.2" src="step8_2.gif" /></p>
+<h3 id="83-split-a-complex-expression-across-several-lines">8.3. Split a complex expression across several lines</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">pair</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">border</span><span class="p">)</span>
+
+<span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="p">(</span>
+</span><span class="hll">    <span class="n">appear</span><span class="p">(</span><span class="n">border</span><span class="p">)</span>
+</span><span class="hll">    <span class="o">+</span> <span class="n">gbackground</span><span class="p">(</span><span class="n">appear</span><span class="p">(</span><span class="n">sign</span><span class="p">),</span> <span class="p">[</span><span class="n">border</span><span class="p">])</span>
+</span><span class="hll">    <span class="o">+</span> <span class="n">const_a</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+</span><span class="hll"><span class="p">)</span>
+</span></code></pre></div>
+<h2 id="9-move-the-whole-thing-down">9. Move the whole thing down</h2>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">move_by</span>
+</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">pair</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">border</span><span class="p">)</span>
+
+<span class="n">export</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">appear</span><span class="p">(</span><span class="n">border</span><span class="p">)</span>
+    <span class="o">+</span> <span class="n">gbackground</span><span class="p">(</span><span class="n">appear</span><span class="p">(</span><span class="n">sign</span><span class="p">),</span> <span class="p">[</span><span class="n">border</span><span class="p">])</span>
+    <span class="o">+</span> <span class="n">const_a</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+<span class="hll">    <span class="o">+</span> <span class="n">move_by</span><span class="p">(</span><span class="n">pair</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span class="p">)</span>
+</code></pre></div>
+<img alt="Step 9" src="step9.gif" /></p>
+<hr />
+<p>The animation is doing the action we wanted it to do, but it&rsquo;s not pretty.
+Let&rsquo;s fix that.</p>
+<h2 id="10-add-easings">10. Add easings</h2>
+<p>An <a href="https://easings.net/"><em>easing function</em></a> allows you to change the &ldquo;shape&rdquo;
+of the change.</p>
+<div class="tabbed-set" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Animation</label><div class="tabbed-content">
+<p>Here you can see that</p>
+<ul>
+<li>The <em>linear</em> easing moves at a steady pace</li>
+<li>The <em>in-out</em> easing has a gentle start and end</li>
+<li>The <em>sled</em> easing starts out slow and then accelerates</li>
+</ul>
+<p><img alt="Demonstration of three easings" src="easings.gif" /></p>
+</div>
+<input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Formulas</label><div class="tabbed-content">
+<p>An easing is a function from <code>[0; 1]</code> to <code>[0; 1]</code>.</p>
+<p>You can see their graphs in action on <a href="https://www.desmos.com/calculator/ljbkaftbej">Desmos</a></p>
+<p><img alt="Formulas" src="easing_formulas.gif" /></p>
+</div>
+<input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><label for="__tabbed_1_3">Code (advanced)</label><div class="tabbed-content">
+<p>This should mostly be understandable, but has a lot of stuff going on
+(you can animate numbers? WTF?)</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span><span class="p">,</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Triangle</span>
+<span class="kn">from</span> <span class="nn">lanim.easings</span> <span class="kn">import</span> <span class="n">linear</span><span class="p">,</span> <span class="n">in_out</span><span class="p">,</span> <span class="n">sled</span>
+
+
+<span class="k">def</span> <span class="nf">slider</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="n">slider_xpos</span> <span class="o">=</span> <span class="n">x1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">x2</span><span class="o">*</span><span class="n">t</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="n">x1</span> <span class="o">+</span> <span class="n">x2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">width</span><span class="o">=</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+        <span class="n">line_width</span><span class="o">=</span><span class="mf">1.5</span>
+    <span class="p">)</span>
+    <span class="n">pointer</span> <span class="o">=</span> <span class="n">Triangle</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">slider_xpos</span><span class="p">,</span> <span class="n">y</span><span class="o">=-</span><span class="mf">0.3</span><span class="p">,</span>
+        <span class="n">dx1</span><span class="o">=-</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">dy1</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">dx2</span><span class="o">=+</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">dy2</span><span class="o">=-</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">dx3</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>    <span class="n">dy3</span><span class="o">=+</span><span class="mf">0.3</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">pointer</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">slider_row</span><span class="p">(</span><span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="n">latex</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">label</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="n">Align</span><span class="o">.</span><span class="n">RC</span><span class="p">)</span>
+    <span class="n">slider_</span> <span class="o">=</span> <span class="n">slider</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">moved</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">latex</span><span class="p">,</span> <span class="n">slider_</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">all_rows</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="n">linear_row</span> <span class="o">=</span> <span class="n">slider_row</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\texttt</span><span class="si">{linear}</span><span class="s2">:&quot;</span><span class="p">,</span> <span class="n">linear</span><span class="p">(</span><span class="n">t</span><span class="p">))</span><span class="o">.</span><span class="n">moved</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="o">=-</span><span class="mf">2.5</span><span class="p">)</span>
+    <span class="n">in_out_row</span> <span class="o">=</span> <span class="n">slider_row</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\texttt{in\_out}:&quot;</span><span class="p">,</span> <span class="n">in_out</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+    <span class="n">sled_row</span> <span class="o">=</span> <span class="n">slider_row</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\texttt</span><span class="si">{sled}</span><span class="s2">:&quot;</span><span class="p">,</span> <span class="n">sled</span><span class="p">(</span><span class="n">t</span><span class="p">))</span><span class="o">.</span><span class="n">moved</span><span class="p">(</span><span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mf">2.5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Group</span><span class="p">([</span><span class="n">linear_row</span><span class="p">,</span> <span class="n">in_out_row</span><span class="p">,</span> <span class="n">sled_row</span><span class="p">])</span>
+
+
+<span class="n">zero</span> <span class="o">=</span> <span class="n">const_a</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">one</span> <span class="o">=</span> <span class="n">const_a</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">rise</span> <span class="o">=</span> <span class="n">Animation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">fall</span> <span class="o">=</span> <span class="n">Animation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="o">-</span><span class="n">t</span><span class="p">)</span>
+<span class="n">timing</span> <span class="o">=</span> <span class="n">zero</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="n">rise</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">one</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="n">fall</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="n">zero</span><span class="o">*</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">rise</span> <span class="o">+</span> <span class="n">one</span> <span class="o">+</span> <span class="n">fall</span> <span class="o">+</span> <span class="n">zero</span><span class="o">*</span><span class="mi">2</span>
+
+<span class="n">export</span> <span class="o">=</span> <span class="n">timing</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">all_rows</span><span class="p">)</span>
+</code></pre></div>
+<p>Formulas:</p>
+<div class="highlight"><pre><span></span><code><span class="n">linear_formula</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$linear(t) = t$&quot;</span>
+<span class="n">in_out_formula</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">\begin</span><span class="si">{equation}</span><span class="s2"></span>
+<span class="s2">    in\_out(t) =</span>
+<span class="s2">    \begin</span><span class="si">{cases}</span><span class="s2"></span>
+<span class="s2">        4 t^3          &amp; \text{ if } t &lt; \frac</span><span class="si">{1}{2}</span><span class="s2"> \\</span>
+<span class="s2">        1 - 4(1 - t)^3 &amp; \text</span><span class="si">{otherwise}</span><span class="s2"></span>
+<span class="s2">    \end</span><span class="si">{cases}</span><span class="s2"></span>
+<span class="s2">\end</span><span class="si">{equation}</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">sled_formula</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;$ sled(t) = \left( \dfrac{\ln(1 + t)}{\ln 2} \right) ^ \text{\large{$\pi$}}$&quot;</span>
+<span class="n">export</span> <span class="o">=</span> <span class="n">Group</span><span class="p">([</span>
+    <span class="n">Latex</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.8</span><span class="p">,</span> <span class="n">linear_formula</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="n">Align</span><span class="o">.</span><span class="n">LC</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+    <span class="n">Latex</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span>  <span class="mf">0.0</span><span class="p">,</span> <span class="n">in_out_formula</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="n">Align</span><span class="o">.</span><span class="n">LC</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+    <span class="n">Latex</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span> <span class="o">+</span><span class="mf">2.8</span><span class="p">,</span> <span class="n">sled_formula</span><span class="p">,</span>   <span class="n">align</span><span class="o">=</span><span class="n">Align</span><span class="o">.</span><span class="n">LC</span><span class="p">)</span><span class="o">.</span><span class="n">scaled</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
+<span class="p">])</span>
+</code></pre></div>
+</div>
+</div>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">move_by</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">lanim.easings</span> <span class="kn">import</span> <span class="n">in_out</span><span class="p">,</span> <span class="n">sled</span>
+</span>
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">pair</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">border</span><span class="p">)</span>
+
+<span class="n">export</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">appear</span><span class="p">(</span><span class="n">border</span><span class="p">)</span>
+<span class="hll">    <span class="o">+</span> <span class="n">gbackground</span><span class="p">(</span><span class="n">appear</span><span class="p">(</span><span class="n">sign</span><span class="p">),</span> <span class="p">[</span><span class="n">border</span><span class="p">])</span><span class="o">.</span><span class="n">ease</span><span class="p">(</span><span class="n">in_out</span><span class="p">)</span>
+</span>    <span class="o">+</span> <span class="n">const_a</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
+<span class="hll">    <span class="o">+</span> <span class="n">move_by</span><span class="p">(</span><span class="n">pair</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">ease</span><span class="p">(</span><span class="n">sled</span><span class="p">)</span>
+</span><span class="p">)</span>
+</code></pre></div>
+<img alt="Step 10" src="step10.gif" /></p>
+<h2 id="11-adjust-durations">11. Adjust durations</h2>
+<p>Timing is crucial. It&rsquo;s like the accents and intonation in speech.</p>
+<p>Let&rsquo;s spice our animation up by tweaking some of the durations.</p>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">move_by</span>
+<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+<span class="kn">from</span> <span class="nn">lanim.easings</span> <span class="kn">import</span> <span class="n">in_out</span><span class="p">,</span> <span class="n">sled</span>
+
+<span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
+
+<span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">width</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="n">sign</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="n">pair</span> <span class="o">=</span> <span class="n">Pair</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">border</span><span class="p">)</span>
+
+<span class="n">export</span> <span class="o">=</span> <span class="p">(</span>
+<span class="hll">    <span class="n">appear</span><span class="p">(</span><span class="n">border</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5</span>
+</span>    <span class="o">+</span> <span class="n">gbackground</span><span class="p">(</span><span class="n">appear</span><span class="p">(</span><span class="n">sign</span><span class="p">),</span> <span class="p">[</span><span class="n">border</span><span class="p">])</span><span class="o">.</span><span class="n">ease</span><span class="p">(</span><span class="n">in_out</span><span class="p">)</span>
+<span class="hll">    <span class="o">+</span> <span class="n">const_a</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.25</span>
+</span>    <span class="o">+</span> <span class="n">move_by</span><span class="p">(</span><span class="n">pair</span><span class="p">,</span> <span class="n">dx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">ease</span><span class="p">(</span><span class="n">sled</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+<img alt="Step 11" src="step11.gif" /></p>
+<h2 id="recap">Recap</h2>
+<p>In this tutorial, you&rsquo;ve learned how to:</p>
+<ol>
+<li>Export a simple animation from a Python module</li>
+<li>Create graphical objects, namely <code>Latex</code>, <code>Rect</code> and <code>Pair</code></li>
+<li>Animate still frames, as well as scale out and move objects</li>
+<li>Change the duration of animations</li>
+<li>Use easings to make transitions more interesting</li>
+</ol>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../installation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Installation
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../howtos/" class="md-footer__link md-footer__link--next" aria-label="Next: How-to guides" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              How-to guides
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>
