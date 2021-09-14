@@ -22,3 +22,5 @@ markdown_extensions:
   - smarty
   - admonition
   - pymdownx.details
+  - pymdownx.tasklist:
+      custom_checkbox: true
