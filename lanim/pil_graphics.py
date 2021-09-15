@@ -177,14 +177,14 @@ def lrpair_shortest(ap: Animation[P], aq: Animation[Q]) -> Animation[Pair[P, Q]]
 
 # Group-relatd functions:
 
-def gbackground(fg: Animation[P], bg: Iterable[Q]) -> Animation[Group[Union[P, Q]]]:
-    bg = list(bg)
-    return fg.map(lambda p: Group((*bg, p)))  # type: ignore
+def gbackground(fg: Animation[P], bg: Iterable[Q]) -> Animation[Pair[Group[Q], P]]:
+    bg_list = list(bg)
+    return fg.map(lambda p: Pair(Group(bg_list), p))
 
 
-def gforeground(bg: Animation[P], fg: Iterable[P]) -> Animation[Group[P]]:
-    fg = list(fg)
-    return bg.map(lambda p: Group((p, *fg)))
+def gforeground(bg: Animation[P], fg: Iterable[Q]) -> Animation[Pair[P, Group[Q]]]:
+    fg_list = list(fg)
+    return bg.map(lambda q: Pair(q, Group(fg_list)))
 
 
 def group_join(g: Group[Group[N]]) -> Group[N]:
