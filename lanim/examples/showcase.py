@@ -11,7 +11,7 @@ animations = []
 
 # Scene 1. `Sum` of animations
 
-@scene_any()
+@scene_any(in_out)
 def sum_example(then: ThenAny):
     n0: Maybe[Rect] = m_none(0.0, 0.0)
     n1 = then(morph_into(n0, n0.with_left(Rect(0, 0, 5, 3))))
@@ -35,7 +35,7 @@ def swap_numbers(items: Sequence[int], swappings: Sequence[tuple[bool, int, int]
         ) for (i, item) in enumerate(items)
     ]
 
-    @scene()
+    @scene(in_out)
     def _swap(then: Then[Group[Cell]]):
         g = Group(cells)
         for (should_swap, i1, i2) in swappings:
@@ -69,7 +69,7 @@ animations.append(bubble_sort_animation)
 
 # Scene 3. Trajectories
 
-@scene(linear)
+@scene()
 def moving_rectangle(then: Then[Rect]):
     r0 = then(const_a(Rect(-2, -2, 1, 1)) * 0.1)
     r1 = then(move_t(r0, dest_x=3, dest_y=1, traj=halfcircle_traj) >> (pause_after, 0.5))
@@ -118,8 +118,8 @@ animations.append(slider_animation)
 
 # Scene 5. Easing definition:
 
-@scene()
-def easing_generalization(then: Then[Group[Latex]]):
+@scene_any(in_out)
+def easing_generalization(then: ThenAny):
     square1 = Latex(-0.5, -2.0, R"($D$, $\tau \mapsto f(\tau^2)$)", 0.5, align=Align.RC)
     invert1 = Latex(+0.5, -2.0, R"($D$, $\tau \mapsto f(1 - \tau)$)", 0.5, align=Align.LC)
 
@@ -164,7 +164,7 @@ def advance(acc: ScalableMorphable, n: int) -> Animation[ScalableMorphable]:
         >> (pause_after, 0.15)
     )
 
-@scene_any()
+@scene_any(in_out)
 def fibonacci_animation(then: ThenAny):
     fibs = islice(fibonacci(), 13)
     progression(advance, Nil(x=0, y=0), fibs, then)

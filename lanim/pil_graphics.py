@@ -329,7 +329,7 @@ class Then(Protocol[P]):
     def __call__(self, a: Animation[P]) -> P: ...
 
 
-def scene_any(easing: easings.Easing = easings.in_out, duration: float = 1.0):
+def scene_any(easing: easings.Easing = easings.linear, duration: float = 1.0):
     def _(f: Callable[[ThenAny], Any]) -> Animation[PilRenderable]:
         animations: list[Animation[PilRenderable]] = []
         def on_animate(a: Animation[Q]) -> Q:
