@@ -499,7 +499,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/decorator-factory/lanim/tree/master/mkdocs/docs/tutorial/coordinates.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/decorator-factory/lanim/tree/master/mkdocs/docs/tutorial/coordinates/index.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -512,8 +512,8 @@
 Good enough!</p>
 <hr />
 <p>The horizontal axis is drawn like this. It&rsquo;s just a static image, nothing fancy.
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
 
 
 <span class="k">def</span> <span class="nf">horizontal_axis</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
@@ -546,8 +546,8 @@ of your animation are 16:9, your canvas is 16 units wide and 9 units high.</p>
 The center of the screen is the origin &mdash; the point where <code>x</code> and <code>y</code> are both <code>0</code>.</p>
 <hr />
 <p>The vertical axis is pretty much the same.
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
 
 
 <span class="k">def</span> <span class="nf">horizontal_axis</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
@@ -601,8 +601,8 @@ The center of the screen is the origin &mdash; the point where <code>x</code> an
 <p><img alt="Both axes" src="step1_2.gif" /></p>
 <hr />
 <p>Now we&rsquo;ll add notches where the <code>1</code> mark is
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
 
 
 <span class="k">def</span> <span class="nf">horizontal_axis</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
@@ -713,8 +713,8 @@ The center of the screen is the origin &mdash; the point where <code>x</code> an
 </code></pre></div>
 <hr />
 <p>Now let&rsquo;s see it in action.</p>
-<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span>
-</span><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">Animation</span>
+</span><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span>
 </span><span class="hll"><span class="kn">from</span> <span class="nn">lanim.easings</span> <span class="kn">import</span> <span class="n">in_out</span>
 </span>
 
@@ -746,7 +746,7 @@ The center of the screen is the origin &mdash; the point where <code>x</code> an
 <hr />
 <p>If you have lots of animations, it can be inconvenient to use <code>+</code>.
 You can use the <code>seq_a</code> function, which essentially runs <code>+</code> on a list of animations.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span><span class="p">,</span> <span class="n">seq_a</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">Animation</span><span class="p">,</span> <span class="n">seq_a</span>
 
 <span class="o">...</span>
 
@@ -758,8 +758,8 @@ You can use the <code>seq_a</code> function, which essentially runs <code>+</cod
 </code></pre></div>
 <h2 id="3-combining-the-animations">3. Combining the animations</h2>
 <p>Let&rsquo;s rename the export of the previous animation to <code>point_animation</code>.</p>
-<details class="quote all the code so far"><summary>Quote</summary><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span><span class="p">,</span> <span class="n">seq_a</span><span class="p">,</span> <span class="n">const_a</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<details class="quote all the code so far"><summary>Quote</summary><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">Animation</span><span class="p">,</span> <span class="n">seq_a</span><span class="p">,</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
 <span class="kn">from</span> <span class="nn">lanim.easings</span> <span class="kn">import</span> <span class="n">in_out</span>
 
 
@@ -870,7 +870,7 @@ each frame of the animation.</p>
 </code></pre></div></p>
 <h3 id="33-gbackground">3.3.  <code>gbackground</code></h3>
 <p><code>lanim</code> provides a built-in function to express adding a static background:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">gbackground</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">gbackground</span>
 
 <span class="o">...</span>
 
@@ -879,7 +879,7 @@ each frame of the animation.</p>
 <h2 id="4-adding-a-delay">4. Adding a delay</h2>
 <p>Use the <code>pause_after</code> and <code>pause_before</code> functions to freeze for a given
 amount of seconds before the start or after the end of an animation.
-<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span><span class="p">,</span> <span class="n">pause_after</span><span class="p">,</span> <span class="n">pause_before</span><span class="p">,</span> <span class="n">seq_a</span>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">Animation</span><span class="p">,</span> <span class="n">pause_after</span><span class="p">,</span> <span class="n">pause_before</span><span class="p">,</span> <span class="n">seq_a</span>
 </span>
 <span class="o">...</span>
 
@@ -888,9 +888,8 @@ amount of seconds before the start or after the end of an animation.
 </span></code></pre></div></p>
 <p>Try implementing these functions yourself as an exercise!</p>
 <p><img alt="Final animation" src="step4.gif" /></p>
-<details class="quote"><summary>The final program</summary><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">gbackground</span>
-<span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span><span class="p">,</span> <span class="n">pause_after</span><span class="p">,</span> <span class="n">pause_before</span><span class="p">,</span> <span class="n">seq_a</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<details class="quote"><summary>The final program</summary><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">Animation</span><span class="p">,</span> <span class="n">pause_after</span><span class="p">,</span> <span class="n">pause_before</span><span class="p">,</span> <span class="n">seq_a</span>
 <span class="kn">from</span> <span class="nn">lanim.easings</span> <span class="kn">import</span> <span class="n">in_out</span>
 
 

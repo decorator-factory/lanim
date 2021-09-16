@@ -487,7 +487,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/decorator-factory/lanim/tree/master/mkdocs/docs/tutorial/how-does-lanim-work.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/decorator-factory/lanim/tree/master/mkdocs/docs/tutorial/how-does-lanim-work/index.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -512,8 +512,8 @@ and remove all the noise, this is what it is:</p>
 We&rsquo;ll see what this function does in just a moment.</p>
 <h2 id="2-lets-write-an-animation-from-scratch">2. Let&rsquo;s write an animation from scratch</h2>
 <p>Type this code into a file, e.g. <code>how_does.py</code>:
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Rect</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">Animation</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Rect</span>
 
 
 <span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
@@ -531,8 +531,8 @@ While doing so, it records all the <em>frames</em> (in this case, <code>Rect</co
 renders them as images with the <code>pillow</code> library.</p>
 <p>That&rsquo;s it &mdash; no tricks up my sleeve.</p>
 <h2 id="3-using-standard-functions">3. Using standard functions</h2>
-<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Rect</span>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">Animation</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Rect</span>
 
 
 <span class="k">def</span> <span class="nf">projector1</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
@@ -570,9 +570,8 @@ the <code>t</code> value. For example, like this:
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Code (advanced)</label><div class="tabbed-content">
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span>
-<span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">lrpair_longest</span>
+<span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">Animation</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">lrpair_longest</span><span class="p">,</span> <span class="n">Align</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
 
 
 <span class="k">def</span> <span class="nf">slider</span><span class="p">(</span><span class="n">x1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">x2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -660,7 +659,7 @@ the <code>t</code> value. For example, like this:
 <p>Here, <code>x</code> and <code>y</code> are the center of our slider, <code>width</code> is the width of the slider,
 and <code>t</code> is the progress &mdash; a value from 0 to 1 that tells where on the slider
 the triangle should be.
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
 
 
 <span class="hll"><span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -676,7 +675,7 @@ the triangle should be.
 </code></pre></div></p>
 <hr />
 <p>For the bar, we&rsquo;ll use a very thin rectangle with a big line thickness.
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
 
 
 <span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -696,7 +695,7 @@ the triangle should be.
 three points is from <code>(x, y)</code>.</p>
 <p>For the <code>x</code> position, we will choose a value that depends on <code>t</code>. This is what&rsquo;s
 going to make the slide animated.
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
 
 
 <span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -712,7 +711,7 @@ going to make the slide animated.
 </code></pre></div></p>
 <hr />
 <p>Finally, we bundle the bar and the triangle into a pair and return it.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
 
 
 <span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -729,8 +728,8 @@ going to make the slide animated.
 <h2 id="5-testing-the-slider">5. Testing the slider</h2>
 <p>Let&rsquo;s make a helper function that will act the <em>projector</em>.
 Then you can run the animation.</p>
-<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span>
-</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">Animation</span>
+</span><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span>
 
 
 <span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
@@ -789,7 +788,7 @@ formats a <code>float</code> with two decimal places.
     <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">)</span>
 </code></pre></div></p>
 <p>Here&rsquo;s the issue: a pair only accepts two values, but we need three.
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span><span class="p">,</span> <span class="n">Latex</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span><span class="p">,</span> <span class="n">Latex</span>
 
 <span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
     <span class="n">bar</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -825,8 +824,8 @@ formats a <code>float</code> with two decimal places.
 <span class="hll">    <span class="k">return</span> <span class="n">Pair</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">Pair</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="n">triangle</span><span class="p">))</span>
 </span></code></pre></div></p>
 <p>Now let&rsquo;s run the code:</p>
-<details class="quote"><summary>The code so far</summary><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">Animation</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span><span class="p">,</span> <span class="n">Latex</span>
+<details class="quote"><summary>The code so far</summary><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">Animation</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Pair</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Triangle</span><span class="p">,</span> <span class="n">Latex</span>
 
 
 <span class="k">def</span> <span class="nf">make_slider</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>

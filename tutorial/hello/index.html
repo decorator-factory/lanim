@@ -611,7 +611,7 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/decorator-factory/lanim/tree/master/mkdocs/docs/tutorial/hello.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/decorator-factory/lanim/tree/master/mkdocs/docs/tutorial/hello/index.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
@@ -628,15 +628,15 @@
 animation under the <code>export</code> name.</p>
 <p>Now we&rsquo;re going to make an</p>
 <h2 id="2-create-the-greeting">2. Create the greeting</h2>
-<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Latex</span>
 
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
 </code></pre></div>
 Theis object doesn&rsquo;t <em>do</em> anything yet &mdash; it&rsquo;s a simple value, like a number
 or a string.</p>
 <h2 id="3-make-a-static-animation-of-the-sign">3. Make a static animation of the sign</h2>
-<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span>
+<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+</span><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Latex</span>
 
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
 
@@ -646,8 +646,8 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 <img alt="Step 3" src="step3.gif" /></p>
 <p>This animation is only 1 second long, how do we make it longer?</p>
 <h2 id="3-stretch-the-animation">3. Stretch the animation</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Latex</span>
 
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
 
@@ -655,16 +655,15 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 </span></code></pre></div>
 <p>The animation now lasts for five seconds.</p>
 <h2 id="4-make-the-sign-scale-out-instead-of-just-sitting-there">4. Make the sign scale out instead of just sitting there</h2>
-<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span>
-</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span>
-
+<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">appear</span>
+</span>
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
 
 <span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">appear</span><span class="p">(</span><span class="n">sign</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span>
 </span></code></pre></div>
 <img alt="Step 6" src="step4.gif" /></p>
 <h2 id="5-create-a-border-around-the-greeting">5. Create a border around the greeting</h2>
-<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span>
 </span>
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
 
@@ -677,9 +676,8 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 </span></code></pre></div>
 <p>How do we animate both of them?</p>
 <h2 id="6-animate-a-pair-of-the-greeting-and-the-border">6. Animate a pair of the greeting and the border</h2>
-<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span>
-</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
-
+<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+</span>
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
 
 <span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
@@ -696,9 +694,8 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 <img alt="Step 6" src="step6.gif" /></p>
 <p><code>Pair</code> is also an ordinary immutable value, like <code>Latex</code> and <code>Rect</code>.</p>
 <h2 id="7-make-the-last-frame-persist-for-a-while">7. Make the last frame persist for a while:</h2>
-<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-</span><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+</span><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
 
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
 
@@ -716,10 +713,9 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 <img alt="Step 7" src="step7.gif" /></p>
 <h2 id="8-make-the-border-appear-before-the-sign">8. Make the border appear before the sign</h2>
 <h3 id="81-make-the-sign-appear-inside-the-border">8.1. Make the sign appear inside the border</h3>
-<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span>
-</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
-
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+</span>
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
 
 <span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
@@ -736,9 +732,8 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 <img alt="Step 8.1" src="step8_1.gif" /></p>
 <p><code>gbackground</code> accepts an animation and a list of things to put in the background.</p>
 <h3 id="82-stretch-out-the-border-before-the-greeting-animation">8.2. Stretch out the border before the greeting animation</h3>
-<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
 
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
 
@@ -755,9 +750,8 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 </span></code></pre></div>
 <img alt="Step 8.2" src="step8_2.gif" /></p>
 <h3 id="83-split-a-complex-expression-across-several-lines">8.3. Split a complex expression across several lines</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
 
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
 
@@ -777,10 +771,9 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 </span><span class="hll"><span class="p">)</span>
 </span></code></pre></div>
 <h2 id="9-move-the-whole-thing-down">9. Move the whole thing down</h2>
-<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-<span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">move_by</span>
-</span><span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
-
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">move_by</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+</span>
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
 
 <span class="n">border</span> <span class="o">=</span> <span class="n">Rect</span><span class="p">(</span>
@@ -821,9 +814,8 @@ of the change.</p>
 <p><img alt="Formulas" src="easing_formulas.gif" /></p>
 </div>
 </div>
-<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">move_by</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">move_by</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
 <span class="hll"><span class="kn">from</span> <span class="nn">lanim.easings</span> <span class="kn">import</span> <span class="n">in_out</span><span class="p">,</span> <span class="n">sled</span>
 </span>
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
@@ -848,9 +840,8 @@ of the change.</p>
 <h2 id="11-adjust-durations">11. Adjust durations</h2>
 <p>Timing is crucial. It&rsquo;s like the accents and intonation in speech.</p>
 <p>Let&rsquo;s spice our animation up by tweaking some of the durations.</p>
-<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.anim</span> <span class="kn">import</span> <span class="n">const_a</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_graphics</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">move_by</span>
-<span class="kn">from</span> <span class="nn">lanim.pil_types</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
+<p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
+<span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">move_by</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
 <span class="kn">from</span> <span class="nn">lanim.easings</span> <span class="kn">import</span> <span class="n">in_out</span><span class="p">,</span> <span class="n">sled</span>
 
 <span class="n">sign</span> <span class="o">=</span> <span class="n">Latex</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Hello, $\lambda$anim!&quot;</span><span class="p">)</span>
