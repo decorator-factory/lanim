@@ -226,7 +226,10 @@ def seq_a(*animations: Animation[A]) -> Animation[A]:
         t_offset = begin / total  # type: ignore
         t_delta = t - t_offset
         t_scale = total / (end - begin) # type: ignore
-        return a.projector(t_scale * t_delta)  # type: ignore
+
+        # this is required to account for floating-point errors:
+        t = max(0, min(1, t_scale * t_delta))
+        return a.projector(t)  # type: ignore
 
     return Animation(sum(a.duration for a in animations), projector)
 
