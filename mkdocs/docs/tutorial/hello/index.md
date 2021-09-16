@@ -21,7 +21,7 @@ Now we're going to make an
 
 ## 2. Create the greeting
 ```py
-from lanim.pil_types import Latex
+from lanim.pil import Latex
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 ```
@@ -31,8 +31,8 @@ or a string.
 ## 3. Make a static animation of the sign
 
 ```py hl_lines="1 6"
-from lanim.anim import const_a
-from lanim.pil_types import Latex
+from lanim.core import const_a
+from lanim.pil import Latex
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
@@ -46,8 +46,8 @@ This animation is only 1 second long, how do we make it longer?
 
 ## 3. Stretch the animation
 ```py hl_lines="6"
-from lanim.anim import const_a
-from lanim.pil_types import Latex
+from lanim.core import const_a
+from lanim.pil import Latex
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
@@ -58,9 +58,8 @@ The animation now lasts for five seconds.
 
 ## 4. Make the sign scale out instead of just sitting there
 
-```py hl_lines="1 6"
-from lanim.pil_graphics import appear
-from lanim.pil_types import Latex
+```py hl_lines="1 5"
+from lanim.pil import Latex, appear
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
@@ -70,7 +69,7 @@ export = appear(sign) * 2
 
 ## 5. Create a border around the greeting
 ```py hl_lines="1 5-10"
-from lanim.pil_types import Latex, Rect
+from lanim.pil import Latex, Rect
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
@@ -86,9 +85,8 @@ How do we animate both of them?
 
 
 ## 6. Animate a pair of the greeting and the border
-```py hl_lines="1 13 15"
-from lanim.pil_graphics import appear
-from lanim.pil_types import Latex, Rect, Pair
+```py hl_lines="1 12 14"
+from lanim.pil import appear, Latex, Rect, Pair
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
@@ -110,10 +108,9 @@ export = appear(pair)
 
 ## 7. Make the last frame persist for a while:
 
-```py hl_lines="1 16"
-from lanim.anim import const_a
-from lanim.pil_graphics import appear
-from lanim.pil_types import Latex, Rect, Pair
+```py hl_lines="1 15"
+from lanim.core import const_a
+from lanim.pil import appear, Latex, Rect, Pair
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
@@ -134,10 +131,9 @@ export = appear(pair) + const_a(pair)
 ## 8. Make the border appear before the sign
 
 ### 8.1. Make the sign appear inside the border
-```py hl_lines="2 16"
-from lanim.anim import const_a
-from lanim.pil_graphics import appear, gbackground
-from lanim.pil_types import Latex, Rect, Pair
+```py hl_lines="2 15"
+from lanim.core import const_a
+from lanim.pil import appear, gbackground, Latex, Rect, Pair
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
@@ -158,10 +154,9 @@ export = gbackground(appear(sign), [border]) + const_a(pair)
 
 
 ### 8.2. Stretch out the border before the greeting animation
-```py hl_lines="16"
-from lanim.anim import const_a
-from lanim.pil_graphics import appear, gbackground
-from lanim.pil_types import Latex, Rect, Pair
+```py hl_lines="15"
+from lanim.core import const_a
+from lanim.pil import appear, gbackground, Latex, Rect, Pair
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
@@ -180,10 +175,9 @@ export = appear(border) + gbackground(appear(sign), [border]) + const_a(pair)
 
 
 ### 8.3. Split a complex expression across several lines
-```py hl_lines="16-20"
-from lanim.anim import const_a
-from lanim.pil_graphics import appear, gbackground
-from lanim.pil_types import Latex, Rect, Pair
+```py hl_lines="15-19"
+from lanim.core import const_a
+from lanim.pil import appear, gbackground, Latex, Rect, Pair
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
@@ -204,10 +198,9 @@ export = (
 ```
 
 ## 9. Move the whole thing down
-```py hl_lines="2 20"
-from lanim.anim import const_a
-from lanim.pil_graphics import appear, gbackground, move_by
-from lanim.pil_types import Latex, Rect, Pair
+```py hl_lines="2 19"
+from lanim.core import const_a
+from lanim.pil import appear, gbackground, move_by, Latex, Rect, Pair
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
@@ -258,10 +251,9 @@ of the change.
     ![Formulas](easing_formulas.gif)
 
 
-```py hl_lines="4 19 21"
-from lanim.anim import const_a
-from lanim.pil_graphics import appear, gbackground, move_by
-from lanim.pil_types import Latex, Rect, Pair
+```py hl_lines="3 18 20"
+from lanim.core import const_a
+from lanim.pil import appear, gbackground, move_by, Latex, Rect, Pair
 from lanim.easings import in_out, sled
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
@@ -291,10 +283,9 @@ Timing is crucial. It's like the accents and intonation in speech.
 
 Let's spice our animation up by tweaking some of the durations.
 
-```py hl_lines="18 20"
-from lanim.anim import const_a
-from lanim.pil_graphics import appear, gbackground, move_by
-from lanim.pil_types import Latex, Rect, Pair
+```py hl_lines="17 19"
+from lanim.core import const_a
+from lanim.pil import appear, gbackground, move_by, Latex, Rect, Pair
 from lanim.easings import in_out, sled
 
 sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")

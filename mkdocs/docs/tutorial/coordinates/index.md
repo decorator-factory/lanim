@@ -13,8 +13,8 @@ Good enough!
 
 The horizontal axis is drawn like this. It's just a static image, nothing fancy.
 ```py
-from lanim.anim import const_a
-from lanim.pil_types import Align, Group, Latex, Rect, Triangle
+from lanim.core import const_a
+from lanim.pil import Align, Group, Latex, Rect, Triangle
 
 
 def horizontal_axis(width):
@@ -53,8 +53,8 @@ The center of the screen is the origin --- the point where `x` and `y` are both 
 
 The vertical axis is pretty much the same.
 ```py hl_lines="25-51"
-from lanim.anim import const_a
-from lanim.pil_types import Align, Group, Latex, Rect, Triangle
+from lanim.core import const_a
+from lanim.pil import Align, Group, Latex, Rect, Triangle
 
 
 def horizontal_axis(width):
@@ -113,8 +113,8 @@ export = const_a(axes)
 
 Now we'll add notches where the `1` mark is
 ```py hl_lines="50-60"
-from lanim.anim import const_a
-from lanim.pil_types import Align, Group, Latex, Rect, Triangle
+from lanim.core import const_a
+from lanim.pil import Align, Group, Latex, Rect, Triangle
 
 
 def horizontal_axis(width):
@@ -245,8 +245,8 @@ def moving_point(x1, y1, x2, y2):
 Now let's see it in action.
 
 ```py hl_lines="1-3 19"
-from lanim.anim import Animation
-from lanim.pil_types import Align, Group, Latex, Rect
+from lanim.core import Animation
+from lanim.pil import Align, Group, Latex, Rect
 from lanim.easings import in_out
 
 
@@ -288,7 +288,7 @@ If you have lots of animations, it can be inconvenient to use `+`.
 You can use the `seq_a` function, which essentially runs `+` on a list of animations.
 
 ```py
-from lanim.anim import Animation, seq_a
+from lanim.core import Animation, seq_a
 
 ...
 
@@ -308,8 +308,8 @@ Let's rename the export of the previous animation to `point_animation`.
 ??? quote All the code so far
 
     ```py
-    from lanim.anim import Animation, seq_a, const_a
-    from lanim.pil_types import Align, Group, Latex, Rect, Triangle
+    from lanim.core import Animation, seq_a, const_a
+    from lanim.pil import Align, Group, Latex, Rect, Triangle
     from lanim.easings import in_out
 
 
@@ -440,7 +440,7 @@ export = point_animation.map(Group([axes, notches]).add)
 `lanim` provides a built-in function to express adding a static background:
 
 ```py
-from lanim.pil_graphics import gbackground
+from lanim.pil import gbackground
 
 ...
 
@@ -453,7 +453,7 @@ export = gbackground(point_animation, [axes, notches])
 Use the `pause_after` and `pause_before` functions to freeze for a given
 amount of seconds before the start or after the end of an animation.
 ```py hl_lines="1 6"
-from lanim.anim import Animation, pause_after, pause_before, seq_a
+from lanim.core import Animation, pause_after, pause_before, seq_a
 
 ...
 
@@ -469,9 +469,8 @@ Try implementing these functions yourself as an exercise!
 ??? quote "The final program"
 
     ```py
-    from lanim.pil_graphics import gbackground
-    from lanim.anim import Animation, pause_after, pause_before, seq_a
-    from lanim.pil_types import Align, Group, Latex, Rect, Triangle
+    from lanim.pil import gbackground, Align, Group, Latex, Rect, Triangle
+    from lanim.core import Animation, pause_after, pause_before, seq_a
     from lanim.easings import in_out
 
 

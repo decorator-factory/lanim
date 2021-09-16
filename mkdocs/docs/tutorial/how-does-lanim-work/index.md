@@ -29,8 +29,8 @@ We'll see what this function does in just a moment.
 
 Type this code into a file, e.g. `how_does.py`:
 ```py
-from lanim.anim import Animation
-from lanim.pil_types import Rect
+from lanim.core import Animation
+from lanim.pil import Rect
 
 
 def projector(t):
@@ -56,8 +56,8 @@ That's it --- no tricks up my sleeve.
 ## 3. Using standard functions
 
 ```py
-from lanim.anim import Animation
-from lanim.pil_types import Rect
+from lanim.core import Animation
+from lanim.pil import Rect
 
 
 def projector1(t):
@@ -101,9 +101,8 @@ export = Animation(1.0 + 3.0, export_projector )
 
     ```py
     from functools import reduce
-    from lanim.anim import Animation
-    from lanim.pil_types import Align, Group, Latex, Rect, Triangle
-    from lanim.pil_graphics import lrpair_longest
+    from lanim.core import Animation
+    from lanim.pil import lrpair_longest, Align, Group, Latex, Rect, Triangle
 
 
     def slider(x1: float, x2: float, message: str, t: float):
@@ -200,7 +199,7 @@ Here, `x` and `y` are the center of our slider, `width` is the width of the slid
 and `t` is the progress --- a value from 0 to 1 that tells where on the slider
 the triangle should be.
 ```py hl_lines="4"
-from lanim.pil_types import Pair, Rect, Triangle
+from lanim.pil import Pair, Rect, Triangle
 
 
 def make_slider(x, y, width, t):
@@ -219,7 +218,7 @@ def make_slider(x, y, width, t):
 
 For the bar, we'll use a very thin rectangle with a big line thickness.
 ```py hl_lines="5"
-from lanim.pil_types import Pair, Rect, Triangle
+from lanim.pil import Pair, Rect, Triangle
 
 
 def make_slider(x, y, width, t):
@@ -243,7 +242,7 @@ three points is from `(x, y)`.
 For the `x` position, we will choose a value that depends on `t`. This is what's
 going to make the slide animated.
 ```py hl_lines="6-12"
-from lanim.pil_types import Pair, Rect, Triangle
+from lanim.pil import Pair, Rect, Triangle
 
 
 def make_slider(x, y, width, t):
@@ -263,7 +262,7 @@ def make_slider(x, y, width, t):
 Finally, we bundle the bar and the triangle into a pair and return it.
 
 ```py hl_lines="13"
-from lanim.pil_types import Pair, Rect, Triangle
+from lanim.pil import Pair, Rect, Triangle
 
 
 def make_slider(x, y, width, t):
@@ -284,8 +283,8 @@ Let's make a helper function that will act the _projector_.
 Then you can run the animation.
 
 ```py hl_lines="1 17-22"
-from lanim.anim import Animation
-from lanim.pil_types import Pair, Rect, Triangle
+from lanim.core import Animation
+from lanim.pil import Pair, Rect, Triangle
 
 
 def make_slider(x, y, width, t):
@@ -354,7 +353,7 @@ def make_slider(x, y, width, t):
 
 Here's the issue: a pair only accepts two values, but we need three.
 ```py hl_lines="17"
-from lanim.pil_types import Pair, Rect, Triangle, Latex
+from lanim.pil import Pair, Rect, Triangle, Latex
 
 def make_slider(x, y, width, t):
     bar = Rect(x=x, y=y, width=width, height=0.05, line_width=4)
@@ -397,8 +396,8 @@ Now let's run the code:
 ??? quote "The code so far"
 
     ```py
-    from lanim.anim import Animation
-    from lanim.pil_types import Pair, Rect, Triangle, Latex
+    from lanim.core import Animation
+    from lanim.pil import Pair, Rect, Triangle, Latex
 
 
     def make_slider(x, y, width, t):

@@ -5,8 +5,7 @@ from typing import Iterable
 from pathlib import Path
 from threading import Thread
 import time
-from lanim import core as anim
-from lanim.core import Animation
+from lanim.core import Animation, frames
 from lanim.pil_types import PilRenderable, PilSettings
 
 
@@ -31,7 +30,7 @@ def render_pil(
 
     jobs = [[] for _ in range(workers)]
 
-    for (i, frame) in enumerate(anim.frames(animation, fps)):
+    for (i, frame) in enumerate(frames(animation, fps)):
         jobs[i % workers].append((i, frame))
 
     frame_rendering_threads: list[Thread] = []

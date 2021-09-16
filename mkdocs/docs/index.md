@@ -20,7 +20,7 @@ or use [GitHub Discussions](https://github.com/decorator-factory/lanim/discussio
         - [X] The coordinate system
         - [X] Projectors
         - [ ] Imperative `scene` API
-        - [ ] APIs offered by `pil_types`
+        - [ ] APIs offered by `pil`
     - [ ] Advanced guides
         - [ ] Animating unexpected things
         - [ ] Type annotations
