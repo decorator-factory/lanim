@@ -202,14 +202,10 @@ def mixed_group_join(g: Group[Union[N, Group[N]]]) -> Group[N]:
         else:
             items.append(item)
     return Group(items)
-
+0
 
 def merge_group_animations(*animations: Animation[Group[N]]) -> Animation[Group[N]]:
     return parallel(*animations).map(group_join)
-
-
-def par_and_bg(fg: Sequence[Animation[N]], bg: Sequence[N]) -> Animation[Group[N]]:
-    return gforeground(parallel(*fg), bg).map(group_join)  # type: ignore
 
 
 def parallel(*animations: Animation[P]) -> Animation[Group[P]]:
