@@ -1,6 +1,7 @@
 from itertools import islice
+from typing import Iterator, Sequence
 
-from lanim.anim import *
+from lanim.core import *
 from lanim.easings import *
 from lanim.pil_graphics import *
 from lanim.pil_types import *

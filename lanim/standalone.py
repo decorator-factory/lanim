@@ -3,7 +3,7 @@ import importlib
 import subprocess
 from typing import Protocol
 
-from lanim.anim import Animation, crop_by_range
+from lanim.core import Animation, crop_by_range
 from lanim.pil_types import PilRenderable
 from lanim.pil_machinery import render_pil
 

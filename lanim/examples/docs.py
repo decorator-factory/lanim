@@ -1,4 +1,4 @@
-from lanim.anim import pause_after, pause_before
+from lanim.core import pause_after, pause_before
 from lanim.pil_types import Group, Latex, Pair, Opacity
 from lanim.pil_graphics import appear, gbackground, morph_into, move_by, scene_any, ThenAny
 from lanim.easings import linear, in_out, sled

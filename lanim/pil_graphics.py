@@ -4,9 +4,51 @@ from lanim.pil_types import *
 
 import math
 from typing import Any, Callable, Iterable, Protocol, TYPE_CHECKING, Union, TypeVar
-from lanim import anim
-from lanim.anim import Animation, Projector, ease_p, par_a_longest, par_a_shortest
+from lanim.core import Animation, Projector, ease_p, par_a_longest, par_a_shortest, seq_a
 from lanim import easings
+
+__all__ = (
+    "moved_to",
+    "morph_into",
+    "move_by",
+    "scale",
+    "align",
+    "Trajectory",
+    "ease_t",
+    "move_t",
+    "proj_t",
+    "linear_traj",
+    "make_arc_traj",
+    "halfcircle_traj",
+    "low_arc_traj",
+    "lift_traj",
+    "lpair",
+    "rpair",
+    "lrpair_longest",
+    "lrpair_shortest",
+    "gbackground",
+    "gforeground",
+    "group_join",
+    "mixed_group_join",
+    "merge_group_animations",
+    "parallel",
+    "group",
+    "with_last_frame",
+    "swap",
+    "Maybe",
+    "m_just",
+    "m_none",
+    "appear",
+    "appear_from",
+    "disappear_from",
+    "disappear_into_nil",
+    "appear_from_nil",
+    "ThenAny",
+    "Then",
+    "scene_any",
+    "scene",
+    "progression",
+)
 
 
 N = TypeVar("N", bound=PilRenderable, covariant=True)
@@ -202,7 +244,7 @@ def mixed_group_join(g: Group[Union[N, Group[N]]]) -> Group[N]:
         else:
             items.append(item)
     return Group(items)
-0
+
 
 def merge_group_animations(*animations: Animation[Group[N]]) -> Animation[Group[N]]:
     return parallel(*animations).map(group_join)
@@ -332,7 +374,7 @@ def scene_any(easing: easings.Easing = easings.linear, duration: float = 1.0):
             animations.append(a.ease(easing) * duration)
             return a.projector(1.0)
         f(on_animate)
-        return anim.seq_a(*animations)
+        return seq_a(*animations)
     return _
 
 

@@ -5,8 +5,8 @@ from typing import Iterable
 from pathlib import Path
 from threading import Thread
 import time
-from lanim import anim
-from lanim.anim import Animation
+from lanim import core as anim
+from lanim.core import Animation
 from lanim.pil_types import PilRenderable, PilSettings
 
 

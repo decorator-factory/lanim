@@ -1,4 +1,4 @@
-from lanim.anim import pause_after, seq_a
+from lanim.core import pause_after, seq_a
 from lanim.pil_graphics import appear, gbackground, move_by
 from lanim.pil_types import Latex, Pair, Rect
 from lanim.easings import in_out, sled

@@ -7,8 +7,40 @@ from typing import (
 )
 from PIL import Image, ImageDraw, ImageChops
 from lanim.pil_utils import render_latex_scaled
-from lanim.anim import Animation, Projector, ease_p
+from lanim.core import Animation, Projector, ease_p
 from lanim import easings
+
+
+__all__ = (
+    "Align",
+    "Style",
+    "PilSettings",
+    "PilContext",
+
+    "PilRenderable",
+    "Scalable",
+    "Morphable",
+    "Alignable",
+    "AlignableMorphable",
+    "ScalableMorphable",
+
+    # TypeVars:
+    "A", "B", "P", "Q", "R", "R2", "R3", "PA", "PS", "QS", "RS", "RS2", "RS3",
+    "PX", "QX", "RX", "RX2", "RX3", "PSX", "QSX", "RSX", "RSX2", "RSX3",
+    "PAX", "QAX", "RAX", "RAX2", "RAX3",
+
+    "Rect",
+    "Triangle",
+    "Group",
+    "Pair",
+    "Triple",
+    "Latex",
+    "Nil",
+    "Select",
+    "Sum",
+    "Opacity",
+)
+
 
 @dataclass
 class Align:
