@@ -2,7 +2,7 @@
 
 In this tutorial, we're going to recreate the `lanim.examples.hello` animation.
 
-![Step 11](hello/step11.gif)
+![Step 11](step11.gif)
 
 ## 1. Create a stub
 
@@ -39,7 +39,7 @@ sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 export = const_a(sign)
 ```
 Now try `python -m lanim -o hello.mp4 tutorial_hello` and see what happens.
-![Step 3](hello/step3.gif)
+![Step 3](step3.gif)
 
 This animation is only 1 second long, how do we make it longer?
 
@@ -66,7 +66,7 @@ sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 
 export = appear(sign) * 2
 ```
-![Step 6](hello/step4.gif)
+![Step 6](step4.gif)
 
 ## 5. Create a border around the greeting
 ```py hl_lines="1 5-10"
@@ -103,7 +103,7 @@ pair = Pair(sign, border)
 
 export = appear(pair)
 ```
-![Step 6](hello/step6.gif)
+![Step 6](step6.gif)
 
 `Pair` is also an ordinary immutable value, like `Latex` and `Rect`.
 
@@ -128,7 +128,7 @@ pair = Pair(sign, border)
 
 export = appear(pair) + const_a(pair)
 ```
-![Step 7](hello/step7.gif)
+![Step 7](step7.gif)
 
 
 ## 8. Make the border appear before the sign
@@ -152,7 +152,7 @@ pair = Pair(sign, border)
 
 export = gbackground(appear(sign), [border]) + const_a(pair)
 ```
-![Step 8.1](hello/step8_1.gif)
+![Step 8.1](step8_1.gif)
 
 `gbackground` accepts an animation and a list of things to put in the background.
 
@@ -176,7 +176,7 @@ pair = Pair(sign, border)
 
 export = appear(border) + gbackground(appear(sign), [border]) + const_a(pair)
 ```
-![Step 8.2](hello/step8_2.gif)
+![Step 8.2](step8_2.gif)
 
 
 ### 8.3. Split a complex expression across several lines
@@ -227,7 +227,7 @@ export = (
     + move_by(pair, dx=0, dy=10)
 )
 ```
-![Step 9](hello/step9.gif)
+![Step 9](step9.gif)
 
 ---
 
@@ -247,7 +247,7 @@ of the change.
     - The _in-out_ easing has a gentle start and end
     - The _sled_ easing starts out slow and then accelerates
 
-    ![Demonstration of three easings](hello/easings.gif)
+    ![Demonstration of three easings](easings.gif)
 
 === "Formulas"
 
@@ -255,7 +255,7 @@ of the change.
 
     You can see their graphs in action on [Desmos](https://www.desmos.com/calculator/ljbkaftbej)
 
-    ![Formulas](hello/easing_formulas.gif)
+    ![Formulas](easing_formulas.gif)
 
 
 ```py hl_lines="4 19 21"
@@ -282,7 +282,7 @@ export = (
     + move_by(pair, dx=0, dy=10).ease(sled)
 )
 ```
-![Step 10](hello/step10.gif)
+![Step 10](step10.gif)
 
 
 ## 11. Adjust durations
@@ -315,7 +315,7 @@ export = (
     + move_by(pair, dx=0, dy=10).ease(sled)
 )
 ```
-![Step 11](hello/step11.gif)
+![Step 11](step11.gif)
 
 
 ## Recap
