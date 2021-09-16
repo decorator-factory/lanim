@@ -1,10 +1,5 @@
 # Welcome to _λanim_!
 
-![Promo animation](docs.gif)
-
-We're  nowhere near what the GIF promises, but we're working on growing the
-documentation and the library itself.
-
 If you want to get started, check out [the tutorial](tutorial/installation).
 
 If you want to see recipes for common use cases, look at [the how-to guides](howtos).
