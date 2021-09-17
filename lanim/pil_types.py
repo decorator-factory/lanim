@@ -44,8 +44,26 @@ __all__ = (
 
 @dataclass
 class Align:
+    """
+    Specification of the horizontal and vertical alignment
+
+    Predefined class variables:
+    ```
+    LU----CU----RU
+     |          |
+     |          |
+    LC    CC    RC
+     |          |
+     |          |
+    LF----VF----RD
+    ```
+    """
+
     dx: float
+    "Proporton by which to move a LU-aligned object to the right"
+
     dy: float
+    "Proporton by which to move a LU-aligned object to the bottom"
 
     CC: ClassVar[Align]
     LC: ClassVar[Align]
@@ -72,6 +90,10 @@ class Align:
         return Align(self.dx * (1 - t) + other.dx * t, self.dy * (1 - t) + other.dy * t)
 
     def apply(self, x: float, y: float, width: float, height: float) -> tuple[float, float]:
+        """
+        Compute the new bottom-left position of a `(x, y, width, height)` rectangle
+        after applying this alignemnt
+        """
         return x + self.dx * width, y + self.dy * height
 
 
@@ -88,15 +110,19 @@ Align.RD = Align(  -1,   -1)
 
 @dataclass(frozen=True)
 class Style:
+    """
+    Settings regarding the drawing of a single element
+    """
     fill: Optional[Union[str, int]]
     outline: Optional[Union[str, int]]
     line_width: int
 
-    default: ClassVar[Style]
-
 
 @dataclass(frozen=True)
 class PilSettings:
+    """
+    Settings regarding the entire viewport
+    """
     width: int
     height: int
     center_x: int
@@ -105,12 +131,15 @@ class PilSettings:
 
     def make_ctx(self) -> PilContext:
         img = Image.new("RGBA", (self.width, self.height), (0, 0, 0, 0))
-        draw = ImageDraw.ImageDraw(img) # type: ignore
+        draw = ImageDraw.ImageDraw(img)
         return PilContext(self, img, draw)
 
 
 @dataclass(frozen=True)
 class PilContext:
+    """
+    Context object holding the current state of a frame
+    """
     settings: PilSettings
     img: Image.Image
     draw: ImageDraw.ImageDraw
@@ -156,7 +185,10 @@ class PilContext:
 
 class PilRenderable(Protocol):
     x: float
+    "x-coordinate of the object's center"
+
     y: float
+    "y-coordinate of the object's center"
 
     def moved(self: A, dx: float, dy: float) -> A: ...
     def render_pil(self, ctx: PilContext) -> None: ...
@@ -211,6 +243,9 @@ RAX3 = TypeVar("RAX3", bound=AlignableMorphable)
 
 @dataclass(frozen=True)
 class Rect:
+    """
+    Axis-aligned rectangle
+    """
     x: float
     y: float
     width: float
@@ -259,6 +294,10 @@ def _automorph(self: P, other: P, t: float, *names: str) -> P:
 
 @dataclass(frozen=True)
 class Triangle:
+    """
+    Triangle, defined by its center and the deviation of each
+    point from its center.
+    """
     x: float
     y: float
     dx1: float
@@ -312,6 +351,12 @@ class Triangle:
 
 @dataclass(frozen=True)
 class Group(Generic[P]):
+    """
+    Group of `PilRenderable` objects rendered together in order.
+
+    Type variable `P` represents the type of each object contained.
+    """
+
     items: Sequence[P]
 
     if TYPE_CHECKING:
@@ -377,6 +422,11 @@ else:
 
 @dataclass(frozen=True)
 class Pair(_GTuple2[P, Q]):
+    """
+    Pair of two `PilRenderable` objects _p_ and _q_, where
+    _p_ is drawn before _q_. Exists primarily for better
+    type-checker support.
+    """
     p: P
     q: Q
 
@@ -434,6 +484,9 @@ Triple = Pair[P, Pair[Q, R]]
 
 @dataclass(frozen=True)
 class Latex:
+    """
+    Graphical primitive rendered via the LaTeX program.
+    """
     x: float
     y: float
     source: str
@@ -441,6 +494,7 @@ class Latex:
 
     align: Align = Align.CC
     packages: Collection[str] = ("amsmath", "amssymb")
+    r"The LaTeX packages to include as `\usepackage{...}` clauses"
 
     def morphed(self, other: Latex, t: float) -> Latex:
         return Latex(
@@ -492,6 +546,9 @@ class Latex:
 
 @dataclass(frozen=True)
 class Nil:
+    """
+    Special graphical primitive that doesn't do anything on render.
+    """
     x: float
     y: float
 
@@ -521,8 +578,16 @@ Select = Union[tuple[Literal["p"], PX], tuple[Literal["q"], QX]]
 
 @dataclass(frozen=True)
 class Sum(Generic[PX, QX]):
+    """
+    Graphical primitive representing a union of two objects.
+    The name _Sum_ derives from _sum type_, not from a combination,
+    which would be a _product type_.
+    """
+
     item: Select[PX, QX]
+
     mpq: Callable[[PX, QX], Projector[Select[PX, QX]]]
+    "Strategy for morphing the left item into the right item"
 
     if TYPE_CHECKING:
         x: float = field(init = False)
@@ -540,15 +605,13 @@ class Sum(Generic[PX, QX]):
     def mqp(self) -> Callable[[QX, PX], Projector[Select[PX, QX]]]:
         return lambda q, p: ease_p(self.mpq(p, q), easings.invert)
 
-    # mqp: Callable[[QX, PX], Projector[Select[PX, QX]]]
-
     def with_left(self, left: PX) -> Sum[PX, QX]:
         return self.with_pq(("p", left))
 
     def with_right(self, right: QX) -> Sum[PX, QX]:
         return self.with_pq(("q", right))
 
-    def with_pq(self, pq: Select[PX, QX]):
+    def with_pq(self, pq: Select[PX, QX]) -> Sum[PX, QX]:
         return Sum(pq, self.mpq)
 
     def map(self, fp: Callable[[PX], RX], fq: Callable[[QX], RX2]) -> Sum[RX, RX2]:
@@ -608,22 +671,22 @@ class Opacity(Generic[P]):
         self.child = child
         self.opacity = opacity
 
-    def morphed(self: "Opacity[PX]", other: "Opacity[PX]", t: float) -> "Opacity[PX]":
+    def morphed(self: Opacity[PX], other: Opacity[PX], t: float) -> Opacity[PX]:
         return Opacity(
             self.child.morphed(other.child, t),
             self.opacity * (1 - t) + other.opacity * t
         )
 
-    def scaled(self: "Opacity[PS]", factor: float) -> "Opacity[PS]":
+    def scaled(self: Opacity[PS], factor: float) -> Opacity[PS]:
         return Opacity(self.child.scaled(factor), self.opacity)
 
-    def scaled_about(self: "Opacity[PS]", factor: float, cx: float, cy: float) -> "Opacity[PS]":
+    def scaled_about(self: Opacity[PS], factor: float, cx: float, cy: float) -> Opacity[PS]:
         return Opacity(self.child.scaled_about(factor, cx, cy), self.opacity)
 
-    def moved(self, dx: float, dy: float) -> "Opacity[P]":
+    def moved(self, dx: float, dy: float) -> Opacity[P]:
         return Opacity(self.child.moved(dx, dy), self.opacity)
 
-    def fade(self, target: float = 0) -> Animation["Opacity[P]"]:
+    def fade(self, target: float = 0) -> Animation[Opacity[P]]:
         def projector(t: float):
             return Opacity(self.child, self.opacity * (1 - t) + target * t)
         return Animation(1, projector)

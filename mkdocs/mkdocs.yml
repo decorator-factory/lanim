@@ -13,6 +13,7 @@ nav:
   - Reference:
     - Command-line arguments: reference/command-line.md
     - core: reference/core.md
+    - pil: reference/pil.md
 
 theme:
   name: material
