@@ -40,6 +40,7 @@ __all__ = (
     "m_none",
     "appear",
     "appear_from",
+    "disappear",
     "disappear_from",
     "disappear_into_nil",
     "appear_from_nil",
@@ -148,12 +149,14 @@ def make_arc_traj(distancing_function: Callable[[float], float]) -> Trajectory:
     """
     Make an arc trajectory using a distancing function.
 
+    ```
             ^^^^^^^^^^^^       _
          ^^^            ^^^    | distancing_function(t)
         ^                  ^   _
        A--------------------B
     (x1,y1)              (x2,y2)
       t=0       t=0.5      t=1
+    ```
     """
     def _traj(x1: float, y1: float, x2: float, y2: float, t: float) -> tuple[float, float]:
         nx, ny = normal(x1, y1, x2, y2)
@@ -368,6 +371,16 @@ class Then(Protocol[P]):
 
 
 def scene_any(easing: easings.Easing = easings.linear, duration: float = 1.0):
+    """
+    Decorator used for making an imperative-feeling scene.
+
+    The decorated function should accept a single argument --- a function ---
+    which it can call with an animation. That function will return the last
+    frame of the animation and add it to an internal animation list, which
+    will be rendered using [lanim.core.seq_a][].
+
+    The decorated function will be replaced with the generated animation.
+    """
     def _(f: Callable[[ThenAny], Any]) -> Animation[PilRenderable]:
         animations: list[Animation[PilRenderable]] = []
         def on_animate(a: Animation[Q]) -> Q:

@@ -85,6 +85,60 @@
             - fade
 
 
+## Manipulation of graphical primitives
+
+### ::: lanim.pil.moved_to
+### ::: lanim.pil.morph_into
+### ::: lanim.pil.move_by
+### ::: lanim.pil.scale
+### ::: lanim.pil.align
+### ::: lanim.pil.lpair
+### ::: lanim.pil.rpair
+### ::: lanim.pil.lrpair_longest
+### ::: lanim.pil.lrpair_shortest
+### ::: lanim.pil.gbackground
+### ::: lanim.pil.gforeground
+### ::: lanim.pil.group_join
+### ::: lanim.pil.mixed_group_join
+### ::: lanim.pil.merge_group_animations
+### ::: lanim.pil.parallel
+### ::: lanim.pil.group
+### ::: lanim.pil.with_last_frame
+### ::: lanim.pil.swap
+### ::: lanim.pil.m_just
+### ::: lanim.pil.m_none
+### ::: lanim.pil.appear
+### ::: lanim.pil.disappear
+### ::: lanim.pil.appear_from
+### ::: lanim.pil.disappear_from
+
+
+## Imperative API
+
+
+### ::: lanim.pil.scene_any
+
+### `scene`
+`scene` is just an alias for `scene_any` but with
+a different type signature.
+
+
+## Trajectories
+
+### ::: lanim.pil.Trajectory
+    selection:
+        members:
+            - __call__
+
+### ::: lanim.pil.ease_t
+### ::: lanim.pil.move_t
+### ::: lanim.pil.proj_t
+### ::: lanim.pil.linear_traj
+### ::: lanim.pil.make_arc_traj
+### ::: lanim.pil.halfcircle_traj
+### ::: lanim.pil.low_arc_traj
+### ::: lanim.pil.lift_traj
+
 ## Protocols
 
 ### ::: lanim.pil.PilRenderable
