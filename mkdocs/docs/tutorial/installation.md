@@ -52,12 +52,17 @@ python -m lanim -o smoke_test.mp4 lanim.examples.hello
 ```
 (substitute `python` for the right executable on your system)
 
+This is what you should see:
+
+!["Hello, lanim" GIF](hello.gif)
+
 After running that, you should have a video called `smoke_test.mp4` in your current folder.
 
 The default settings are: `--width 1280 --height 720 --fps 30`. Let's try better ones:
 ```bash
 python -m lanim -w 1920 -h 1080 --fps 60 -o smoke_test.mp4 lanim.examples.hello
 ```
+
 
 ## Performance
 
