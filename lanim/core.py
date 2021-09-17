@@ -66,6 +66,10 @@ Projector = Callable[[float], A]
 
 @dataclass(frozen=True)
 class Animation(Generic[A]):
+    """
+    Animation with a given duration on a set A of still frames
+    """
+
     duration: float
     "How long the animation lasts, in seconds"
 
@@ -95,7 +99,17 @@ class Animation(Generic[A]):
         return self.map_projector(lambda p: map_p(p, f))
 
     def progress_map(self, f: Callable[[A, float], B]) -> Animation[B]:
+        """
+        Similar to [`map`][lanim.core.Animation.map], but also passes the `t`
+        parameter to the provided function `f`.
+        """
         return self.map_projector(lambda p: lambda t: f(p(t), t))
+
+    def ease(self, easing: Easing) -> Animation[A]:
+        """
+        Apply an easing to an animation
+        """
+        return self.map_projector(lambda p: ease_p(p, easing))
 
     def map_projector(self, f: Callable[[Projector[A]], Projector[B]]) -> Animation[B]:
         """
@@ -111,12 +125,16 @@ class Animation(Generic[A]):
 
     def __mul__(self, factor: float) -> Animation[A]:
         """
+        Overloading of `self * factor`.
+
         Stretch the duration of the animation by `factor`
         """
         return self.with_duration(self.duration * factor)
 
     def __add__(self, other: Animation[B]) -> Animation[Union[A, B]]:
         """
+        Overloading of `self + other`.
+
         Put one animation after the other
         """
         return seq_a(self, other)  # type: ignore
@@ -131,7 +149,14 @@ class Animation(Generic[A]):
     def __rshift__(self, other: tuple[Callable[[Animation[A], B, C, D], E], B, C, D]) -> E: ...
     def __rshift__(self, other):
         """
-        Apply a function in a pipes-and-filters style
+        Overloading of `self >> other`.
+
+        Apply a function in a pipes-and-filters style:
+
+        - `self >> fn` means `fn(self)`
+        - `self >> (fn, arg)` means `fn(self, arg)`
+        - `self >> (fn, arg1, arg2)` means `fn(self, arg1, arg2)`
+        - etc.
         """
         if hasattr(other, "__call__"):
             return other(self)
@@ -139,9 +164,6 @@ class Animation(Generic[A]):
             return NotImplemented
         fn, *args = other
         return fn(self, *args)
-
-    def ease(self, easing: Easing) -> Animation[A]:
-        return self.map_projector(lambda p: ease_p(p, easing))
 
 
 def const_p(a: C) -> Projector[C]:

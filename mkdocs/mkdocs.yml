@@ -10,7 +10,8 @@ nav:
     - Hello, λanim!: tutorial/hello/index.md
     - How does Lanim work?: tutorial/how-does-lanim-work/index.md
     - The coordinate system: tutorial/coordinates/index.md
-  - How-to guides: howtos.md
+  - Reference:
+    - core: reference/core.md
 
 theme:
   name: material
@@ -25,3 +26,14 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.tasklist:
       custom_checkbox: true
+
+plugins:
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+            rendering:
+              show_root_heading: true
+              show_if_no_docstring: true
+              show_signature_annotations: true
+              members_order: source

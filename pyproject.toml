@@ -20,6 +20,7 @@ pillow = "^8.3.2"
 mkdocs = "^1.2.2"
 mkdocs-material = "^7.2.6"
 pymdown-extensions = "^8.2"
+mkdocstrings = { git = "https://github.com/mkdocstrings/mkdocstrings.git", rev = "5c961e7c95650c2a6a95e060fc41a3bd346f1cff" }
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
