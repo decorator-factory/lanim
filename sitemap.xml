@@ -16,6 +16,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://decorator-factory.github.io/lanim/reference/pil/</loc>
+         <lastmod>2021-09-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://decorator-factory.github.io/lanim/tutorial/installation/</loc>
          <lastmod>2021-09-17</lastmod>
          <changefreq>daily</changefreq>
