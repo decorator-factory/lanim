@@ -204,7 +204,7 @@ def par_p(pa: Projector[A], pb: Projector[B]) -> Projector[tuple[A, B]]:
 def ease_p(proj: Projector[A], e: Easing) -> Projector[A]:
     """
     Apply an easing to a projector
-
+    ```py
     >>> from lanim.easings import in_out
     >>> projector1 = lambda t: (3*t, 4*t)
     >>> projector2 = ease_p(projector1, in_out)
@@ -212,6 +212,7 @@ def ease_p(proj: Projector[A], e: Easing) -> Projector[A]:
     (1.62, 2.16)
     >>> projector2(0.54)
     (1.832, 2.443)
+    ```
     """
     return lambda t: proj(e(t))
 
@@ -263,9 +264,13 @@ def _it_flatmap(it: Iterable[A], f: Callable[[A], Iterable[B]]) -> Iterator[B]:
 
 def flatmap_a(
     animations: Iterable[Animation[A]],
-    r: Callable[[Animation[A]], Iterable[Animation[B]]],
+    f: Callable[[Animation[A]], Iterable[Animation[B]]],
 ) -> Animation[B]:
-    return seq_a(*_it_flatmap(animations, r))
+    """
+    For each animation `animations`, apply `f` to get a list of
+    animations which in turn will be concatenated.
+    """
+    return seq_a(*_it_flatmap(animations, f))
 
 
 def par_a_longest(anim1: Animation[A], anim2: Animation[B]) -> Animation[tuple[A, B]]:
