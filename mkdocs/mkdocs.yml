@@ -11,6 +11,7 @@ nav:
     - How does Lanim work?: tutorial/how-does-lanim-work/index.md
     - The coordinate system: tutorial/coordinates/index.md
   - Reference:
+    - Command-line arguments: reference/command-line.md
     - core: reference/core.md
 
 theme:

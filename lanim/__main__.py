@@ -12,7 +12,7 @@ from lanim.standalone import entry_point
 # -h conflicts with our `height` option, so we need to change it
 parser = argparse.ArgumentParser(add_help=False)
 
-parser.add_argument("-?", "--help", action="help")
+parser.add_argument("-?", "--help", action="help", help="Show the reference")
 
 parser.add_argument("module", help="Python module to animate")
 parser.add_argument(
