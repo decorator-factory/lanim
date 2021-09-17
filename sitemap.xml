@@ -2,32 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://decorator-factory.github.io/lanim/</loc>
-         <lastmod>2021-09-16</lastmod>
+         <lastmod>2021-09-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://decorator-factory.github.io/lanim/howtos/</loc>
-         <lastmod>2021-09-16</lastmod>
+         <loc>https://decorator-factory.github.io/lanim/reference/command-line/</loc>
+         <lastmod>2021-09-17</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://decorator-factory.github.io/lanim/reference/core/</loc>
+         <lastmod>2021-09-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://decorator-factory.github.io/lanim/tutorial/installation/</loc>
-         <lastmod>2021-09-16</lastmod>
+         <lastmod>2021-09-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://decorator-factory.github.io/lanim/tutorial/coordinates/</loc>
-         <lastmod>2021-09-16</lastmod>
+         <lastmod>2021-09-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://decorator-factory.github.io/lanim/tutorial/hello/</loc>
-         <lastmod>2021-09-16</lastmod>
+         <lastmod>2021-09-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://decorator-factory.github.io/lanim/tutorial/how-does-lanim-work/</loc>
-         <lastmod>2021-09-16</lastmod>
+         <lastmod>2021-09-17</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

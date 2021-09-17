@@ -1,0 +1,1669 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://decorator-factory.github.io/lanim/reference/core/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+    
+    
+      
+        <title>core - Lanim</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#core" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lanim" class="md-header__button md-logo" aria-label="Lanim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lanim
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              core
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/decorator-factory/lanim/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lanim" class="md-nav__button md-logo" aria-label="Lanim" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Lanim
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/decorator-factory/lanim/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        Tutorial
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorial" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/installation/" class="md-nav__link">
+        Installation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/hello/" class="md-nav__link">
+        Hello, λanim!
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/how-does-lanim-work/" class="md-nav__link">
+        How does Lanim work?
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/coordinates/" class="md-nav__link">
+        The coordinate system
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Reference
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../command-line/" class="md-nav__link">
+        Command-line arguments
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          core
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        core
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#projector" class="md-nav__link">
+    Projector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lanim.core.Animation" class="md-nav__link">
+    Animation
+  </a>
+  
+    <nav class="md-nav" aria-label="Animation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.duration" class="md-nav__link">
+    duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.projector" class="md-nav__link">
+    projector
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.map" class="md-nav__link">
+    map()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.progress_map" class="md-nav__link">
+    progress_map()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.ease" class="md-nav__link">
+    ease()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.__mul__" class="md-nav__link">
+    __mul__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.__add__" class="md-nav__link">
+    __add__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.__rshift__" class="md-nav__link">
+    __rshift__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-on-projectors" class="md-nav__link">
+    Functions on projectors
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions on projectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.const_p" class="md-nav__link">
+    const_p()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.map_p" class="md-nav__link">
+    map_p()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.join_p" class="md-nav__link">
+    join_p()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.flatmap_p" class="md-nav__link">
+    flatmap_p()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.ease_p" class="md-nav__link">
+    ease_p()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-on-animations" class="md-nav__link">
+    Functions on animations
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions on animations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.const_a" class="md-nav__link">
+    const_a()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.seq_a" class="md-nav__link">
+    seq_a()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.flatmap_a" class="md-nav__link">
+    flatmap_a()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.par_a_longest" class="md-nav__link">
+    par_a_longest()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.par_a_shortest" class="md-nav__link">
+    par_a_shortest()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.pause_after" class="md-nav__link">
+    pause_after()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.pause_before" class="md-nav__link">
+    pause_before()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.crop_by_range" class="md-nav__link">
+    crop_by_range()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.frames" class="md-nav__link">
+    frames()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#projector" class="md-nav__link">
+    Projector
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lanim.core.Animation" class="md-nav__link">
+    Animation
+  </a>
+  
+    <nav class="md-nav" aria-label="Animation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.duration" class="md-nav__link">
+    duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.projector" class="md-nav__link">
+    projector
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.map" class="md-nav__link">
+    map()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.progress_map" class="md-nav__link">
+    progress_map()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.ease" class="md-nav__link">
+    ease()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.__mul__" class="md-nav__link">
+    __mul__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.__add__" class="md-nav__link">
+    __add__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.Animation.__rshift__" class="md-nav__link">
+    __rshift__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-on-projectors" class="md-nav__link">
+    Functions on projectors
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions on projectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.const_p" class="md-nav__link">
+    const_p()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.map_p" class="md-nav__link">
+    map_p()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.join_p" class="md-nav__link">
+    join_p()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.flatmap_p" class="md-nav__link">
+    flatmap_p()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.ease_p" class="md-nav__link">
+    ease_p()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#functions-on-animations" class="md-nav__link">
+    Functions on animations
+  </a>
+  
+    <nav class="md-nav" aria-label="Functions on animations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.const_a" class="md-nav__link">
+    const_a()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.seq_a" class="md-nav__link">
+    seq_a()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.flatmap_a" class="md-nav__link">
+    flatmap_a()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.par_a_longest" class="md-nav__link">
+    par_a_longest()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.par_a_shortest" class="md-nav__link">
+    par_a_shortest()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.pause_after" class="md-nav__link">
+    pause_after()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.pause_before" class="md-nav__link">
+    pause_before()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.crop_by_range" class="md-nav__link">
+    crop_by_range()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lanim.core.frames" class="md-nav__link">
+    frames()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/decorator-factory/lanim/tree/master/mkdocs/docs/reference/core.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="core"><code>core</code></h1>
+<p>The <code>lanim.core</code> module provides a rendering frontend-agnostic core
+for creating and transforming general animations.</p>
+<h2 id="projector"><code>Projector</code></h2>
+<p>Generic type alias standing for <code>Callable[[float], A]</code>.</p>
+<p>The semantics are as follows: a projector is a function mapping
+a progress (a <code>float</code> from <code>0</code> to <code>1</code> inclusive) to a still frame A.</p>
+<p>Passing a value outside of the <code>[0; 1]</code> range is undefined
+behaviour. You should watch out for this, especially in light of
+floating-point errors.</p>
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="lanim.core.Animation" class="doc doc-heading">
+        <code>
+Animation            ()
+        </code>
+
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
+  </span>
+
+</h2>
+
+    <div class="doc doc-contents first">
+
+      <p>Animation with a given duration on a set A of still frames</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="lanim.core.Animation.duration" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">duration</span><span class="p">:</span> <span class="nb">float</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass-field"><code>dataclass-field</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>How long the animation lasts, in seconds</p>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-attribute">
+
+
+
+<h3 id="lanim.core.Animation.projector" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">projector</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="o">+</span><span class="n">A</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-dataclass-field"><code>dataclass-field</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Strategy to get a still frame from a progress in [0; 1]</p>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="lanim.core.Animation.map" class="doc doc-heading">
+<code class="highlight language-python"><span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">A</span><span class="p">],</span> <span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Apply a function to each frame of an animation</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">A</span><span class="p">],</span> <span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply a function to each frame of an animation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_projector</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">map_p</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="lanim.core.Animation.progress_map" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">progress_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">A</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Similar to <a href="#lanim.core.Animation.map"><code>map</code></a>, but also passes the <code>t</code>
+parameter to the provided function <code>f</code>.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">progress_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">A</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Similar to [`map`][lanim.core.Animation.map], but also passes the `t`</span>
+<span class="sd">    parameter to the provided function `f`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_projector</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">t</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="lanim.core.Animation.ease" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">ease</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">easing</span><span class="p">:</span> <span class="n">Easing</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Apply an easing to an animation</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">ease</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">easing</span><span class="p">:</span> <span class="n">Easing</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply an easing to an animation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_projector</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">ease_p</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">easing</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="lanim.core.Animation.__mul__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Overloading of <code>self * factor</code>.</p>
+<p>Stretch the duration of the animation by <code>factor</code></p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overloading of `self * factor`.</span>
+
+<span class="sd">    Stretch the duration of the animation by `factor`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">with_duration</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">*</span> <span class="n">factor</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="lanim.core.Animation.__add__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]]</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Overloading of <code>self + other</code>.</p>
+<p>Put one animation after the other</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overloading of `self + other`.</span>
+
+<span class="sd">    Put one animation after the other</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">seq_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="lanim.core.Animation.__rshift__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__rshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Overloading of <code>self &gt;&gt; other</code>.</p>
+<p>Apply a function in a pipes-and-filters style:</p>
+<ul>
+<li><code>self &gt;&gt; fn</code> means <code>fn(self)</code></li>
+<li><code>self &gt;&gt; (fn, arg)</code> means <code>fn(self, arg)</code></li>
+<li><code>self &gt;&gt; (fn, arg1, arg2)</code> means <code>fn(self, arg1, arg2)</code></li>
+<li>etc.</li>
+</ul>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__rshift__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Overloading of `self &gt;&gt; other`.</span>
+
+<span class="sd">    Apply a function in a pipes-and-filters style:</span>
+
+<span class="sd">    - `self &gt;&gt; fn` means `fn(self)`</span>
+<span class="sd">    - `self &gt;&gt; (fn, arg)` means `fn(self, arg)`</span>
+<span class="sd">    - `self &gt;&gt; (fn, arg1, arg2)` means `fn(self, arg1, arg2)`</span>
+<span class="sd">    - etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s2">&quot;__call__&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">other</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+    <span class="n">fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span> <span class="o">=</span> <span class="n">other</span>
+    <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+<h2 id="functions-on-projectors">Functions on projectors</h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.const_p" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">const_p</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Projector</span><span class="p">[</span><span class="n">C</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Make a projector that always returns the same still frame</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">const_p</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Projector</span><span class="p">[</span><span class="n">C</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a projector that always returns the same still frame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="n">a</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.map_p" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">map_p</span><span class="p">(</span><span class="n">proj</span><span class="p">:</span> <span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">A</span><span class="p">],</span> <span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Projector</span><span class="p">[</span><span class="n">B</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Apply a function to the result of a projector</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">map_p</span><span class="p">(</span><span class="n">proj</span><span class="p">:</span> <span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">A</span><span class="p">],</span> <span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Projector</span><span class="p">[</span><span class="n">B</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply a function to the result of a projector</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">proj</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.join_p" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">join_p</span><span class="p">(</span><span class="n">proj</span><span class="p">:</span> <span class="n">Projector</span><span class="p">[</span><span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Flatten a projector of projectors into just a projector</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">join_p</span><span class="p">(</span><span class="n">proj</span><span class="p">:</span> <span class="n">Projector</span><span class="p">[</span><span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Flatten a projector of projectors into just a projector</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">proj</span><span class="p">(</span><span class="n">t</span><span class="p">)(</span><span class="n">t</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.flatmap_p" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">flatmap_p</span><span class="p">(</span><span class="n">proj</span><span class="p">:</span> <span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">A</span><span class="p">],</span> <span class="n">Projector</span><span class="p">[</span><span class="n">B</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Projector</span><span class="p">[</span><span class="n">B</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Composition of <code>map_p</code> and <code>join_p</code></p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">flatmap_p</span><span class="p">(</span><span class="n">proj</span><span class="p">:</span> <span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">A</span><span class="p">],</span> <span class="n">Projector</span><span class="p">[</span><span class="n">B</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Projector</span><span class="p">[</span><span class="n">B</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Composition of `map_p` and `join_p`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">proj</span><span class="p">(</span><span class="n">t</span><span class="p">))(</span><span class="n">t</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.ease_p" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">ease_p</span><span class="p">(</span><span class="n">proj</span><span class="p">:</span> <span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">e</span><span class="p">:</span> <span class="n">Easing</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Apply an easing to a projector
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">lanim.easings</span> <span class="kn">import</span> <span class="n">in_out</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">projector1</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="mi">4</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">projector2</span> <span class="o">=</span> <span class="n">ease_p</span><span class="p">(</span><span class="n">projector1</span><span class="p">,</span> <span class="n">in_out</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">projector1</span><span class="p">(</span><span class="mf">0.54</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">1.62</span><span class="p">,</span> <span class="mf">2.16</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">projector2</span><span class="p">(</span><span class="mf">0.54</span><span class="p">)</span>
+<span class="p">(</span><span class="mf">1.832</span><span class="p">,</span> <span class="mf">2.443</span><span class="p">)</span>
+</code></pre></div></p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">ease_p</span><span class="p">(</span><span class="n">proj</span><span class="p">:</span> <span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">e</span><span class="p">:</span> <span class="n">Easing</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Projector</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply an easing to a projector</span>
+<span class="sd">    ```py</span>
+<span class="sd">    &gt;&gt;&gt; from lanim.easings import in_out</span>
+<span class="sd">    &gt;&gt;&gt; projector1 = lambda t: (3*t, 4*t)</span>
+<span class="sd">    &gt;&gt;&gt; projector2 = ease_p(projector1, in_out)</span>
+<span class="sd">    &gt;&gt;&gt; projector1(0.54)</span>
+<span class="sd">    (1.62, 2.16)</span>
+<span class="sd">    &gt;&gt;&gt; projector2(0.54)</span>
+<span class="sd">    (1.832, 2.443)</span>
+<span class="sd">    ```</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">t</span><span class="p">:</span> <span class="n">proj</span><span class="p">(</span><span class="n">e</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+<h2 id="functions-on-animations">Functions on animations</h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.const_a" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">const_a</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">C</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Create a second-long animation consisting of a still frame</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">const_a</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">C</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">C</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a second-long animation consisting of a still frame</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Animation</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">const_p</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.seq_a" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">seq_a</span><span class="p">(</span><span class="o">*</span><span class="n">animations</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Put animations in sequence, one after another.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">seq_a</span><span class="p">(</span><span class="o">*</span><span class="n">animations</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Put animations in sequence, one after another.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">animations</span> <span class="o">==</span> <span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No animations&quot;</span><span class="p">)</span>
+
+    <span class="n">total</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">steps</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">animations</span><span class="p">:</span>
+        <span class="n">dur</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">duration</span> <span class="o">*</span> <span class="mi">512</span>
+        <span class="n">steps</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">total</span><span class="p">,</span> <span class="n">total</span><span class="o">+</span><span class="n">dur</span><span class="p">,</span> <span class="n">a</span><span class="p">))</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">dur</span>
+
+    <span class="c1"># 100__________500________________1200</span>
+    <span class="c1">#       +400             +700</span>
+    <span class="c1"># (0, 100, ...), (400, 500, ...), (500, 1200, ...)</span>
+
+    <span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">A</span><span class="p">:</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">begin</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">begin</span> <span class="o">&lt;=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">total</span> <span class="o">&lt;=</span> <span class="n">end</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="n">t_offset</span> <span class="o">=</span> <span class="n">begin</span> <span class="o">/</span> <span class="n">total</span>  <span class="c1"># type: ignore</span>
+        <span class="n">t_delta</span> <span class="o">=</span> <span class="n">t</span> <span class="o">-</span> <span class="n">t_offset</span>
+        <span class="n">t_scale</span> <span class="o">=</span> <span class="n">total</span> <span class="o">/</span> <span class="p">(</span><span class="n">end</span> <span class="o">-</span> <span class="n">begin</span><span class="p">)</span> <span class="c1"># type: ignore</span>
+
+        <span class="c1"># this is required to account for floating-point errors:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">t_scale</span> <span class="o">*</span> <span class="n">t_delta</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">projector</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">return</span> <span class="n">Animation</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">duration</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">animations</span><span class="p">),</span> <span class="n">projector</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.flatmap_a" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">flatmap_a</span><span class="p">(</span><span class="n">animations</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]],</span> <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]],</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>For each animation <code>animations</code>, apply <code>f</code> to get a list of
+animations which in turn will be concatenated.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">flatmap_a</span><span class="p">(</span>
+    <span class="n">animations</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]],</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]],</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">]]],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    For each animation `animations`, apply `f` to get a list of</span>
+<span class="sd">    animations which in turn will be concatenated.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">seq_a</span><span class="p">(</span><span class="o">*</span><span class="n">_it_flatmap</span><span class="p">(</span><span class="n">animations</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.par_a_longest" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">par_a_longest</span><span class="p">(</span><span class="n">anim1</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">anim2</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Run two animations side by side.</p>
+<p>If one animation is longer than the other, the last frame of
+the shorter animation will be kept hanging.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">par_a_longest</span><span class="p">(</span><span class="n">anim1</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">anim2</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run two animations side by side.</span>
+
+<span class="sd">    If one animation is longer than the other, the last frame of</span>
+<span class="sd">    the shorter animation will be kept hanging.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">anim1</span><span class="o">.</span><span class="n">duration</span><span class="p">,</span> <span class="n">anim2</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]:</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">duration</span> <span class="o">/</span> <span class="n">anim1</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">duration</span> <span class="o">/</span> <span class="n">anim2</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">anim1</span><span class="o">.</span><span class="n">projector</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="n">anim2</span><span class="o">.</span><span class="n">projector</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Animation</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">projector</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.par_a_shortest" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">par_a_shortest</span><span class="p">(</span><span class="n">anim1</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">anim2</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Run two animations side by side.</p>
+<p>If one animation is longer animation, the longer animation
+will be cut off when the short one ends.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">par_a_shortest</span><span class="p">(</span><span class="n">anim1</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">anim2</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">B</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Run two animations side by side.</span>
+
+<span class="sd">    If one animation is longer animation, the longer animation</span>
+<span class="sd">    will be cut off when the short one ends.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">anim1</span><span class="o">.</span><span class="n">duration</span><span class="p">,</span> <span class="n">anim2</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]:</span>
+        <span class="n">t1</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">duration</span> <span class="o">/</span> <span class="n">anim1</span><span class="o">.</span><span class="n">duration</span>
+        <span class="n">t2</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">duration</span> <span class="o">/</span> <span class="n">anim2</span><span class="o">.</span><span class="n">duration</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">anim1</span><span class="o">.</span><span class="n">projector</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="n">anim2</span><span class="o">.</span><span class="n">projector</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">Animation</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">projector</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.pause_after" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">pause_after</span><span class="p">(</span><span class="n">anim</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Stretch the last frame for <code>duration</code> seconds after the
+animation is over.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">pause_after</span><span class="p">(</span><span class="n">anim</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stretch the last frame for `duration` seconds after the</span>
+<span class="sd">    animation is over.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">last_frame</span> <span class="o">=</span> <span class="n">anim</span><span class="o">.</span><span class="n">projector</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="n">total_duration</span> <span class="o">=</span> <span class="n">duration</span> <span class="o">+</span> <span class="n">anim</span><span class="o">.</span><span class="n">duration</span>
+    <span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">A</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">anim</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="n">total_duration</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">anim</span><span class="o">.</span><span class="n">projector</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">total_duration</span> <span class="o">/</span> <span class="n">anim</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">last_frame</span>
+    <span class="k">return</span> <span class="n">Animation</span><span class="p">(</span><span class="n">total_duration</span><span class="p">,</span> <span class="n">projector</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.pause_before" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">pause_before</span><span class="p">(</span><span class="n">anim</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Stretch the first frame for <code>duration</code> seconds before the
+animation starts.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">pause_before</span><span class="p">(</span><span class="n">anim</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stretch the first frame for `duration` seconds before the</span>
+<span class="sd">    animation starts.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">first_frame</span> <span class="o">=</span> <span class="n">anim</span><span class="o">.</span><span class="n">projector</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">total_duration</span> <span class="o">=</span> <span class="n">duration</span> <span class="o">+</span> <span class="n">anim</span><span class="o">.</span><span class="n">duration</span>
+    <span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">A</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="n">duration</span> <span class="o">/</span> <span class="n">total_duration</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">anim</span><span class="o">.</span><span class="n">projector</span><span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">duration</span> <span class="o">/</span> <span class="n">total_duration</span><span class="p">)</span> <span class="o">*</span> <span class="n">total_duration</span> <span class="o">/</span> <span class="n">anim</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">first_frame</span>
+    <span class="k">return</span> <span class="n">Animation</span><span class="p">(</span><span class="n">total_duration</span><span class="p">,</span> <span class="n">projector</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.crop_by_range" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">crop_by_range</span><span class="p">(</span><span class="n">anim</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">start</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">finish</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Render a range of an animation.
+<code>start</code> and <code>finish</code> should be floats from 0 to 1.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">crop_by_range</span><span class="p">(</span><span class="n">anim</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">start</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">finish</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Render a range of an animation.</span>
+<span class="sd">    `start` and `finish` should be floats from 0 to 1.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">finish</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Invalid range (</span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">). Expected 0 &lt;= start &lt;= finish &lt; 1&quot;</span>
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="n">scale_factor</span> <span class="o">=</span> <span class="n">finish</span> <span class="o">-</span> <span class="n">start</span>
+    <span class="n">new_duration</span> <span class="o">=</span> <span class="n">anim</span><span class="o">.</span><span class="n">duration</span> <span class="o">*</span> <span class="n">scale_factor</span>
+
+    <span class="k">def</span> <span class="nf">projector</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">A</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">anim</span><span class="o">.</span><span class="n">projector</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">scale_factor</span> <span class="o">+</span> <span class="n">start</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Animation</span><span class="p">(</span><span class="n">new_duration</span><span class="p">,</span> <span class="n">projector</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="lanim.core.frames" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">frames</span><span class="p">(</span><span class="n">animation</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">A</span><span class="p">]</span></code>
+
+
+</h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Generate a series of discrete frames from an animation given
+the frames per second.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>lanim/core.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">frames</span><span class="p">(</span><span class="n">animation</span><span class="p">:</span> <span class="n">Animation</span><span class="p">[</span><span class="n">A</span><span class="p">],</span> <span class="n">fps</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">A</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a series of discrete frames from an animation given</span>
+<span class="sd">    the frames per second.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">total_steps</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">fps</span> <span class="o">*</span> <span class="n">animation</span><span class="o">.</span><span class="n">duration</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_steps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">animation</span><span class="o">.</span><span class="n">projector</span><span class="p">(</span><span class="n">step</span> <span class="o">/</span> <span class="n">total_steps</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../command-line/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Command-line arguments" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Command-line arguments
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      
+    
+  </body>
+</html>
