@@ -6,17 +6,15 @@
 
 ### FFmpeg
 
-_FFmpeg_ is used to create images from
+_FFmpeg_ is used to create a video from a sequence of images.
 
-You should find instructions for installing it on the [official website](https://www.ffmpeg.org/).
+You should find out how to instll FFmpeg on the [official website](https://www.ffmpeg.org/).
 
 ### LaTeX
 
 _LaTeX_ is the engine behind text and equations.
 
 Besides LaTeX itself, you'll need three packages: `standalone`, `amsmath` and `amssymb`.
-
-The easiest way to go is to download a package with many common packages.
 
 - Ubuntu:
 
