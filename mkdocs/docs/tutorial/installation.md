@@ -8,7 +8,7 @@
 
 We use _FFmpeg_ to turn a series of images into a video.
 
-You should find out how to instll FFmpeg on the [official website](https://www.ffmpeg.org/).
+You should find out how to install FFmpeg on the [official website](https://www.ffmpeg.org/).
 
 ### LaTeX
 
