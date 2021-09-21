@@ -17,8 +17,6 @@ Then run `python -m lanim -o hello.mp4 tutorial_hello` in the same directory.
 This explains how to make `lanim` animate your module: it needs to export the
 animation under the `export` name.
 
-Now we're going to make an
-
 ## 2. Create the greeting
 ```py
 from lanim.pil import Latex
@@ -28,7 +26,7 @@ sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 Theis object doesn't _do_ anything yet --- it's a simple value, like a number
 or a string.
 
-## 3. Make a static animation of the sign
+## 3. Make a static animation of the greeting
 
 ```py hl_lines="1 6"
 from lanim.core import const_a
@@ -54,7 +52,7 @@ sign = Latex(x=0, y=0, source=r"Hello, $\lambda$anim!")
 export = const_a(sign) * 5
 ```
 
-The animation now lasts for five seconds.
+Render the video again. It should be five seconds long.
 
 ## 4. Make the sign scale out instead of just sitting there
 
@@ -106,7 +104,9 @@ export = appear(pair)
 `Pair` is also an ordinary immutable value, like `Latex` and `Rect`.
 
 
-## 7. Make the last frame persist for a while:
+## 7. Make the last frame persist for a while
+
+You can put one animation after another by adding them:
 
 ```py hl_lines="1 15"
 from lanim.core import const_a
@@ -126,6 +126,7 @@ pair = Pair(sign, border)
 export = appear(pair) + const_a(pair)
 ```
 ![Step 7](step7.gif)
+
 
 
 ## 8. Make the border appear before the sign
@@ -150,7 +151,7 @@ export = gbackground(appear(sign), [border]) + const_a(pair)
 ```
 ![Step 8.1](step8_1.gif)
 
-`gbackground` accepts an animation and a list of things to put in the background.
+`gbackground` accepts an animation and a list of graphics to put in the background.
 
 
 ### 8.2. Stretch out the border before the greeting animation
@@ -174,7 +175,7 @@ export = appear(border) + gbackground(appear(sign), [border]) + const_a(pair)
 ![Step 8.2](step8_2.gif)
 
 
-### 8.3. Split a complex expression across several lines
+### 8.3. Formatting tweak
 ```py hl_lines="15-19"
 from lanim.core import const_a
 from lanim.pil import appear, gbackground, Latex, Rect, Pair
@@ -197,7 +198,7 @@ export = (
 )
 ```
 
-## 9. Move the whole thing down
+## 9. Move the assembly down
 ```py hl_lines="2 19"
 from lanim.core import const_a
 from lanim.pil import appear, gbackground, move_by, Latex, Rect, Pair
@@ -230,13 +231,13 @@ Let's fix that.
 ## 10. Add easings
 
 An [_easing function_](https://easings.net/) allows you to change the "shape"
-of the change.
+or "texture" of the change.
 
 === "Animation"
 
-    Here you can see that
+    To illustrate, look at these easings:
 
-    - The _linear_ easing moves at a steady pace
+    - The _linear_ easing moves at a steady pace. It doesn't change an animation.
     - The _in-out_ easing has a gentle start and end
     - The _sled_ easing starts out slow and then accelerates
 
@@ -246,7 +247,7 @@ of the change.
 
     An easing is a function from `[0; 1]` to `[0; 1]`.
 
-    You can see their graphs in action on [Desmos](https://www.desmos.com/calculator/ljbkaftbej)
+    You can see their graphs in on [Desmos](https://www.desmos.com/calculator/ljbkaftbej)
 
     ![Formulas](easing_formulas.gif)
 
@@ -279,7 +280,7 @@ export = (
 
 ## 11. Adjust durations
 
-Timing is crucial. It's like the accents and intonation in speech.
+Timing is to animation what intonation is to speech.
 
 Let's spice our animation up by tweaking some of the durations.
 

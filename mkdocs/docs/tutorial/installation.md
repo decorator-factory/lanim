@@ -6,13 +6,13 @@
 
 ### FFmpeg
 
-_FFmpeg_ is used to create a video from a sequence of images.
+We use _FFmpeg_ to turn a series of images into a video.
 
 You should find out how to instll FFmpeg on the [official website](https://www.ffmpeg.org/).
 
 ### LaTeX
 
-_LaTeX_ is the engine behind text and equations.
+[_LaTeX_](https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes) is the engine behind text and equations.
 
 Besides LaTeX itself, you'll need three packages: `standalone`, `amsmath` and `amssymb`.
 
@@ -32,13 +32,14 @@ Besides LaTeX itself, you'll need three packages: `standalone`, `amsmath` and `a
 
     Download MikTeX here: [https://miktex.org/download](https://miktex.org/download)
 
-(If you have a better way of doing this on Windows and Mac, please tell me!)
+(If you know a better way of doing this on Windows and Mac, let me know!)
 
 ## Python
 
 You need Python 3.9 or higher to use `lanim`.
 
-Simply install the `lanim` package using `pip`.
+We recommend using a [virtual environment](https://docs.python.org/3/tutorial/venv.html).
+Run `pip install lanim` when you're inside the venv.
 
 
 ## Verify the installation
@@ -48,7 +49,6 @@ To make sure you installed `lanim` correctly, render the smoke test animation.
 ```bash
 python -m lanim -o smoke_test.mp4 lanim.examples.hello
 ```
-(substitute `python` for the right executable on your system)
 
 You should have a video called `smoke_test.mp4` in your current folder:
 
