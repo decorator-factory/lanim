@@ -268,8 +268,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-make-a-static-animation-of-the-sign" class="md-nav__link">
-    3. Make a static animation of the sign
+  <a href="#3-make-a-static-animation-of-the-greeting" class="md-nav__link">
+    3. Make a static animation of the greeting
   </a>
   
 </li>
@@ -304,7 +304,7 @@
       
         <li class="md-nav__item">
   <a href="#7-make-the-last-frame-persist-for-a-while" class="md-nav__link">
-    7. Make the last frame persist for a while:
+    7. Make the last frame persist for a while
   </a>
   
 </li>
@@ -332,8 +332,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#83-split-a-complex-expression-across-several-lines" class="md-nav__link">
-    8.3. Split a complex expression across several lines
+  <a href="#83-formatting-tweak" class="md-nav__link">
+    8.3. Formatting tweak
   </a>
   
 </li>
@@ -344,8 +344,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-move-the-whole-thing-down" class="md-nav__link">
-    9. Move the whole thing down
+  <a href="#9-move-the-assembly-down" class="md-nav__link">
+    9. Move the assembly down
   </a>
   
 </li>
@@ -515,8 +515,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-make-a-static-animation-of-the-sign" class="md-nav__link">
-    3. Make a static animation of the sign
+  <a href="#3-make-a-static-animation-of-the-greeting" class="md-nav__link">
+    3. Make a static animation of the greeting
   </a>
   
 </li>
@@ -551,7 +551,7 @@
       
         <li class="md-nav__item">
   <a href="#7-make-the-last-frame-persist-for-a-while" class="md-nav__link">
-    7. Make the last frame persist for a while:
+    7. Make the last frame persist for a while
   </a>
   
 </li>
@@ -579,8 +579,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#83-split-a-complex-expression-across-several-lines" class="md-nav__link">
-    8.3. Split a complex expression across several lines
+  <a href="#83-formatting-tweak" class="md-nav__link">
+    8.3. Formatting tweak
   </a>
   
 </li>
@@ -591,8 +591,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-move-the-whole-thing-down" class="md-nav__link">
-    9. Move the whole thing down
+  <a href="#9-move-the-assembly-down" class="md-nav__link">
+    9. Move the assembly down
   </a>
   
 </li>
@@ -645,7 +645,6 @@
 <p>Then run <code>python -m lanim -o hello.mp4 tutorial_hello</code> in the same directory.</p>
 <p>This explains how to make <code>lanim</code> animate your module: it needs to export the
 animation under the <code>export</code> name.</p>
-<p>Now we&rsquo;re going to make an</p>
 <h2 id="2-create-the-greeting">2. Create the greeting</h2>
 <p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Latex</span>
 
@@ -653,7 +652,7 @@ animation under the <code>export</code> name.</p>
 </code></pre></div>
 Theis object doesn&rsquo;t <em>do</em> anything yet &mdash; it&rsquo;s a simple value, like a number
 or a string.</p>
-<h2 id="3-make-a-static-animation-of-the-sign">3. Make a static animation of the sign</h2>
+<h2 id="3-make-a-static-animation-of-the-greeting">3. Make a static animation of the greeting</h2>
 <p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
 </span><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Latex</span>
 
@@ -672,7 +671,7 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 
 <span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">const_a</span><span class="p">(</span><span class="n">sign</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span>
 </span></code></pre></div>
-<p>The animation now lasts for five seconds.</p>
+<p>Render the video again. It should be five seconds long.</p>
 <h2 id="4-make-the-sign-scale-out-instead-of-just-sitting-there">4. Make the sign scale out instead of just sitting there</h2>
 <p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">appear</span>
 </span>
@@ -712,7 +711,8 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 </span></code></pre></div>
 <img alt="Step 6" src="step6.gif" /></p>
 <p><code>Pair</code> is also an ordinary immutable value, like <code>Latex</code> and <code>Rect</code>.</p>
-<h2 id="7-make-the-last-frame-persist-for-a-while">7. Make the last frame persist for a while:</h2>
+<h2 id="7-make-the-last-frame-persist-for-a-while">7. Make the last frame persist for a while</h2>
+<p>You can put one animation after another by adding them:</p>
 <p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
 </span><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
 
@@ -749,7 +749,7 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 <span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">gbackground</span><span class="p">(</span><span class="n">appear</span><span class="p">(</span><span class="n">sign</span><span class="p">),</span> <span class="p">[</span><span class="n">border</span><span class="p">])</span> <span class="o">+</span> <span class="n">const_a</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
 </span></code></pre></div>
 <img alt="Step 8.1" src="step8_1.gif" /></p>
-<p><code>gbackground</code> accepts an animation and a list of things to put in the background.</p>
+<p><code>gbackground</code> accepts an animation and a list of graphics to put in the background.</p>
 <h3 id="82-stretch-out-the-border-before-the-greeting-animation">8.2. Stretch out the border before the greeting animation</h3>
 <p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
 <span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
@@ -768,7 +768,7 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 <span class="hll"><span class="n">export</span> <span class="o">=</span> <span class="n">appear</span><span class="p">(</span><span class="n">border</span><span class="p">)</span> <span class="o">+</span> <span class="n">gbackground</span><span class="p">(</span><span class="n">appear</span><span class="p">(</span><span class="n">sign</span><span class="p">),</span> <span class="p">[</span><span class="n">border</span><span class="p">])</span> <span class="o">+</span> <span class="n">const_a</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
 </span></code></pre></div>
 <img alt="Step 8.2" src="step8_2.gif" /></p>
-<h3 id="83-split-a-complex-expression-across-several-lines">8.3. Split a complex expression across several lines</h3>
+<h3 id="83-formatting-tweak">8.3. Formatting tweak</h3>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
 <span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
 
@@ -789,7 +789,7 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 </span><span class="hll">    <span class="o">+</span> <span class="n">const_a</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span>
 </span><span class="hll"><span class="p">)</span>
 </span></code></pre></div>
-<h2 id="9-move-the-whole-thing-down">9. Move the whole thing down</h2>
+<h2 id="9-move-the-assembly-down">9. Move the assembly down</h2>
 <p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
 <span class="hll"><span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">move_by</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
 </span>
@@ -817,11 +817,11 @@ Now try <code>python -m lanim -o hello.mp4 tutorial_hello</code> and see what ha
 Let&rsquo;s fix that.</p>
 <h2 id="10-add-easings">10. Add easings</h2>
 <p>An <a href="https://easings.net/"><em>easing function</em></a> allows you to change the &ldquo;shape&rdquo;
-of the change.</p>
+or &ldquo;texture&rdquo; of the change.</p>
 <div class="tabbed-set" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><label for="__tabbed_1_1">Animation</label><div class="tabbed-content">
-<p>Here you can see that</p>
+<p>To illustrate, look at these easings:</p>
 <ul>
-<li>The <em>linear</em> easing moves at a steady pace</li>
+<li>The <em>linear</em> easing moves at a steady pace. It doesn&rsquo;t change an animation.</li>
 <li>The <em>in-out</em> easing has a gentle start and end</li>
 <li>The <em>sled</em> easing starts out slow and then accelerates</li>
 </ul>
@@ -829,7 +829,7 @@ of the change.</p>
 </div>
 <input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><label for="__tabbed_1_2">Formulas</label><div class="tabbed-content">
 <p>An easing is a function from <code>[0; 1]</code> to <code>[0; 1]</code>.</p>
-<p>You can see their graphs in action on <a href="https://www.desmos.com/calculator/ljbkaftbej">Desmos</a></p>
+<p>You can see their graphs in on <a href="https://www.desmos.com/calculator/ljbkaftbej">Desmos</a></p>
 <p><img alt="Formulas" src="easing_formulas.gif" /></p>
 </div>
 </div>
@@ -857,7 +857,7 @@ of the change.</p>
 </code></pre></div>
 <img alt="Step 10" src="step10.gif" /></p>
 <h2 id="11-adjust-durations">11. Adjust durations</h2>
-<p>Timing is crucial. It&rsquo;s like the accents and intonation in speech.</p>
+<p>Timing is to animation what intonation is to speech.</p>
 <p>Let&rsquo;s spice our animation up by tweaking some of the durations.</p>
 <p><div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">lanim.core</span> <span class="kn">import</span> <span class="n">const_a</span>
 <span class="kn">from</span> <span class="nn">lanim.pil</span> <span class="kn">import</span> <span class="n">appear</span><span class="p">,</span> <span class="n">gbackground</span><span class="p">,</span> <span class="n">move_by</span><span class="p">,</span> <span class="n">Latex</span><span class="p">,</span> <span class="n">Rect</span><span class="p">,</span> <span class="n">Pair</span>
