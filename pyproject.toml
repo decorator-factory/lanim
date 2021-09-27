@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "lanim"
-version = "0.3.0"
+version = "0.3.1"
 description = "Functional animation library"
 authors = ["decorator-factory <42166884+decorator-factory@users.noreply.github.com>"]
 license = "MIT"
