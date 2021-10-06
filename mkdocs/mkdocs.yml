@@ -14,6 +14,8 @@ nav:
     - Command-line arguments: reference/command-line.md
     - core: reference/core.md
     - pil: reference/pil.md
+  - For contributors:
+    - Documentation: dev/docs.md
 
 theme:
   name: material
