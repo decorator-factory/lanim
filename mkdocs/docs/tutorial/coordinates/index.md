@@ -305,7 +305,7 @@ export = seq_a(
 Let's rename the export of the previous animation to `point_animation`.
 
 
-??? quote All the code so far
+??? quote "All the code so far"
 
     ```py
     from lanim.core import Animation, seq_a, const_a
