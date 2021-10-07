@@ -305,90 +305,90 @@ export = seq_a(
 Let's rename the export of the previous animation to `point_animation`.
 
 
- >  All the code so far
+??? quote  All the code so far
 
-```py
-from lanim.core import Animation, seq_a, const_a
-from lanim.pil import Align, Group, Latex, Rect, Triangle
-from lanim.easings import in_out
-
-
-def horizontal_axis(width):
-    return Group([
-        Rect(
-            x=-0.3, y=0,
-            width=width-0.6, height=0.04,
-            line_width=2
-        ),
-        Triangle(
-            x=width/2, y=0,
-            dx1=0, dy1=0,
-            dx2=-0.6, dy2=-0.6,
-            dx3=-0.6, dy3=0.6,
-            line_width=2
-        ),
-        Latex(
-            x=6.5, y=-0.1, source=f"${width}$", scale_factor=0.75, align=Align.CD
-        )
-    ])
+    ```py
+    from lanim.core import Animation, seq_a, const_a
+    from lanim.pil import Align, Group, Latex, Rect, Triangle
+    from lanim.easings import in_out
 
 
-def vertical_axis(height):
-    return Group([
-        Rect(
-            x=0, y=-0.3,
-            width=0.04, height=height-0.6,
-            line_width=2
-        ),
-        Triangle(
-            x=0, y=height/2,
-            dx1=0, dy1=0,
-            dx2=-0.6, dy2=-0.6,
-            dx3=0.6, dy3=-0.6,
-            line_width=2
-        ),
-        Latex(
-            x=0.1, y=3, source=f"${height}$", scale_factor=0.75, align=Align.LC
-        )
-    ])
-
-
-def moving_point(x1, y1, x2, y2):
-    def projector(t):
-        x = x1*(1 - t) + x2*t
-        y = y1*(1 - t) + y2*t
-        latex = f"$(x:{x:.1f}, y:{y:.1f})$"
+    def horizontal_axis(width):
         return Group([
-            Rect(x, y, 0.05, 0.05, line_width=2),
-            Rect(x, y, 0.25, 0.25, line_width=0.7),
-            Latex(x, y-0.1, latex, align=Align.CD).scaled(0.4),
+            Rect(
+                x=-0.3, y=0,
+                width=width-0.6, height=0.04,
+                line_width=2
+            ),
+            Triangle(
+                x=width/2, y=0,
+                dx1=0, dy1=0,
+                dx2=-0.6, dy2=-0.6,
+                dx3=-0.6, dy3=0.6,
+                line_width=2
+            ),
+            Latex(
+                x=6.5, y=-0.1, source=f"${width}$", scale_factor=0.75, align=Align.CD
+            )
         ])
-    return Animation(1, projector)
 
 
-#---------------------------------------#
+    def vertical_axis(height):
+        return Group([
+            Rect(
+                x=0, y=-0.3,
+                width=0.04, height=height-0.6,
+                line_width=2
+            ),
+            Triangle(
+                x=0, y=height/2,
+                dx1=0, dy1=0,
+                dx2=-0.6, dy2=-0.6,
+                dx3=0.6, dy3=-0.6,
+                line_width=2
+            ),
+            Latex(
+                x=0.1, y=3, source=f"${height}$", scale_factor=0.75, align=Align.LC
+            )
+        ])
 
 
-axes = Group([
-    horizontal_axis(16),
-    vertical_axis(9)
-])
-
-notches = Group([
-    Rect(x=1, y=0, width=0.05, height=0.5, line_width=2),
-    Rect(x=0, y=1, width=0.5, height=0.05, line_width=2),
-])
-
-
-point_animation = seq_a(
-    moving_point(x1=-3, y1=2, x2=5, y2=-3).ease(in_out) * 6,
-    moving_point(x1=5, y1=-3, x2=-4, y2=-3).ease(in_out) * 4,
-    moving_point(x1=-4, y1=-3, x2=-3, y2=2).ease(in_out) * 4,
-)
+    def moving_point(x1, y1, x2, y2):
+        def projector(t):
+            x = x1*(1 - t) + x2*t
+            y = y1*(1 - t) + y2*t
+            latex = f"$(x:{x:.1f}, y:{y:.1f})$"
+            return Group([
+                Rect(x, y, 0.05, 0.05, line_width=2),
+                Rect(x, y, 0.25, 0.25, line_width=0.7),
+                Latex(x, y-0.1, latex, align=Align.CD).scaled(0.4),
+            ])
+        return Animation(1, projector)
 
 
-export = const_a(Group([axes, notches]))
-```
+    #---------------------------------------#
+
+
+    axes = Group([
+        horizontal_axis(16),
+        vertical_axis(9)
+    ])
+
+    notches = Group([
+        Rect(x=1, y=0, width=0.05, height=0.5, line_width=2),
+        Rect(x=0, y=1, width=0.5, height=0.05, line_width=2),
+    ])
+
+
+    point_animation = seq_a(
+        moving_point(x1=-3, y1=2, x2=5, y2=-3).ease(in_out) * 6,
+        moving_point(x1=5, y1=-3, x2=-4, y2=-3).ease(in_out) * 4,
+        moving_point(x1=-4, y1=-3, x2=-3, y2=2).ease(in_out) * 4,
+    )
+
+
+    export = const_a(Group([axes, notches]))
+    ```
 
 What we need to do know is to make an animation which will play
 the `point_animation` but place `axes` and `notches` in the background, so to speak.
@@ -466,89 +466,89 @@ Try implementing these functions yourself as an exercise!
 ![Final animation](step4.gif)
 
 
-> "The final program"
+??? quote "The final program"
 
-```py
-from lanim.pil import gbackground, Align, Group, Latex, Rect, Triangle
-from lanim.core import Animation, pause_after, pause_before, seq_a
-from lanim.easings import in_out
-
-
-def horizontal_axis(width):
-    return Group([
-        Rect(
-            x=-0.3, y=0,
-            width=width-0.6, height=0.04,
-            line_width=2
-        ),
-        Triangle(
-            x=width/2, y=0,
-            dx1=0, dy1=0,
-            dx2=-0.6, dy2=-0.6,
-            dx3=-0.6, dy3=0.6,
-            line_width=2
-        ),
-        Latex(
-            x=6.5, y=-0.1, source=f"${width}$", scale_factor=0.75, align=Align.CD
-        )
-    ])
+    ```py
+    from lanim.pil import gbackground, Align, Group, Latex, Rect, Triangle
+    from lanim.core import Animation, pause_after, pause_before, seq_a
+    from lanim.easings import in_out
 
 
-def vertical_axis(height):
-    return Group([
-        Rect(
-            x=0, y=-0.3,
-            width=0.04, height=height-0.6,
-            line_width=2
-        ),
-        Triangle(
-            x=0, y=height/2,
-            dx1=0, dy1=0,
-            dx2=-0.6, dy2=-0.6,
-            dx3=0.6, dy3=-0.6,
-            line_width=2
-        ),
-        Latex(
-            x=0.1, y=3, source=f"${height}$", scale_factor=0.75, align=Align.LC
-        )
-    ])
-
-
-def moving_point(x1, y1, x2, y2):
-    def projector(t):
-        x = x1*(1 - t) + x2*t
-        y = y1*(1 - t) + y2*t
-        latex = f"$(x:{x:.1f}, y:{y:.1f})$"
+    def horizontal_axis(width):
         return Group([
-            Rect(x, y, 0.05, 0.05, line_width=2),
-            Rect(x, y, 0.25, 0.25, line_width=0.7),
-            Latex(x, y-0.1, latex, align=Align.CD).scaled(0.4),
+            Rect(
+                x=-0.3, y=0,
+                width=width-0.6, height=0.04,
+                line_width=2
+            ),
+            Triangle(
+                x=width/2, y=0,
+                dx1=0, dy1=0,
+                dx2=-0.6, dy2=-0.6,
+                dx3=-0.6, dy3=0.6,
+                line_width=2
+            ),
+            Latex(
+                x=6.5, y=-0.1, source=f"${width}$", scale_factor=0.75, align=Align.CD
+            )
         ])
-    return Animation(1, projector)
 
 
-#---------------------------------------#
+    def vertical_axis(height):
+        return Group([
+            Rect(
+                x=0, y=-0.3,
+                width=0.04, height=height-0.6,
+                line_width=2
+            ),
+            Triangle(
+                x=0, y=height/2,
+                dx1=0, dy1=0,
+                dx2=-0.6, dy2=-0.6,
+                dx3=0.6, dy3=-0.6,
+                line_width=2
+            ),
+            Latex(
+                x=0.1, y=3, source=f"${height}$", scale_factor=0.75, align=Align.LC
+            )
+        ])
 
 
-axes = Group([
-    horizontal_axis(16),
-    vertical_axis(9)
-])
+    def moving_point(x1, y1, x2, y2):
+        def projector(t):
+            x = x1*(1 - t) + x2*t
+            y = y1*(1 - t) + y2*t
+            latex = f"$(x:{x:.1f}, y:{y:.1f})$"
+            return Group([
+                Rect(x, y, 0.05, 0.05, line_width=2),
+                Rect(x, y, 0.25, 0.25, line_width=0.7),
+                Latex(x, y-0.1, latex, align=Align.CD).scaled(0.4),
+            ])
+        return Animation(1, projector)
 
-notches = Group([
-    Rect(x=1, y=0, width=0.05, height=0.5, line_width=2),
-    Rect(x=0, y=1, width=0.5, height=0.05, line_width=2),
-])
 
-point_animation = seq_a(
-    moving_point(x1=-3, y1=2, x2=5, y2=-3).ease(in_out) * 6,
-    moving_point(x1=5, y1=-3, x2=-4, y2=-3).ease(in_out) * 4,
-    moving_point(x1=-4, y1=-3, x2=-3, y2=2).ease(in_out) * 4,
-)
+    #---------------------------------------#
 
-export = gbackground(point_animation, [axes, notches])
-export = pause_after(pause_before(export, 2), 2)
-```
+
+    axes = Group([
+        horizontal_axis(16),
+        vertical_axis(9)
+    ])
+
+    notches = Group([
+        Rect(x=1, y=0, width=0.05, height=0.5, line_width=2),
+        Rect(x=0, y=1, width=0.5, height=0.05, line_width=2),
+    ])
+
+    point_animation = seq_a(
+        moving_point(x1=-3, y1=2, x2=5, y2=-3).ease(in_out) * 6,
+        moving_point(x1=5, y1=-3, x2=-4, y2=-3).ease(in_out) * 4,
+        moving_point(x1=-4, y1=-3, x2=-3, y2=2).ease(in_out) * 4,
+    )
+
+    export = gbackground(point_animation, [axes, notches])
+    export = pause_after(pause_before(export, 2), 2)
+    ```
 
 
 ## 5. Recap
