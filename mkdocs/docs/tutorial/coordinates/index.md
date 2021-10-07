@@ -391,7 +391,7 @@ Let's rename the export of the previous animation to `point_animation`.
     ```
 
 What we need to do know is to make an animation which will play
-the `point_animatino` but place `axes` and `notches` in the background, so to speak.
+the `point_animation` but place `axes` and `notches` in the background, so to speak.
 
 We will do it in three ways: a low-level one, a high-level one and finally
 using a built-in function.
@@ -416,7 +416,7 @@ It works!
 
 ![It works](step3_1.gif)
 
-But it's pretty long, and we have to make seure we supply the correct
+But it's pretty long, and we have to make sure we supply the correct
 duration to `Animation`.
 
 
@@ -435,7 +435,7 @@ export = point_animation.map(Group([axes, notches]).add)
 ```
 
 
-### 3.3.  `gbackground`
+### 3.3.  The built-in `gbackground`
 
 `lanim` provides a built-in function to express adding a static background:
 
